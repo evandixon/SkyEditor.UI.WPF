@@ -8,7 +8,7 @@ Namespace MenuActions.Context
     Public Class SolutionAddExistingProject
         Inherits MenuAction
 
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 Dim ParentSolution As Solution
                 Dim ParentPath As String
@@ -30,8 +30,7 @@ Namespace MenuActions.Context
                     ParentSolution.AddExistingProject(ParentPath, w.FileName, CurrentPluginManager)
                 End If
             Next
-            Return Task.CompletedTask
-        End Function
+        End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(Solution).GetTypeInfo, GetType(SolutionNode).GetTypeInfo}

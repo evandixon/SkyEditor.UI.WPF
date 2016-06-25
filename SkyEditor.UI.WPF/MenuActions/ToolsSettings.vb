@@ -5,10 +5,9 @@ Namespace MenuActions
     Public Class ToolsSettings
         Inherits MenuAction
 
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             CurrentPluginManager.CurrentIOUIManager.OpenFile(CurrentPluginManager.CurrentSettingsProvider, False)
-            Return Task.CompletedTask
-        End Function
+        End Sub
 
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuTools, My.Resources.Language.MenuToolsSettings})

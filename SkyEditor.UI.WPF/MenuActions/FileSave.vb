@@ -14,7 +14,7 @@ Namespace MenuActions
         'Public Overrides Function SupportsObject(Obj As Object) As Boolean
         '    Return Not TypeOf Obj Is Solution AndAlso Not TypeOf Obj Is Project
         'End Function
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 If TypeOf item Is ISavable Then
                     Dim sav = DirectCast(item, ISavable)
@@ -44,8 +44,7 @@ Namespace MenuActions
                     'Therefore, we've done all we need.
                 End If
             Next
-            Return Task.CompletedTask
-        End Function
+        End Sub
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileSave, My.Resources.Language.MenuFileSaveFile})
             SaveFileDialog1 = New SaveFileDialog

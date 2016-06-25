@@ -6,10 +6,10 @@ Namespace MenuActions
     Public Class DevConsole
         Inherits MenuAction
 
-        Public Overrides Async Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             Internal.ConsoleManager.Show()
             Await ConsoleHelper.RunConsole(CurrentPluginManager)
-        End Function
+        End Sub
 
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuDev, My.Resources.Language.MenuDevConsole})

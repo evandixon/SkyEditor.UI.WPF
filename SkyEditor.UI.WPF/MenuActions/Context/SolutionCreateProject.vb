@@ -7,7 +7,7 @@ Namespace MenuActions.Context
     Public Class SolutionCreateProject
         Inherits MenuAction
 
-        Public Overrides Async Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 Dim ParentSolution As Solution
                 Dim ParentPath As String
@@ -37,7 +37,7 @@ Namespace MenuActions.Context
                     End If
                 End If
             Next
-        End Function
+        End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(Solution).GetTypeInfo, GetType(SolutionNode).GetTypeInfo}

@@ -11,15 +11,14 @@ Namespace MenuActions
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(ISavableAs).GetTypeInfo}
         End Function
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item As ISavableAs In Targets
                 SaveFileDialog1.Filter = CurrentPluginManager.CurrentIOUIManager.IOFiltersStringSaveAs(IO.Path.GetExtension(item.GetDefaultExtension))
                 If SaveFileDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                     item.Save(SaveFileDialog1.FileName, CurrentPluginManager.CurrentIOProvider)
                 End If
             Next
-            Return Task.CompletedTask
-        End Function
+        End Sub
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileSave, My.Resources.Language.MenuFileSaveFileAs})
             SaveFileDialog1 = New SaveFileDialog

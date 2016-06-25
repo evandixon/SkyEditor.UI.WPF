@@ -8,7 +8,7 @@ Namespace MenuActions.Context
     Public Class ProjectAddExistingFile
         Inherits MenuAction
 
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 Dim CurrentPath As String
                 Dim ParentProject As Project
@@ -29,8 +29,7 @@ Namespace MenuActions.Context
                     ParentProject.AddExistingFile(CurrentPath, w.FileName, CurrentPluginManager.CurrentIOProvider)
                 End If
             Next
-            Return Task.CompletedTask
-        End Function
+        End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(SolutionNode).GetTypeInfo, GetType(ProjectNode).GetTypeInfo}

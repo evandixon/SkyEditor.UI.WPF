@@ -6,7 +6,7 @@ Namespace MenuActions
     Public Class SolutionProjectProperties
         Inherits MenuAction
 
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 If TypeOf item Is Solution Then
                     CurrentPluginManager.CurrentIOUIManager.OpenFile(item, False)
@@ -16,8 +16,7 @@ Namespace MenuActions
                     End If
                 End If
             Next
-            Return Task.CompletedTask
-        End Function
+        End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(Solution).GetTypeInfo, GetType(SolutionNode).GetTypeInfo}

@@ -6,7 +6,7 @@ Namespace MenuActions.Context
     Public Class SolutionProjectAddFolder
         Inherits MenuAction
 
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each obj In Targets
                 Dim w As New NewNameWindow(My.Resources.Language.NewFolderQuestion, My.Resources.Language.NewFolder)
                 If w.ShowDialog Then
@@ -19,8 +19,7 @@ Namespace MenuActions.Context
                     End If
                 End If
             Next
-            Return Task.CompletedTask
-        End Function
+        End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(Solution).GetTypeInfo, GetType(SolutionNode).GetTypeInfo, GetType(ProjectNode).GetTypeInfo}
