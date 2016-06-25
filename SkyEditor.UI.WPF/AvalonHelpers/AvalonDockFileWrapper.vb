@@ -3,7 +3,7 @@ Imports SkyEditor.Core.UI
 
 Namespace AvalonHelpers
     Public Class AvalonDockFileWrapper
-        Inherits GenericViewModel
+        Inherits FileViewModel
         Implements INotifyPropertyChanged
 
         Public Sub New()
