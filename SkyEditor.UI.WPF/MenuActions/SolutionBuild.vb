@@ -12,11 +12,11 @@ Namespace MenuActions
         End Function
 
 
-        Public Overrides Async Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item As Solution In Targets
                 Await item.Build()
             Next
-        End Function
+        End Sub
 
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuSolution, My.Resources.Language.MenuSolutionBuild})

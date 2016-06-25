@@ -5,10 +5,9 @@ Namespace MenuActions.View
     Public Class MenuViewSolutionExplorer
         Inherits MenuAction
 
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             CurrentPluginManager.CurrentIOUIManager.ShowAnchorable(New SolutionExplorerViewModel)
-            Return Task.CompletedTask
-        End Function
+        End Sub
 
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuView, My.Resources.Language.SolutionExplorerToolWindowTitle})

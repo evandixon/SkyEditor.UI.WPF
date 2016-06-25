@@ -7,7 +7,7 @@ Namespace MenuActions.Context
     Public Class ProjectNewFile
         Inherits MenuAction
 
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 Dim CurrentPath As String
                 Dim ParentProject As Project
@@ -30,8 +30,7 @@ Namespace MenuActions.Context
                     ParentProject.CreateFile(CurrentPath, w.SelectedName, w.SelectedType)
                 End If
             Next
-            Return Task.CompletedTask
-        End Function
+        End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(SolutionNode).GetTypeInfo, GetType(ProjectNode).GetTypeInfo}

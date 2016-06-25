@@ -8,7 +8,7 @@ Namespace MenuActions.Context
     Public Class ProjectNodeOpenFile
         Inherits MenuAction
 
-        Public Overrides Async Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item As ProjectNode In Targets
                 Dim obj = Await item.GetFile(CurrentPluginManager, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
                 If obj IsNot Nothing Then
@@ -20,7 +20,7 @@ Namespace MenuActions.Context
                     End If
                 End If
             Next
-        End Function
+        End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(ProjectNode).GetTypeInfo}

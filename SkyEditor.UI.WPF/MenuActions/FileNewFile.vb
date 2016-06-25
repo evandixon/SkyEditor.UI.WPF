@@ -7,7 +7,7 @@ Namespace MenuActions
     Public Class FileNewFile
         Inherits MenuAction
 
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             Dim w As New NewFileWindow()
             Dim games As New Dictionary(Of String, Type)
             For Each item In IOHelper.GetCreatableFileTypes(CurrentPluginManager)
@@ -18,8 +18,7 @@ Namespace MenuActions
                 Dim file As Object = IOHelper.CreateNewFile(w.SelectedName, w.SelectedType)
                 CurrentPluginManager.CurrentIOUIManager.OpenFile(file, True)
             End If
-            Return Task.CompletedTask
-        End Function
+        End Sub
 
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileNew, My.Resources.Language.MenuFileNewFile})

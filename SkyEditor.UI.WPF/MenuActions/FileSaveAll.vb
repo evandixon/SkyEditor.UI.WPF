@@ -16,7 +16,7 @@ Namespace MenuActions
 
             Return hasProject.Any AndAlso hasSavable.Any
         End Function
-        Public Overrides Function DoAction(Targets As IEnumerable(Of Object)) As Task
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
                 If TypeOf item Is Solution Then
                     DirectCast(item, Solution).SaveAllProjects(CurrentPluginManager.CurrentIOProvider)
@@ -36,8 +36,7 @@ Namespace MenuActions
                     End If
                 End If
             Next
-            Return Task.CompletedTask
-        End Function
+        End Sub
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileSave, My.Resources.Language.MenuFileSaveAll})
             SaveFileDialog1 = New SaveFileDialog
