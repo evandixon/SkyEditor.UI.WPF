@@ -448,4 +448,10 @@
   <data name="ZipFiles" xml:space="preserve">
     <value>Zip Files</value>
   </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>_Help</value>
+  </data>
+  <data name="MenuHelpCredits" xml:space="preserve">
+    <value>_Credits</value>
+  </data>
 </root>

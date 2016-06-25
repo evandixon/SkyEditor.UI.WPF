@@ -632,6 +632,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to _Help.
+        '''</summary>
+        Public Shared ReadOnly Property MenuHelp() As String
+            Get
+                Return ResourceManager.GetString("MenuHelp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to _Credits.
+        '''</summary>
+        Public Shared ReadOnly Property MenuHelpCredits() As String
+            Get
+                Return ResourceManager.GetString("MenuHelpCredits", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to _Properties.
         '''</summary>
         Public Shared ReadOnly Property MenuProperties() As String
