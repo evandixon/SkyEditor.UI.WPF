@@ -1,12 +1,13 @@
 ﻿Imports System.Threading.Tasks
 Imports SkyEditor.Core.UI
+Imports SkyEditor.UI.WPF.ViewModels
 
 Namespace MenuActions
     Public Class ToolsSettings
         Inherits MenuAction
 
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
-            CurrentPluginManager.CurrentIOUIManager.OpenFile(CurrentPluginManager.CurrentSettingsProvider, False)
+            CurrentPluginManager.CurrentIOUIManager.OpenFile(New SettingsViewModel(CurrentPluginManager.CurrentSettingsProvider), False)
         End Sub
 
         Public Sub New()

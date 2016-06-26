@@ -162,9 +162,6 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="Edit1" xml:space="preserve">
-    <value>Edit</value>
-  </data>
   <data name="Enabled" xml:space="preserve">
     <value>Enabled</value>
   </data>
@@ -236,9 +233,6 @@
   </data>
   <data name="MainTitle" xml:space="preserve">
     <value>Sky Editor</value>
-  </data>
-  <data name="MainTitle1" xml:space="preserve">
-    <value>Sky Editor {0}{1}</value>
   </data>
   <data name="MenuAddFile" xml:space="preserve">
     <value>Add _Existing File</value>
@@ -361,9 +355,6 @@
   <data name="NoAvailableUI" xml:space="preserve">
     <value>There is no available UI for this object of type "{0}".</value>
   </data>
-  <data name="NoAvailableUI1" xml:space="preserve">
-    <value>There is no available UI for this object of type "{0}".</value>
-  </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -385,13 +376,7 @@
   <data name="Progress" xml:space="preserve">
     <value>Progress</value>
   </data>
-  <data name="Progress1" xml:space="preserve">
-    <value>Progress</value>
-  </data>
   <data name="ProjectName" xml:space="preserve">
-    <value>Project Name</value>
-  </data>
-  <data name="ProjectName1" xml:space="preserve">
     <value>Project Name</value>
   </data>
   <data name="Ready" xml:space="preserve">
@@ -421,9 +406,6 @@
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="Status1" xml:space="preserve">
-    <value>Status</value>
-  </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>
@@ -433,11 +415,8 @@
   <data name="Version" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="VersionBeta" xml:space="preserve">
-    <value>Beta </value>
-  </data>
   <data name="VersionPrefix" xml:space="preserve">
-    <value>Alpha</value>
+    <value>Beta </value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>
@@ -447,5 +426,23 @@
   </data>
   <data name="ZipFiles" xml:space="preserve">
     <value>Zip Files</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>_Help</value>
+  </data>
+  <data name="MenuHelpCredits" xml:space="preserve">
+    <value>_Credits</value>
+  </data>
+  <data name="Credits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="AuthorLabel" xml:space="preserve">
+    <value>Author: </value>
+  </data>
+  <data name="CreditsLabel" xml:space="preserve">
+    <value>Credits: </value>
   </data>
 </root>

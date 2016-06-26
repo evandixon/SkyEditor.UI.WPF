@@ -83,6 +83,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Author: .
+        '''</summary>
+        Public Shared ReadOnly Property AuthorLabel() As String
+            Get
+                Return ResourceManager.GetString("AuthorLabel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Background Task.
         '''</summary>
         Public Shared ReadOnly Property BackgroundTask() As String
@@ -146,6 +155,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Credits.
+        '''</summary>
+        Public Shared ReadOnly Property Credits() As String
+            Get
+                Return ResourceManager.GetString("Credits", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Credits: .
+        '''</summary>
+        Public Shared ReadOnly Property CreditsLabel() As String
+            Get
+                Return ResourceManager.GetString("CreditsLabel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Delete.
         '''</summary>
         Public Shared ReadOnly Property Delete() As String
@@ -196,15 +223,6 @@ Namespace My.Resources
         Public Shared ReadOnly Property Edit() As String
             Get
                 Return ResourceManager.GetString("Edit", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Edit.
-        '''</summary>
-        Public Shared ReadOnly Property Edit1() As String
-            Get
-                Return ResourceManager.GetString("Edit1", resourceCulture)
             End Get
         End Property
         
@@ -425,15 +443,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Sky Editor {0}{1}.
-        '''</summary>
-        Public Shared ReadOnly Property MainTitle1() As String
-            Get
-                Return ResourceManager.GetString("MainTitle1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Add _Existing File.
         '''</summary>
         Public Shared ReadOnly Property MenuAddFile() As String
@@ -632,6 +641,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to _Help.
+        '''</summary>
+        Public Shared ReadOnly Property MenuHelp() As String
+            Get
+                Return ResourceManager.GetString("MenuHelp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to _Credits.
+        '''</summary>
+        Public Shared ReadOnly Property MenuHelpCredits() As String
+            Get
+                Return ResourceManager.GetString("MenuHelpCredits", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to _Properties.
         '''</summary>
         Public Shared ReadOnly Property MenuProperties() As String
@@ -785,15 +812,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to There is no available UI for this object of type &quot;{0}&quot;..
-        '''</summary>
-        Public Shared ReadOnly Property NoAvailableUI1() As String
-            Get
-                Return ResourceManager.GetString("NoAvailableUI1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to OK.
         '''</summary>
         Public Shared ReadOnly Property OK() As String
@@ -857,29 +875,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Progress.
-        '''</summary>
-        Public Shared ReadOnly Property Progress1() As String
-            Get
-                Return ResourceManager.GetString("Progress1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Project Name.
         '''</summary>
         Public Shared ReadOnly Property ProjectName() As String
             Get
                 Return ResourceManager.GetString("ProjectName", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Project Name.
-        '''</summary>
-        Public Shared ReadOnly Property ProjectName1() As String
-            Get
-                Return ResourceManager.GetString("ProjectName1", resourceCulture)
             End Get
         End Property
         
@@ -898,6 +898,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property References() As String
             Get
                 Return ResourceManager.GetString("References", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Settings.
+        '''</summary>
+        Public Shared ReadOnly Property Settings() As String
+            Get
+                Return ResourceManager.GetString("Settings", resourceCulture)
             End Get
         End Property
         
@@ -965,15 +974,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Status.
-        '''</summary>
-        Public Shared ReadOnly Property Status1() As String
-            Get
-                Return ResourceManager.GetString("Status1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Type.
         '''</summary>
         Public Shared ReadOnly Property Type() As String
@@ -1002,15 +1002,6 @@ Namespace My.Resources
         
         '''<summary>
         '''  Looks up a localized string similar to Beta .
-        '''</summary>
-        Public Shared ReadOnly Property VersionBeta() As String
-            Get
-                Return ResourceManager.GetString("VersionBeta", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Alpha.
         '''</summary>
         Public Shared ReadOnly Property VersionPrefix() As String
             Get

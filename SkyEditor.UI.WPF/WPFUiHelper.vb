@@ -27,36 +27,6 @@ Public Class WPFUiHelper
     End Function
 
     ''' <summary>
-    ''' Generates MenuItems from the given IEnumerable of MenuItemInfo.
-    ''' </summary>
-    ''' <param name="MenuItemInfo">IEnumerable of MenuItemInfo that will be used to create the MenuItems.</param>
-    ''' <returns></returns>
-    Public Shared Function GenerateMenuItems(MenuItemInfo As IEnumerable(Of MenuItemInfo), manager As PluginManager) As List(Of MenuItem)
-        If MenuItemInfo Is Nothing Then
-            Throw New ArgumentNullException(NameOf(MenuItemInfo))
-        End If
-
-        Dim output As New List(Of MenuItem)
-
-        For Each item In From m In MenuItemInfo Order By m.SortOrder, m.Header
-            Dim m As New MenuItem
-            m.Header = item.Header
-            m.Tag = New List(Of MenuAction)
-            For Each action In item.ActionTypes
-                Dim a As MenuAction = ReflectionHelpers.CreateInstance(action)
-                a.CurrentPluginManager = manager
-                DirectCast(m.Tag, List(Of MenuAction)).Add(a)
-            Next
-            For Each child In GenerateMenuItems(item.Children, manager)
-                m.Items.Add(child)
-            Next
-            output.Add(m)
-        Next
-
-        Return output
-    End Function
-
-    ''' <summary>
     ''' Recursively pdates the visibility of the MenuItems based on the currently selected Types.
     ''' </summary>
     ''' <param name="SelectedObjects">IEnumerable of the currently seleted objects.  Used to determine visibility.</param>
