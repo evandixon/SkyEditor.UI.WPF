@@ -830,7 +830,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to .
+        '''  Looks up a localized string similar to Evan Dixon.
         '''</summary>
         Public Shared ReadOnly Property PluginAuthor() As String
             Get
@@ -839,7 +839,10 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to .
+        '''  Looks up a localized string similar to (Credits are still in the making)
+        '''
+        '''Newtonsoft.Json Copyright (c) 2007 James Newton-King
+        '''Xceed WPF Toolkit.
         '''</summary>
         Public Shared ReadOnly Property PluginCredits() As String
             Get
@@ -848,7 +851,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Sky Editor (WPF).
+        '''  Looks up a localized string similar to Sky Editor Core WPF.
         '''</summary>
         Public Shared ReadOnly Property PluginName() As String
             Get
