@@ -83,6 +83,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Author: .
+        '''</summary>
+        Public Shared ReadOnly Property AuthorLabel() As String
+            Get
+                Return ResourceManager.GetString("AuthorLabel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Background Task.
         '''</summary>
         Public Shared ReadOnly Property BackgroundTask() As String
@@ -151,6 +160,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property Credits() As String
             Get
                 Return ResourceManager.GetString("Credits", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Credits: .
+        '''</summary>
+        Public Shared ReadOnly Property CreditsLabel() As String
+            Get
+                Return ResourceManager.GetString("CreditsLabel", resourceCulture)
             End Get
         End Property
         
@@ -956,15 +974,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Status.
-        '''</summary>
-        Public Shared ReadOnly Property Status1() As String
-            Get
-                Return ResourceManager.GetString("Status1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Type.
         '''</summary>
         Public Shared ReadOnly Property Type() As String
@@ -992,7 +1001,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Beta.
+        '''  Looks up a localized string similar to Beta .
         '''</summary>
         Public Shared ReadOnly Property VersionPrefix() As String
             Get

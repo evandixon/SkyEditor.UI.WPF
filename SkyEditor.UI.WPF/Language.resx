@@ -406,9 +406,6 @@
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="Status1" xml:space="preserve">
-    <value>Status</value>
-  </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>
@@ -419,7 +416,7 @@
     <value>Version</value>
   </data>
   <data name="VersionPrefix" xml:space="preserve">
-    <value>Beta</value>
+    <value>Beta </value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>
@@ -441,5 +438,11 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="AuthorLabel" xml:space="preserve">
+    <value>Author: </value>
+  </data>
+  <data name="CreditsLabel" xml:space="preserve">
+    <value>Credits: </value>
   </data>
 </root>
