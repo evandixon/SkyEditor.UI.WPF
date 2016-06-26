@@ -7,6 +7,12 @@ Namespace MenuActions
     Public Class FileNewFile
         Inherits MenuAction
 
+        Public Sub New()
+            MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileNew, My.Resources.Language.MenuFileNewFile})
+            AlwaysVisible = True
+            SortOrder = 1.11
+        End Sub
+
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             Dim w As New NewFileWindow()
             Dim games As New Dictionary(Of String, Type)
@@ -20,10 +26,8 @@ Namespace MenuActions
             End If
         End Sub
 
-        Public Sub New()
-            MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileNew, My.Resources.Language.MenuFileNewFile})
-            AlwaysVisible = True
-            SortOrder = 1.11
+        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentPluginManagerChanged
+            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso CurrentPluginManager.GetRegisteredObjects(Of ICreatableFile).Any()
         End Sub
     End Class
 End Namespace
