@@ -11,6 +11,7 @@
         x:Class="MainWindow3"
         x:Name="MainWindow3"
         mc:Ignorable="d"
+        Icon="Resources\favicon.ico"
         Title="MainWindow3" Height="500.915" Width="520.551">
     <Window.Resources>
         <ad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>

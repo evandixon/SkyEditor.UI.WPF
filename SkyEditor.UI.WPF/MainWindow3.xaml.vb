@@ -13,9 +13,10 @@ Public Class MainWindow3
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.Title = String.Format(CultureInfo.InvariantCulture, My.Resources.Language.MainTitle, My.Resources.Language.VersionPrefix, Assembly.GetExecutingAssembly.GetName.Version.ToString)
+        Me.Title = String.Format(CultureInfo.InvariantCulture, My.Resources.Language.FormattedTitle, My.Resources.Language.VersionPrefix, Assembly.GetEntryAssembly.GetName.Version.ToString)
     End Sub
 
+#Region "Properties"
     ''' <summary>
     ''' 
     ''' </summary>
@@ -38,7 +39,9 @@ Public Class MainWindow3
         End Set
     End Property
     Dim _currentPluginManager As PluginManager
+#End Region
 
+#Region "Event Handlers"
     Private Sub OnIOUIManagerFileClosing(sender As Object, e As FileClosingEventArgs)
         If e.File.IsFileModified Then
             e.Cancel = Not (MessageBox.Show(My.Resources.Language.DocumentCloseConfirmation, My.Resources.Language.MainTitle, MessageBoxButton.YesNo) = MessageBoxResult.Yes)
@@ -80,4 +83,6 @@ Public Class MainWindow3
             .Save(CurrentPluginManager.CurrentIOProvider)
         End With
     End Sub
+#End Region
+
 End Class

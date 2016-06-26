@@ -1,0 +1,16 @@
+﻿<local:DataBoundObjectControl x:Class="ObjectControls.Credits"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SkyEditor.UI.WPF"
+             xmlns:models="clr-namespace:SkyEditor.UI.WPF.Models"
+             xmlns:res="clr-namespace:SkyEditor.UI.WPF.My.Resources"
+             mc:Ignorable="d" 
+             TargetType="{x:Type models:CreditsModel}"
+             Header="{x:Static res:Language.Credits}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+            
+    </Grid>
+</local:DataBoundObjectControl>

@@ -1,14 +1,17 @@
-﻿<UserControl x:Class="ObjectControls.SettingsEditor"
+﻿<local:DataBoundObjectControl x:Class="ObjectControls.SettingsEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:res="clr-namespace:SkyEditor.UI.WPF.My.Resources"
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:SkyEditor.UI.WPF"
+             xmlns:vm="clr-namespace:SkyEditor.UI.WPF.ViewModels"
+             xmlns:res="clr-namespace:SkyEditor.UI.WPF.My.Resources"  
+             TargetType="{x:Type vm:SettingsViewModel}"
+             Header="{x:Static res:Language.Settings}"
+             mc:Ignorable="d"             
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <CheckBox x:Name="chbDevelopment" Content="{x:Static res:Language.EnableDevMode}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="chbVerbose" Content="{x:Static res:Language.EnableVerboseOutput}" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <CheckBox Content="{x:Static res:Language.EnableDevMode}" IsChecked="{Binding IsDevMode}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label" Content="{x:Static res:Language.SettingsApplyRestartWarning}" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom"/>
     </Grid>
-</UserControl>
+</local:DataBoundObjectControl>
