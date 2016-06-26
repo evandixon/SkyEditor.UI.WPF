@@ -1,12 +1,17 @@
 ﻿Imports System.ComponentModel
 Imports SkyEditor.Core
+Imports SkyEditor.Core.Utilities
 
 Namespace Models
     Public Class CreditsModel
         Implements INotifyPropertyChanged
+        Implements INamed
 
         Public Sub New(manager As PluginManager)
             CurrentPluginManager = manager
+            If CurrentPlugins.Count > 0 Then
+                SelectedPlugin = CurrentPlugins.First
+            End If
         End Sub
 
         Public ReadOnly Property CurrentPluginManager As PluginManager
@@ -28,6 +33,13 @@ Namespace Models
                 End If
             End Set
         End Property
+
+        Public ReadOnly Property Name As String Implements INamed.Name
+            Get
+                Return My.Resources.Language.Credits
+            End Get
+        End Property
+
         Dim _selectedPlugin As SkyEditorPlugin
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged

@@ -362,13 +362,16 @@
     <value>Output</value>
   </data>
   <data name="PluginAuthor" xml:space="preserve">
-    <value />
+    <value>Evan Dixon</value>
   </data>
   <data name="PluginCredits" xml:space="preserve">
-    <value />
+    <value>(Credits are still in the making)
+
+Newtonsoft.Json Copyright (c) 2007 James Newton-King
+Xceed WPF Toolkit</value>
   </data>
   <data name="PluginName" xml:space="preserve">
-    <value>Sky Editor (WPF)</value>
+    <value>Sky Editor Core WPF</value>
   </data>
   <data name="Plugins" xml:space="preserve">
     <value>Plugins</value>
