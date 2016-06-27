@@ -8,8 +8,8 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("SkyEditor.UI.WPF")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyTitle("SkyEditor.UI.WPF")>
+<Assembly: AssemblyDescription("The WPF MVVM framework for Sky Editor")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("SkyEditor.UI.WPF")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016")> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.2.0.0")>
-<Assembly: AssemblyFileVersion("1.2.0.0")>
+<Assembly: AssemblyVersion("4.0.3.0")>
+<Assembly: AssemblyFileVersion("4.0.3.0")>
