@@ -12,7 +12,7 @@ Public Class WPFIOUIManager
 
     Public Property AvalonDockLayout As AvalonDockLayoutViewModel
 
-    Protected Overrides Function GetViewModel(model As Object) As FileViewModel
+    Protected Overrides Function CreateViewModel(model As Object) As FileViewModel
         Return New AvalonDockFileWrapper(model)
     End Function
 End Class
