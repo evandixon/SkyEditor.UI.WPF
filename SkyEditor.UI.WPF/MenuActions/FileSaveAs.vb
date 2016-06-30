@@ -9,13 +9,17 @@ Namespace MenuActions
         Inherits MenuAction
         Private WithEvents SaveFileDialog1 As SaveFileDialog
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
-            Return {GetType(ISavableAs).GetTypeInfo}
+            Return {GetType(FileViewModel).GetTypeInfo}
+        End Function
+
+        Public Overrides Function SupportsObject(Obj As Object) As Boolean
+            Return TypeOf Obj Is FileViewModel AndAlso DirectCast(Obj, FileViewModel).CanSaveAs(CurrentPluginManager)
         End Function
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
-            For Each item As ISavableAs In Targets
-                SaveFileDialog1.Filter = CurrentPluginManager.CurrentIOUIManager.IOFiltersStringSaveAs(IO.Path.GetExtension(item.GetDefaultExtension))
+            For Each item As FileViewModel In Targets
+                SaveFileDialog1.Filter = CurrentPluginManager.CurrentIOUIManager.IOFiltersStringSaveAs(IO.Path.GetExtension(item.GetDefaultExtension(CurrentPluginManager)))
                 If SaveFileDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                    item.Save(SaveFileDialog1.FileName, CurrentPluginManager.CurrentIOProvider)
+                    item.Save(SaveFileDialog1.FileName, CurrentPluginManager)
                 End If
             Next
         End Sub

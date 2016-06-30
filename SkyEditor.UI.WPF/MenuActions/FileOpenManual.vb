@@ -27,7 +27,7 @@ Namespace MenuActions
                 Next
                 w.SetFileTypeSource(games)
                 If w.ShowDialog Then
-                    CurrentPluginManager.CurrentIOUIManager.OpenFile(Await IOHelper.OpenFile(OpenFileDialog1.FileName, w.SelectedFileType, CurrentPluginManager), True)
+                    Await CurrentPluginManager.CurrentIOUIManager.OpenFile(OpenFileDialog1.FileName, w.SelectedFileType)
                 End If
             End If
         End Sub
