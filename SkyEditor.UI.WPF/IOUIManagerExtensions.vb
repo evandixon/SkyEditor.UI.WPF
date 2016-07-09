@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports SkyEditor.Core
 Imports SkyEditor.Core.UI
 
-Module IOUIManagerExtensions
+Public Module IOUIManagerExtensions
     ''' <summary>
     ''' Gets an OpenFileDialog that can open any supported file.
     ''' </summary>
