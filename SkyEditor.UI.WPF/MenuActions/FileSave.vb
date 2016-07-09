@@ -7,7 +7,6 @@ Imports SkyEditor.Core.UI
 Namespace MenuActions
     Public Class FileSave
         Inherits MenuAction
-        Private WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(FileViewModel).GetTypeInfo}
         End Function
@@ -21,15 +20,9 @@ Namespace MenuActions
                 If item.CanSave(CurrentPluginManager) Then
                     item.Save(CurrentPluginManager)
                 ElseIf item.CanSaveAs(CurrentPluginManager) Then
-                    Dim defaultExt = item.GetDefaultExtension(CurrentPluginManager)
-                    If Not String.IsNullOrEmpty(defaultExt) Then
-                        SaveFileDialog1.Filter = CurrentPluginManager.CurrentIOUIManager.IOFiltersString(IsSaveAs:=True) 'Todo: use default extension
-                    Else
-                        SaveFileDialog1.Filter = CurrentPluginManager.CurrentIOUIManager.IOFiltersStringSaveAs(IO.Path.GetExtension(DirectCast(item, IOnDisk).Filename))
-                    End If
-
-                    If SaveFileDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                        item.Save(SaveFileDialog1.FileName, CurrentPluginManager)
+                    Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(item)
+                    If s.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+                        item.Save(s.FileName, CurrentPluginManager)
                     End If
                     'If the dialog result is not OK, then the user can click the menu item again
                 End If
@@ -37,7 +30,6 @@ Namespace MenuActions
         End Sub
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileSave, My.Resources.Language.MenuFileSaveFile})
-            SaveFileDialog1 = New SaveFileDialog
             'AlwaysVisible = True
             SortOrder = 1.31
         End Sub

@@ -12,14 +12,11 @@ Namespace MenuActions
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileOpen, My.Resources.Language.MenuFileOpenManual})
             AlwaysVisible = True
-            OpenFileDialog1 = New OpenFileDialog
             SortOrder = 1.22
         End Sub
-
-        Private WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
-            OpenFileDialog1.Filter = CurrentPluginManager.CurrentIOUIManager.IOFiltersString
-            If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+            Dim o = CurrentPluginManager.CurrentIOUIManager.GetOpenFileDialog
+            If o.ShowDialog = DialogResult.OK Then
                 Dim w As New FileTypeSelector()
                 Dim games As New Dictionary(Of String, TypeInfo)
                 For Each item In IOHelper.GetOpenableFileTypes(CurrentPluginManager)
@@ -27,7 +24,7 @@ Namespace MenuActions
                 Next
                 w.SetFileTypeSource(games)
                 If w.ShowDialog Then
-                    Await CurrentPluginManager.CurrentIOUIManager.OpenFile(OpenFileDialog1.FileName, w.SelectedFileType)
+                    Await CurrentPluginManager.CurrentIOUIManager.OpenFile(o.FileName, w.SelectedFileType)
                 End If
             End If
         End Sub

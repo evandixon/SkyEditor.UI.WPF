@@ -6,7 +6,6 @@ Imports SkyEditor.Core.UI
 Namespace MenuActions
     Public Class FileSaveAll
         Inherits MenuAction
-        Private WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
         Private Property saveAction As MenuAction
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(Solution).GetTypeInfo, GetType(ISavable).GetTypeInfo}
@@ -29,7 +28,6 @@ Namespace MenuActions
         End Sub
         Public Sub New()
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileSave, My.Resources.Language.MenuFileSaveAll})
-            SaveFileDialog1 = New SaveFileDialog
             SortOrder = 1.34
             saveAction = New FileSave
         End Sub

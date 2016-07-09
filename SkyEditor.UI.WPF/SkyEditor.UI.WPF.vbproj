@@ -56,11 +56,11 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SkyEditor.Core, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.0.3-CI00007\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.4.0.3-CI00027\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SkyEditor.Core.Windows, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.3-CI00007\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.3-CI00027\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="GenericListItem.vb" />
     <Compile Include="Internal\ConsoleManager.vb" />
+    <Compile Include="IOUIManagerExtensions.vb" />
     <Compile Include="MainWindow3.xaml.vb">
       <DependentUpon>MainWindow3.xaml</DependentUpon>
     </Compile>

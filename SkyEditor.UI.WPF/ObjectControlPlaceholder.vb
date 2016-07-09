@@ -76,19 +76,18 @@ Public Class ObjectControlPlaceholder
                     'Tab control if applicable
                     If value IsNot Nothing Then
                         Dim tabs = SkyEditor.Core.UI.UIHelper.GetRefreshedTabs(value, {GetType(UserControl)}, CurrentPluginManager)
-                        Dim ucTabs = (From t In tabs Where ReflectionHelpers.IsOfType(t, GetType(UserControl))).ToList
-                        Dim count = ucTabs.Count '- (From t In ucTabs Where t.GetSortOrder(value.GetType, True) < 0).Count
+                        Dim count = tabs.Count '- (From t In ucTabs Where t.GetSortOrder(value.GetType, True) < 0).Count
                         If count > 1 Then
                             Dim tabControl As New TabControl
                             tabControl.TabStripPlacement = TabControlOrientation
-                            For Each item In WPFUiHelper.GenerateObjectTabs(ucTabs)
+                            For Each item In WPFUiHelper.GenerateObjectTabs(tabs)
                                 tabControl.Items.Add(item)
                                 AddHandler item.ContainedObjectControl.IsModifiedChanged, AddressOf OnModified
                             Next
                             Me.Content = tabControl
 
                         ElseIf count = 1 Then
-                            Dim control = ucTabs.First '(From t In ucTabs Where t.GetSortOrder(value.GetType, True) >= 0).First
+                            Dim control = tabs.First '(From t In ucTabs Where t.GetSortOrder(value.GetType, True) >= 0).First
                             Me.Content = control
                             AddHandler control.IsModifiedChanged, AddressOf OnModified
                         Else
