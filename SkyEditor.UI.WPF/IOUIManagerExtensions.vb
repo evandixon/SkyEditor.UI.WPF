@@ -16,6 +16,18 @@ Public Module IOUIManagerExtensions
     End Function
 
     ''' <summary>
+    ''' Gets an OpenFileDialog that can open any supported file.
+    ''' </summary>
+    ''' <param name="ioui"></param>
+    ''' <param name="filters">The file extensions to include in the filter.</param>
+    ''' <returns>An OpenFileDialog with a filter defined by <paramref name="filters"/>.</returns>
+    <Extension> Public Function GetOpenFileDialog(filters As ICollection(Of String), ioui As IOUIManager) As OpenFileDialog
+        Dim o As New OpenFileDialog
+        o.Filter = ioui.GetIOFilter(filters, True, True)
+        Return o
+    End Function
+
+    ''' <summary>
     ''' Gets a SaveFileDialog with a filter especially for the given file.
     ''' </summary>
     ''' <param name="ioui"></param>
