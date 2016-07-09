@@ -21,7 +21,7 @@ Public Module IOUIManagerExtensions
     ''' <param name="ioui"></param>
     ''' <param name="filters">The file extensions to include in the filter.</param>
     ''' <returns>An OpenFileDialog with a filter defined by <paramref name="filters"/>.</returns>
-    <Extension> Public Function GetOpenFileDialog(filters As ICollection(Of String), ioui As IOUIManager) As OpenFileDialog
+    <Extension> Public Function GetOpenFileDialog(ioui As IOUIManager, filters As ICollection(Of String)) As OpenFileDialog
         Dim o As New OpenFileDialog
         o.Filter = ioui.GetIOFilter(filters, True, True)
         Return o
