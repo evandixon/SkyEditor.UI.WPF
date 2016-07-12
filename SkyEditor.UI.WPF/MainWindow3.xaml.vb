@@ -72,16 +72,27 @@ Public Class MainWindow3
     End Sub
 
     Private Sub MainWindow3_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        With CurrentPluginManager.CurrentSettingsProvider
-            If Not Me.WindowState = WindowState.Maximized Then
-                'Setting width and height while maximized results in the window being the same size when restored
-                .SetMainWindowHeight(Me.Height)
-                .SetMainWindowWidth(Me.Width)
-            End If
+        If CurrentPluginManager.CurrentIOUIManager.OpenFiles.Where(Function(x) x.IsFileModified).Any Then
+            Dim closeConfirmation = MessageBox.Show(My.Resources.Language.MainWindowCloseConfirmation, My.Resources.Language.MainTitle, MessageBoxButton.YesNo)
+            If closeConfirmation <> MessageBoxResult.Yes Then
+                'Don't close the window
+                e.Cancel = True
+            Else
+                'Close like normal
 
-            .SetMainWindowIsMaximized(Me.WindowState = WindowState.Maximized)
-            .Save(CurrentPluginManager.CurrentIOProvider)
-        End With
+                'Save the settings
+                With CurrentPluginManager.CurrentSettingsProvider
+                    If Not Me.WindowState = WindowState.Maximized Then
+                        'Setting width and height while maximized results in the window being the same size when restored
+                        .SetMainWindowHeight(Me.Height)
+                        .SetMainWindowWidth(Me.Width)
+                    End If
+
+                    .SetMainWindowIsMaximized(Me.WindowState = WindowState.Maximized)
+                    .Save(CurrentPluginManager.CurrentIOProvider)
+                End With
+            End If
+        End If
     End Sub
 #End Region
 
