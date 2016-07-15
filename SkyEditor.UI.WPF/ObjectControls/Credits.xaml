@@ -9,10 +9,10 @@
              mc:Ignorable="d" 
              TargetType="{x:Type models:CreditsModel}"
              Header="{x:Static res:Language.Credits}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="250" />
             <ColumnDefinition Width="3"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -20,10 +20,10 @@
         <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="3" VerticalAlignment="Stretch"/>
         <Grid Grid.Column="2">
             <TextBlock Text="{Binding SelectedPlugin.PluginName, Mode=OneWay}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" FontSize="16"/>
-            <TextBlock x:Name="lblAuthor" Text="Author: "  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,31,0,0"/>
+            <TextBlock x:Name="lblAuthor" Text="{x:Static res:Language.AuthorLabel}"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,31,0,0"/>
             <TextBlock Text="{Binding SelectedPlugin.PluginAuthor, Mode=OneWay}"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,31,0,0"/>
-            <TextBlock x:Name="lblVersion" Text="Credits: "  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,52,0,0"/>
-            <TextBox Text="{Binding SelectedPlugin.Credits, Mode=OneWay}" Margin="10,73,10,10" VerticalScrollBarVisibility="Visible" IsReadOnly="True" IsReadOnlyCaretVisible="True" />
+            <TextBlock x:Name="lblVersion" Text="{x:Static res:Language.CreditsLabel}"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,52,0,0"/>
+            <TextBox Text="{Binding SelectedPlugin.Credits, Mode=OneWay}" Margin="10,73,10,10" VerticalScrollBarVisibility="Visible" IsReadOnly="True" IsReadOnlyCaretVisible="True" TextWrapping="Wrap" />
         </Grid>
     </Grid>
 </local:DataBoundObjectControl>

@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports System.Windows
 Imports System.Windows.Controls
 Imports SkyEditor.Core
@@ -34,6 +35,13 @@ Public Class ObjectControlPlaceholder
 
     Public Event Modified(sender As Object, e As EventArgs)
 
+    Private Sub ObjectToEditFVM_Changed(sender As Object, e As PropertyChangedEventArgs)
+        If e.PropertyName = NameOf(FileViewModel.File) Then
+            'Refresh the UI
+            ObjectToEdit = _object
+        End If
+    End Sub
+
     ''' <summary>
     ''' Whether or not to enable tabs.
     ''' When true, multiple object controls will be used
@@ -62,6 +70,9 @@ Public Class ObjectControlPlaceholder
             If CurrentPluginManager Is Nothing Then
                 _pendingObject = value
             Else
+                If _object IsNot Nothing AndAlso TypeOf _object Is FileViewModel Then
+                    RemoveHandler DirectCast(_object, FileViewModel).PropertyChanged, AddressOf ObjectToEditFVM_Changed
+                End If
                 If _object IsNot Nothing AndAlso TypeOf _object Is INotifyModified Then
                     RemoveHandler DirectCast(_object, INotifyModified).Modified, AddressOf OnModified
                 End If
@@ -71,24 +82,26 @@ Public Class ObjectControlPlaceholder
                 If TypeOf value Is INotifyModified Then
                     AddHandler DirectCast(value, INotifyModified).Modified, AddressOf OnModified
                 End If
+                If TypeOf value Is FileViewModel Then
+                    AddHandler DirectCast(value, FileViewModel).PropertyChanged, AddressOf ObjectToEditFVM_Changed
+                End If
 
                 If EnableTabs Then
                     'Tab control if applicable
                     If value IsNot Nothing Then
                         Dim tabs = SkyEditor.Core.UI.UIHelper.GetRefreshedTabs(value, {GetType(UserControl)}, CurrentPluginManager)
-                        Dim ucTabs = (From t In tabs Where ReflectionHelpers.IsOfType(t, GetType(UserControl))).ToList
-                        Dim count = ucTabs.Count '- (From t In ucTabs Where t.GetSortOrder(value.GetType, True) < 0).Count
+                        Dim count = tabs.Count '- (From t In ucTabs Where t.GetSortOrder(value.GetType, True) < 0).Count
                         If count > 1 Then
                             Dim tabControl As New TabControl
                             tabControl.TabStripPlacement = TabControlOrientation
-                            For Each item In WPFUiHelper.GenerateObjectTabs(ucTabs)
+                            For Each item In WPFUiHelper.GenerateObjectTabs(tabs)
                                 tabControl.Items.Add(item)
                                 AddHandler item.ContainedObjectControl.IsModifiedChanged, AddressOf OnModified
                             Next
                             Me.Content = tabControl
 
                         ElseIf count = 1 Then
-                            Dim control = ucTabs.First '(From t In ucTabs Where t.GetSortOrder(value.GetType, True) >= 0).First
+                            Dim control = tabs.First '(From t In ucTabs Where t.GetSortOrder(value.GetType, True) >= 0).First
                             Me.Content = control
                             AddHandler control.IsModifiedChanged, AddressOf OnModified
                         Else

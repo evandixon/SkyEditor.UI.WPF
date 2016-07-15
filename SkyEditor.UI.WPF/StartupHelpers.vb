@@ -43,7 +43,7 @@ Public Class StartupHelpers
         manager.LoadCore(CoreMod).Wait()
 
 
-        manager.CurrentIOUIManager.SupportedToolWindowTypes = {GetType(UserControl)}
+        'manager.CurrentIOUIManager.SupportedToolWindowTypes = {GetType(UserControl)}
         Dim m As New MainWindow3 'UI.MainWindow(manager)
         m.CurrentPluginManager = manager
         m.DataContext = manager.CurrentIOUIManager

@@ -209,15 +209,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Are you sure you want to close this file?  Any unsaved changes will be lost..
-        '''</summary>
-        Public Shared ReadOnly Property DocumentCloseConfirmation1() As String
-            Get
-                Return ResourceManager.GetString("DocumentCloseConfirmation1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Edit.
         '''</summary>
         Public Shared ReadOnly Property Edit() As String
@@ -439,6 +430,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property MainTitle() As String
             Get
                 Return ResourceManager.GetString("MainTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Are you sure you want to close Sky Editor?  Any unsaved changes will be lost..
+        '''</summary>
+        Public Shared ReadOnly Property MainWindowCloseConfirmation() As String
+            Get
+                Return ResourceManager.GetString("MainWindowCloseConfirmation", resourceCulture)
             End Get
         End Property
         
@@ -830,7 +830,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Evan Dixon.
+        '''  Looks up a localized string similar to evandixon.
         '''</summary>
         Public Shared ReadOnly Property PluginAuthor() As String
             Get
@@ -839,10 +839,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to (Credits are still in the making)
+        '''  Looks up a localized string similar to Sky Editor was made using the following libraries:
         '''
-        '''Newtonsoft.Json Copyright (c) 2007 James Newton-King
-        '''Xceed WPF Toolkit.
+        '''Newtonsoft.Json - Copyright © 2007 James Newton-King
+        '''Extended WPF Toolkit - Copyright © Xceed Software Inc. 2010-2016
+        '''Sharp Zip Lib﻿ - Copyright © 2000-2016 SharpZipLib Contributors.
         '''</summary>
         Public Shared ReadOnly Property PluginCredits() As String
             Get
@@ -851,7 +852,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Sky Editor Core WPF.
+        '''  Looks up a localized string similar to Sky Editor UI - WPF.
         '''</summary>
         Public Shared ReadOnly Property PluginName() As String
             Get
