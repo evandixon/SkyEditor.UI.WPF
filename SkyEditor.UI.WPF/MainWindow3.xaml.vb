@@ -14,6 +14,8 @@ Public Class MainWindow3
 
         ' Add any initialization after the InitializeComponent() call.
         Me.Title = String.Format(CultureInfo.InvariantCulture, My.Resources.Language.FormattedTitle, My.Resources.Language.VersionPrefix, Assembly.GetEntryAssembly.GetName.Version.ToString)
+
+        AddHandler SkyEditor.Core.Windows.Utilities.RedistributionHelpers.ApplicationRestartRequested, AddressOf OnRestartRequested
     End Sub
 
 #Region "Properties"
@@ -39,6 +41,12 @@ Public Class MainWindow3
         End Set
     End Property
     Dim _currentPluginManager As PluginManager
+
+    ''' <summary>
+    ''' If true, application will be restarted when the form is closed.
+    ''' </summary>
+    ''' <returns></returns>
+    Private Property RestartOnExit As Boolean
 #End Region
 
 #Region "Event Handlers"
@@ -77,6 +85,7 @@ Public Class MainWindow3
             If closeConfirmation <> MessageBoxResult.Yes Then
                 'Don't close the window
                 e.Cancel = True
+                RestartOnExit = False
             Else
                 'Close like normal
 
@@ -92,6 +101,19 @@ Public Class MainWindow3
                     .Save(CurrentPluginManager.CurrentIOProvider)
                 End With
             End If
+        End If
+    End Sub
+
+    Private Sub OnRestartRequested(sender As Object, e As EventArgs)
+        RestartOnExit = True
+        Me.Close()
+    End Sub
+
+    Private Sub MainWindow3_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        If RestartOnExit Then
+            CurrentPluginManager.Dispose()
+            Forms.Application.Restart()
+            Process.GetCurrentProcess().Kill()
         End If
     End Sub
 #End Region
