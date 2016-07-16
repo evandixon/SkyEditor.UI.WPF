@@ -88,20 +88,20 @@ Public Class MainWindow3
                 RestartOnExit = False
             Else
                 'Close like normal
-
-                'Save the settings
-                With CurrentPluginManager.CurrentSettingsProvider
-                    If Not Me.WindowState = WindowState.Maximized Then
-                        'Setting width and height while maximized results in the window being the same size when restored
-                        .SetMainWindowHeight(Me.Height)
-                        .SetMainWindowWidth(Me.Width)
-                    End If
-
-                    .SetMainWindowIsMaximized(Me.WindowState = WindowState.Maximized)
-                    .Save(CurrentPluginManager.CurrentIOProvider)
-                End With
             End If
         End If
+
+        'Save the settings
+        With CurrentPluginManager.CurrentSettingsProvider
+            If Not Me.WindowState = WindowState.Maximized Then
+                'Setting width and height while maximized results in the window being the same size when restored
+                .SetMainWindowHeight(Me.Height)
+                .SetMainWindowWidth(Me.Width)
+            End If
+
+            .SetMainWindowIsMaximized(Me.WindowState = WindowState.Maximized)
+            .Save(CurrentPluginManager.CurrentIOProvider)
+        End With
     End Sub
 
     Private Sub OnRestartRequested(sender As Object, e As EventArgs)
