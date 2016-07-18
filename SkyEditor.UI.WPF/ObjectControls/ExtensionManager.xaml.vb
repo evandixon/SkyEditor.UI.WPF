@@ -9,11 +9,12 @@ Namespace ObjectControls
     Public Class ExtensionManager
         Inherits ObjectControl
 
-        Private Function GetTVItem(Collection As IExtensionCollection)
+        Private Function GetTVItem(Collection As IExtensionCollection) As TreeViewItem
             Dim item As New TreeViewItem
-            item.Header = Collection.Name
+            'Todo: await
+            item.Header = Collection.GetName().Result
             item.Tag = Collection
-            For Each child In Collection.GetChildCollections(CurrentPluginManager)
+            For Each child In Collection.GetChildCollections(CurrentPluginManager).Result
                 item.Items.Add(GetTVItem(child))
             Next
             Return item
@@ -29,9 +30,9 @@ Namespace ObjectControls
             RefreshCurrentExtensionList()
         End Sub
 
-        Sub RefreshCurrentExtensionList()
+        Async Sub RefreshCurrentExtensionList()
             If tvCategories.SelectedItem IsNot Nothing Then
-                lvExtensions.ItemsSource = DirectCast(tvCategories.SelectedItem.Tag, IExtensionCollection).GetExtensions(CurrentPluginManager)
+                lvExtensions.ItemsSource = Await DirectCast(tvCategories.SelectedItem.Tag, IExtensionCollection).GetExtensions(0, Integer.MaxValue, CurrentPluginManager)
             End If
         End Sub
 
@@ -57,7 +58,7 @@ Namespace ObjectControls
             Dim o As New OpenFileDialog
             o.Filter = $"{My.Resources.Language.ZipFiles} (*.zip)|*.zip|{My.Resources.Language.AllFiles} (*.*)|*.*"
             If o.ShowDialog = DialogResult.OK Then
-                Dim result = Await ExtensionHelper.InstallExtensionZip(o.FileName, EnvironmentPaths.GetExtensionDirectory, CurrentPluginManager)
+                Dim result = Await ExtensionHelper.InstallExtensionZip(o.FileName, CurrentPluginManager)
                 DisplayInstallResultMessage(result)
                 RefreshCurrentExtensionList()
             End If
@@ -68,9 +69,9 @@ Namespace ObjectControls
                 Dim repo = DirectCast(tvCategories.SelectedItem.Tag, IExtensionCollection)
                 Dim info = DirectCast(lvExtensions.SelectedItem, ExtensionInfo)
                 If info.IsInstalled Then
-                    DisplayUninstallResultMessage(Await repo.UninstallExtension(info.ID))
+                    DisplayUninstallResultMessage(Await repo.UninstallExtension(info.ID, CurrentPluginManager))
                 Else
-                    DisplayInstallResultMessage(Await repo.InstallExtension(info.ID))
+                    DisplayInstallResultMessage(Await repo.InstallExtension(info.ID, CurrentPluginManager))
                 End If
             End If
         End Sub
