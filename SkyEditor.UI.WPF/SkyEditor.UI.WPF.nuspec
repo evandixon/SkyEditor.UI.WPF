@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SkyEditor.UI.WPF</id>
+    <version>$version$</version>
+    <title>SkyEditor.UI.WPF</title>
+    <authors>evandixon</authors>
+    <owners>evandixon</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Plugin based MVVM framwork for WPF</description>
+    <copyright>Copyright 2016</copyright>
+  </metadata>
+</package>

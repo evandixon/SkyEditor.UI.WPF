@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SkyEditor.UI.WPF", "SkyEditor.UI.WPF\SkyEditor.UI.WPF.vbproj", "{00AFCE08-71B5-4BF9-9155-C017F8151419}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Shell", "Shell\Shell.vbproj", "{0E8471BA-ACAA-4D8D-948C-9CBED615F394}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Sky Editor", "Sky Editor\Sky Editor.vbproj", "{ED0EDBEC-9CEF-4645-B8CB-855D7377BFC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{00AFCE08-71B5-4BF9-9155-C017F8151419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00AFCE08-71B5-4BF9-9155-C017F8151419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00AFCE08-71B5-4BF9-9155-C017F8151419}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E8471BA-ACAA-4D8D-948C-9CBED615F394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E8471BA-ACAA-4D8D-948C-9CBED615F394}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E8471BA-ACAA-4D8D-948C-9CBED615F394}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E8471BA-ACAA-4D8D-948C-9CBED615F394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED0EDBEC-9CEF-4645-B8CB-855D7377BFC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED0EDBEC-9CEF-4645-B8CB-855D7377BFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED0EDBEC-9CEF-4645-B8CB-855D7377BFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED0EDBEC-9CEF-4645-B8CB-855D7377BFC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
