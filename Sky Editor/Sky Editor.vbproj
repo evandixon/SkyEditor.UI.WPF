@@ -28,16 +28,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <ApplicationVersion Condition="'$(build_number)' == ''">1.0.0.%2a</ApplicationVersion>
-    <ApplicationVersion Condition="'$(build_number)' != ''">$(ApplicationVersion)</ApplicationVersion>
-    <ApplicationRevision Condition="'$(build_number)' == ''">%2a</ApplicationRevision>
-    <ApplicationRevision Condition="'$(build_number)' != ''">$(build_counter)</ApplicationRevision>
-    <InstallUrl Condition="'$(InstallUrl)' == ''">http://localhost/SkyEditor</InstallUrl>
-    <InstallUrl Condition="'$(InstallUrl)' != ''">$(InstallUrl)</InstallUrl>
-    <UpdateUrl Condition="'$(InstallUrl)' == ''">http://localhost/SkyEditor</UpdateUrl>
-    <UpdateUrl Condition="'$(InstallUrl)' != ''">$(InstallUrl)</UpdateUrl>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
