@@ -1,5 +1,6 @@
 ﻿Imports System.Reflection
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
 
@@ -16,7 +17,7 @@ Namespace MenuActions.Context
                     ParentSolution = item
                     ParentPath = ""
                 ElseIf TypeOf item Is SolutionNode Then
-                    ParentSolution = DirectCast(item, SolutionNode).ParentSolution
+                    ParentSolution = DirectCast(item, SolutionNode).ParentProject
                     ParentPath = DirectCast(item, SolutionNode).GetCurrentPath
                 Else
                     Throw New ArgumentException(String.Format(My.Resources.Language.ErrorUnsupportedType, item.GetType.Name))

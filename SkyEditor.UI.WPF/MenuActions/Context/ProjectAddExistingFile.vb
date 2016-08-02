@@ -1,6 +1,7 @@
 ﻿Imports System.Reflection
 Imports System.Windows.Forms
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
 
@@ -14,7 +15,7 @@ Namespace MenuActions.Context
                 Dim ParentProject As Project
                 If TypeOf item Is SolutionNode Then
                     CurrentPath = ""
-                    ParentProject = DirectCast(item, SolutionNode).Project
+                    ParentProject = DirectCast(item, SolutionNode).Item
                 ElseIf TypeOf item Is ProjectNode Then
                     CurrentPath = DirectCast(item, ProjectNode).GetCurrentPath
                     ParentProject = DirectCast(item, ProjectNode).ParentProject
@@ -39,7 +40,7 @@ Namespace MenuActions.Context
             If TypeOf Obj Is ProjectNode Then
                 Return DirectCast(Obj, ProjectNode).IsDirectory AndAlso DirectCast(Obj, ProjectNode).CanCreateFile
             ElseIf TypeOf Obj Is SolutionNode Then
-                Return Not DirectCast(Obj, SolutionNode).IsDirectory AndAlso DirectCast(Obj, SolutionNode).Project.CanAddExistingFile("")
+                Return Not DirectCast(Obj, SolutionNode).IsDirectory AndAlso DirectCast(Obj, SolutionNode).Item.CanAddExistingFile("")
             Else
                 Return False
             End If

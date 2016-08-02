@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 
 Namespace ViewModels

@@ -1,5 +1,6 @@
 ﻿Imports System.Reflection
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 
 Namespace ObjectControls
     Public Class ProjectReferences

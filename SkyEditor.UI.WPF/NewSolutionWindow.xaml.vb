@@ -3,6 +3,7 @@ Imports System.Windows
 Imports System.Windows.Forms
 Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.Utilities
 
 Public Class NewSolutionWindow

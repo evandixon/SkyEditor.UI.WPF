@@ -1,5 +1,6 @@
 ﻿Imports System.Reflection
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 
 Namespace MenuActions
@@ -12,7 +13,7 @@ Namespace MenuActions
                     CurrentPluginManager.CurrentIOUIManager.OpenFile(item, False)
                 ElseIf TypeOf item Is SolutionNode Then
                     If Not DirectCast(item, SolutionNode).IsDirectory Then
-                        CurrentPluginManager.CurrentIOUIManager.OpenFile(DirectCast(item, SolutionNode).Project, False)
+                        CurrentPluginManager.CurrentIOUIManager.OpenFile(DirectCast(item, SolutionNode).Item, False)
                     End If
                 End If
             Next

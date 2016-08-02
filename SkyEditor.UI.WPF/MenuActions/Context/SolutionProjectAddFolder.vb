@@ -1,5 +1,6 @@
 ﻿Imports System.Reflection
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 
 Namespace MenuActions.Context
@@ -11,7 +12,7 @@ Namespace MenuActions.Context
                 Dim w As New NewNameWindow(My.Resources.Language.NewFolderQuestion, My.Resources.Language.NewFolder)
                 If w.ShowDialog Then
                     If TypeOf obj Is Solution Then
-                        DirectCast(obj, Solution).CreateDirectory("", w.SelectedName)
+                        DirectCast(obj, Solution).CreateDirectory(w.SelectedName)
                     ElseIf TypeOf obj Is SolutionNode Then
                         DirectCast(obj, SolutionNode).CreateChildDirectory(w.SelectedName)
                     ElseIf TypeOf obj Is ProjectNode Then
