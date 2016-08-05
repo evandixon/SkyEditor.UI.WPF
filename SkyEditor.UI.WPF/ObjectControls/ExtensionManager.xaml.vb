@@ -71,6 +71,7 @@ Namespace ObjectControls
                 If info.IsInstalled Then
                     DisplayUninstallResultMessage(Await repo.UninstallExtension(info.ID, CurrentPluginManager))
                 Else
+                    'Todo: put version as second parameter of InstallExtension
                     DisplayInstallResultMessage(Await repo.InstallExtension(info.ID, CurrentPluginManager))
                 End If
             End If
