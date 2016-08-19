@@ -55,12 +55,12 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="SkyEditor.Core, Version=4.0.6.86, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.0.6-CI86\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
+    <Reference Include="SkyEditor.Core, Version=4.0.6.91, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.4.0.6-CI91\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkyEditor.Core.Windows, Version=4.0.6.86, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.6-CI86\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
+    <Reference Include="SkyEditor.Core.Windows, Version=4.0.6.91, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.6-CI91\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
