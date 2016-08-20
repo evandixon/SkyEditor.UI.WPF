@@ -132,9 +132,8 @@ Public Class DataBoundObjectControl
     ''' <summary>
     ''' If True, this control will not be used if another one exists.
     ''' </summary>
-    ''' <param name="Obj"></param>
     ''' <returns></returns>
-    Public Overridable Function GetIsBackupControl(Obj As Object) As Boolean Implements IObjectControl.IsBackupControl
+    Public Overridable Function GetIsBackupControl() As Boolean Implements IObjectControl.IsBackupControl
         Return IsBackupControl
     End Function
 

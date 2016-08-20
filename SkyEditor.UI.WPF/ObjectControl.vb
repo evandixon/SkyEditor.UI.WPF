@@ -50,7 +50,7 @@ Imports SkyEditor.Core.Utilities
     ''' </summary>
     ''' <param name="Obj"></param>
     ''' <returns></returns>
-    Public Overridable Function IsBackupControl(Obj As Object) As Boolean Implements IObjectControl.IsBackupControl
+    Public Overridable Function IsBackupControl() As Boolean Implements IObjectControl.IsBackupControl
         Return False
     End Function
 
@@ -94,8 +94,6 @@ Imports SkyEditor.Core.Utilities
     Protected Function GetEditingObject(Of T)() As T
         If TypeOf _editingObject Is T Then
             Return DirectCast(_editingObject, T)
-        ElseIf TypeOf _editingObject Is IContainer(Of T) Then
-            Return DirectCast(_editingObject, IContainer(Of T)).Item
         Else
             'I should probably throw my own exception here, since I'm casting EditingObject to T even though I just found that EditingObject is NOT T, but there will be an exception anyway
             Return DirectCast(_editingObject, T)
@@ -114,8 +112,6 @@ Imports SkyEditor.Core.Utilities
     Protected Sub SetEditingObject(Of T)(Value As T)
         If TypeOf _editingObject Is T Then
             _editingObject = Value
-        ElseIf TypeOf _editingObject Is IContainer(Of T) Then
-            DirectCast(_editingObject, IContainer(Of T)).Item = Value
         Else
             _editingObject = Value
         End If
