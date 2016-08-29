@@ -117,6 +117,7 @@
     <Compile Include="AvalonHelpers\PanesStyleSelector.vb" />
     <Compile Include="AvalonHelpers\PanesTemplateSelector.vb" />
     <Compile Include="DataBoundObjectControl.vb" />
+    <Compile Include="DrawingImageConverter.vb" />
     <Compile Include="FileTypeSelector.xaml.vb">
       <DependentUpon>FileTypeSelector.xaml</DependentUpon>
     </Compile>
