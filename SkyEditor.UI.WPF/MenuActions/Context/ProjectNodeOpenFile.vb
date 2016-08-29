@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Reflection
 Imports System.Windows
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
@@ -9,17 +10,25 @@ Namespace MenuActions.Context
     Public Class ProjectNodeOpenFile
         Inherits MenuAction
 
-        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
-            For Each item As ProjectNode In Targets
-                Dim obj = Await item.GetFile(CurrentPluginManager, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
+        Public Shared Async Function OpenFile(target As ProjectNode, manager As PluginManager) As Task
+            If Not target.IsDirectory Then
+                Dim obj = Await target.GetFile(manager, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
                 If obj IsNot Nothing Then
-                    CurrentPluginManager.CurrentIOUIManager.OpenFile(obj, item.ParentProject)
+                    manager.CurrentIOUIManager.OpenFile(obj, target.ParentProject)
                 Else
-                    Dim f = Path.Combine(Path.GetDirectoryName(item.ParentProject.Filename), item.Filename)
+                    Dim f = Path.Combine(Path.GetDirectoryName(target.ParentProject.Filename), target.Filename)
                     If Not File.Exists(f) Then
                         MessageBox.Show(String.Format(My.Resources.Language.ErrorCantFindFileAt, f))
                     End If
                 End If
+            End If
+        End Function
+
+
+
+        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
+            For Each item As ProjectNode In Targets
+                Await OpenFile(item, CurrentPluginManager)
             Next
         End Sub
 
