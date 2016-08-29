@@ -150,7 +150,7 @@
     <Compile Include="MenuActions\ToolsSettings.vb" />
     <Compile Include="MenuActions\View\MenuViewSolutionBuildProgress.vb" />
     <Compile Include="MenuActions\View\MenuViewSolutionExplorer.vb" />
-    <Compile Include="Models\CreditsModel.vb" />
+    <Compile Include="ViewModels\CreditsViewModel.vb" />
     <Compile Include="NewFileWindow.xaml.vb">
       <DependentUpon>NewFileWindow.xaml</DependentUpon>
     </Compile>
@@ -161,7 +161,7 @@
       <DependentUpon>NewSolutionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjectControl.vb" />
-    <Compile Include="ObjectControls\Credits.xaml.vb">
+    <Compile Include="Views\Credits.xaml.vb">
       <DependentUpon>Credits.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjectControls\ExtensionInfoControl.xaml.vb">
@@ -179,10 +179,10 @@
     <Compile Include="ObjectControls\SettingsEditor.xaml.vb">
       <DependentUpon>SettingsEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ObjectControls\SolutionBuildProgress.xaml.vb">
+    <Compile Include="Views\SolutionBuildProgress.xaml.vb">
       <DependentUpon>SolutionBuildProgress.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ObjectControls\SolutionExplorer.xaml.vb">
+    <Compile Include="Views\SolutionExplorer.xaml.vb">
       <DependentUpon>SolutionExplorer.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjectControls\WelcomeTabContent.xaml.vb">
@@ -286,7 +286,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ObjectControls\Credits.xaml">
+    <Page Include="Views\Credits.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,11 +310,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ObjectControls\SolutionBuildProgress.xaml">
+    <Page Include="Views\SolutionBuildProgress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ObjectControls\SolutionExplorer.xaml">
+    <Page Include="Views\SolutionExplorer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
