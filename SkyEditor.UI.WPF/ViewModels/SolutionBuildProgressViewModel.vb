@@ -3,6 +3,7 @@ Imports System.Windows
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
+Imports SkyEditor.Core.Utilities
 
 Namespace ViewModels
     Public Class SolutionBuildProgressViewModel
@@ -37,7 +38,7 @@ Namespace ViewModels
             Next
         End Sub
 
-        Private Sub Project_BuildStatusChanged(sender As Object, e As ProjectBuildStatusChanged)
+        Private Sub Project_BuildStatusChanged(sender As Object, e As ProgressReportedEventArgs)
             If Not BuildingProjects.Contains(sender) Then
                 Application.Current.Dispatcher.Invoke(Sub()
                                                           BuildingProjects.Add(sender)
