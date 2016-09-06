@@ -48,7 +48,6 @@ Imports SkyEditor.Core.Utilities
     ''' <summary>
     ''' If True, this control will not be used if another one exists.
     ''' </summary>
-    ''' <param name="Obj"></param>
     ''' <returns></returns>
     Public Overridable Function IsBackupControl() As Boolean Implements IObjectControl.IsBackupControl
         Return False
