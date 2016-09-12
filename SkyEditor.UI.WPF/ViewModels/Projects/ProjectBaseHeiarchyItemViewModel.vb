@@ -51,7 +51,7 @@ Namespace ViewModels.Projects
         'Saying "If IShouldHandleThis" in the handler thousands of times when there's only one node (the root) that should handle it could slow things down.
         Dim _project As ProjectBase
 
-        Protected Property CurrentPath As String
+        Public Property CurrentPath As String
             Get
                 Return _currentPath
             End Get
@@ -62,7 +62,7 @@ Namespace ViewModels.Projects
         End Property
         Dim _currentPath As String
 
-        Protected Property IsDirectory As Boolean
+        Public Property IsDirectory As Boolean
             Get
                 Return _isDirectory
             End Get

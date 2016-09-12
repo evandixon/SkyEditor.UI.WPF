@@ -14,6 +14,15 @@ Namespace ViewModels.Projects
 
         Protected Property ProjectRootNode As ProjectHeiarchyItemViewModel
 
+        Public Shadows Property Project() As Solution
+            Get
+                Return MyBase.Project
+            End Get
+            Protected Set(value As Solution)
+                MyBase.Project = value
+            End Set
+        End Property
+
         Protected Overrides Sub PopulateChildren()
             If IsDirectory Then
                 MyBase.PopulateChildren()
@@ -23,5 +32,14 @@ Namespace ViewModels.Projects
                 Me.Children = ProjectRootNode.Children
             End If
         End Sub
+
+        Protected Overrides Function CreateNode(project As ProjectBase, path As String) As ProjectBaseHeiarchyItemViewModel
+            Return New SolutionHeiarchyItemViewModel(project, Me, path)
+        End Function
+
+        Public Function GetNodeProject() As Project
+            Dim solution As Solution = Me.Project
+            Return solution.GetProjectByPath(Me.CurrentPath)
+        End Function
     End Class
 End Namespace

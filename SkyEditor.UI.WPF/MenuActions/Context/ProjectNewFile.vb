@@ -3,6 +3,7 @@ Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
+Imports SkyEditor.UI.WPF.ViewModels.Projects
 
 Namespace MenuActions.Context
     Public Class ProjectNewFile
@@ -12,12 +13,12 @@ Namespace MenuActions.Context
             For Each item In Targets
                 Dim CurrentPath As String
                 Dim ParentProject As Project
-                If TypeOf item Is SolutionNode Then
-                    CurrentPath = ""
-                    ParentProject = DirectCast(item, SolutionNode).Item
-                ElseIf TypeOf item Is ProjectNode Then
-                    CurrentPath = DirectCast(item, ProjectNode).GetCurrentPath
-                    ParentProject = DirectCast(item, ProjectNode).ParentProject
+                If TypeOf item Is SolutionHeiarchyItemViewModel Then
+                    CurrentPath = "/"
+                    ParentProject = DirectCast(item, SolutionHeiarchyItemViewModel).GetNodeProject
+                ElseIf TypeOf item Is ProjectHeiarchyItemViewModel Then
+                    CurrentPath = DirectCast(item, ProjectHeiarchyItemViewModel).CurrentPath
+                    ParentProject = DirectCast(item, ProjectHeiarchyItemViewModel).Project
                 Else
                     Throw New ArgumentException(String.Format(My.Resources.Language.ErrorUnsupportedType, item.GetType.Name))
                 End If
@@ -34,14 +35,14 @@ Namespace MenuActions.Context
         End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
-            Return {GetType(SolutionNode).GetTypeInfo, GetType(ProjectNode).GetTypeInfo}
+            Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo, GetType(ProjectHeiarchyItemViewModel).GetTypeInfo}
         End Function
 
         Public Overrides Function SupportsObject(Obj As Object) As Boolean
-            If TypeOf Obj Is ProjectNode Then
-                Return DirectCast(Obj, ProjectNode).IsDirectory AndAlso DirectCast(Obj, ProjectNode).CanCreateFile
-            ElseIf TypeOf Obj Is SolutionNode Then
-                Return Not DirectCast(Obj, SolutionNode).IsDirectory AndAlso DirectCast(Obj, SolutionNode).Item.CanCreateFile("")
+            If TypeOf Obj Is ProjectHeiarchyItemViewModel Then
+                Return DirectCast(Obj, ProjectHeiarchyItemViewModel).IsDirectory AndAlso DirectCast(Obj, ProjectHeiarchyItemViewModel).Project.CanCreateFile("/")
+            ElseIf TypeOf Obj Is SolutionHeiarchyItemViewModel Then
+                Return Not DirectCast(Obj, SolutionHeiarchyItemViewModel).IsDirectory AndAlso DirectCast(Obj, SolutionHeiarchyItemViewModel).GetNodeProject.CanCreateFile("/")
             Else
                 Return False
             End If
