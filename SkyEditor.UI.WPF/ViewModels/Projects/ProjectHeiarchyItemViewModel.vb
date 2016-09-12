@@ -3,7 +3,7 @@ Imports System.ComponentModel
 Imports SkyEditor.Core.Projects
 
 Namespace ViewModels.Projects
-    Public MustInherit Class ProjectBaseHeiarchyItemViewModel
+    Public Class ProjectBaseHeiarchyItemViewModel
         Implements INotifyPropertyChanged
 
         Public Sub New(project As ProjectBase, parent As ProjectBaseHeiarchyItemViewModel, currentPath As String)
@@ -11,6 +11,7 @@ Namespace ViewModels.Projects
             Me.Project = project
             Me.CurrentPath = currentPath 'Order matters, because events.  This should be set last.
             Children = New ObservableCollection(Of ProjectBaseHeiarchyItemViewModel)
+            'Todo: initialize children
         End Sub
 
 #Region "Events"
@@ -93,7 +94,32 @@ Namespace ViewModels.Projects
             IsDirectory = Project.DirectoryExists(CurrentPath) 'Assumed to be file if it doesn't exist.
             ResetHandlers()
         End Sub
-#End Region
+
+        Private Sub Project_DirectoryCreated(sender As Object, e As DirectoryCreatedEventArgs)
+            Dim newNode = CreateNode(Me.Project, e.FullPath)
+            Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/"))
+            parentNode.AddChild(newNode)
+        End Sub
+
+        Private Sub Project_DirectoryDeleted(sender As Object, e As DirectoryDeletedEventArgs)
+            Dim targetNode = FindNode(e.FullPath)
+            If targetNode IsNot Nothing Then
+                targetNode.Parent.RemoveChild(targetNode)
+            End If
+        End Sub
+
+        Private Sub Project_ItemAdded(sender As Object, e As ItemAddedEventArgs)
+            Dim newNode = CreateNode(Me.Project, e.FullPath)
+            Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/"))
+            parentNode.AddChild(newNode)
+        End Sub
+
+        Private Sub Project_ItemRemoved(sender As Object, e As ItemRemovedEventArgs)
+            Dim targetNode = FindNode(e.FullPath)
+            If targetNode IsNot Nothing Then
+                targetNode.Parent.RemoveChild(targetNode)
+            End If
+        End Sub
 
         Private Sub RemoveHandlers()
             If _project IsNot Nothing Then
@@ -119,6 +145,7 @@ Namespace ViewModels.Projects
                 AddHandlers()
             End If
         End Sub
+#End Region
 
         ''' <summary>
         ''' Creates a new instance of a node to represent the item at the given path.
@@ -126,7 +153,9 @@ Namespace ViewModels.Projects
         ''' <param name="project"></param>
         ''' <param name="path"></param>
         ''' <returns></returns>
-        Protected MustOverride Function CreateNode(project As ProjectBase, path As String) As ProjectBaseHeiarchyItemViewModel
+        Protected Overridable Function CreateNode(project As ProjectBase, path As String) As ProjectBaseHeiarchyItemViewModel
+            Return New ProjectBaseHeiarchyItemViewModel(project, Me, path)
+        End Function
 
         ''' <summary>
         ''' Finds the node with the given absolute path.  Should only be called on the root node, will fail on any other node.
@@ -178,32 +207,6 @@ Namespace ViewModels.Projects
         Protected Sub RemoveChild(node As ProjectBaseHeiarchyItemViewModel)
             If node IsNot Nothing Then
                 Me.Children.Remove(node)
-            End If
-        End Sub
-
-        Private Sub Project_DirectoryCreated(sender As Object, e As DirectoryCreatedEventArgs)
-            Dim newNode = CreateNode(Me.Project, e.FullPath)
-            Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/"))
-            parentNode.AddChild(newNode)
-        End Sub
-
-        Private Sub Project_DirectoryDeleted(sender As Object, e As DirectoryDeletedEventArgs)
-            Dim targetNode = FindNode(e.FullPath)
-            If targetNode IsNot Nothing Then
-                targetNode.Parent.RemoveChild(targetNode)
-            End If
-        End Sub
-
-        Private Sub Project_ItemAdded(sender As Object, e As ItemAddedEventArgs)
-            Dim newNode = CreateNode(Me.Project, e.FullPath)
-            Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/"))
-            parentNode.AddChild(newNode)
-        End Sub
-
-        Private Sub Project_ItemRemoved(sender As Object, e As ItemRemovedEventArgs)
-            Dim targetNode = FindNode(e.FullPath)
-            If targetNode IsNot Nothing Then
-                targetNode.Parent.RemoveChild(targetNode)
             End If
         End Sub
 
