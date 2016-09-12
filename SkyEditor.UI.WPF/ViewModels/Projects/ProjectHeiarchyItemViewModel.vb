@@ -24,6 +24,7 @@ Namespace ViewModels.Projects
                 Return _project
             End Get
             Protected Set(value As ProjectBase)
+                RemoveHandlers()
                 _project = value
             End Set
         End Property
@@ -95,13 +96,21 @@ Namespace ViewModels.Projects
 #End Region
 
         Private Sub RemoveHandlers()
-            RemoveHandler _project.DirectoryCreated, AddressOf Project_DirectoryCreated
-            RemoveHandler _project.DirectoryDeleted, AddressOf Project_DirectoryDeleted
+            If _project IsNot Nothing Then
+                RemoveHandler _project.DirectoryCreated, AddressOf Project_DirectoryCreated
+                RemoveHandler _project.DirectoryDeleted, AddressOf Project_DirectoryDeleted
+                RemoveHandler _project.ItemAdded, AddressOf Project_ItemAdded
+                RemoveHandler _project.ItemRemoved, AddressOf Project_ItemRemoved
+            End If
         End Sub
 
         Private Sub AddHandlers()
-            AddHandler _project.DirectoryCreated, AddressOf Project_DirectoryCreated
-            AddHandler _project.DirectoryDeleted, AddressOf Project_DirectoryDeleted
+            If _project IsNot Nothing Then
+                AddHandler _project.DirectoryCreated, AddressOf Project_DirectoryCreated
+                AddHandler _project.DirectoryDeleted, AddressOf Project_DirectoryDeleted
+                AddHandler _project.ItemAdded, AddressOf Project_ItemAdded
+                AddHandler _project.ItemRemoved, AddressOf Project_ItemRemoved
+            End If
         End Sub
 
         Private Sub ResetHandlers()
@@ -185,7 +194,19 @@ Namespace ViewModels.Projects
             End If
         End Sub
 
-        'Todo: handle item adds and removes
+        Private Sub Project_ItemAdded(sender As Object, e As ItemAddedEventArgs)
+            Dim newNode = CreateNode(Me.Project, e.FullPath)
+            Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/"))
+            parentNode.AddChild(newNode)
+        End Sub
+
+        Private Sub Project_ItemRemoved(sender As Object, e As ItemRemovedEventArgs)
+            Dim targetNode = FindNode(e.FullPath)
+            If targetNode IsNot Nothing Then
+                targetNode.Parent.RemoveChild(targetNode)
+            End If
+        End Sub
+
     End Class
 End Namespace
 
