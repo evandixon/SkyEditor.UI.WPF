@@ -3,6 +3,7 @@ Imports System.Windows
 Imports System.Windows.Input
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.UI.WPF.MenuActions.Context
+Imports SkyEditor.UI.WPF.ViewModels.Projects
 
 Namespace ObjectControls
     Public Class SolutionExplorer
@@ -18,7 +19,7 @@ Namespace ObjectControls
         End Sub
 
         Private Async Sub tvSolutions_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles tvSolutions.MouseDoubleClick
-            If tvSolutions.SelectedItem IsNot Nothing AndAlso TypeOf tvSolutions.SelectedItem Is ProjectNode Then
+            If tvSolutions.SelectedItem IsNot Nothing AndAlso TypeOf tvSolutions.SelectedItem Is ProjectHeiarchyItemViewModel Then
                 Await ProjectNodeOpenFile.OpenFile(tvSolutions.SelectedItem, CurrentPluginManager)
             End If
         End Sub

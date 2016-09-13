@@ -449,4 +449,10 @@ Sharp Zip Lib﻿ - Copyright © 2000-2016 SharpZipLib Contributors</value>
   <data name="CreditsLabel" xml:space="preserve">
     <value>Credits: </value>
   </data>
+  <data name="DirectoryPrefix" xml:space="preserve">
+    <value>[Directory] </value>
+  </data>
+  <data name="ProjectPrefix" xml:space="preserve">
+    <value>[Project] </value>
+  </data>
 </root>

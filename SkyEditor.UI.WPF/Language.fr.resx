@@ -129,6 +129,9 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="DirectoryPrefix" xml:space="preserve">
+    <value>[Dossier] </value>
+  </data>
   <data name="DocumentCloseConfirmation" xml:space="preserve">
     <value>Êtes-vous sûr que vous voulez clore ce fichier?  Les modifications non enregistrées seront perdues.</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="MainTitle" xml:space="preserve">
     <value>Sky Editeur {0}{1}</value>
+  </data>
+  <data name="ProjectPrefix" xml:space="preserve">
+    <value>[Projet]</value>
   </data>
   <data name="VersionBeta" xml:space="preserve">
     <value>Bêta </value>
