@@ -1,5 +1,4 @@
 ﻿Imports System.Reflection
-Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
@@ -40,9 +39,11 @@ Namespace MenuActions.Context
 
         Public Overrides Function SupportsObject(Obj As Object) As Boolean
             If TypeOf Obj Is ProjectHeiarchyItemViewModel Then
-                Return DirectCast(Obj, ProjectHeiarchyItemViewModel).IsDirectory AndAlso DirectCast(Obj, ProjectHeiarchyItemViewModel).Project.CanCreateFile("/")
+                Dim node As ProjectHeiarchyItemViewModel = Obj
+                Return node.IsDirectory AndAlso node.Project.CanCreateFile(node.CurrentPath)
             ElseIf TypeOf Obj Is SolutionHeiarchyItemViewModel Then
-                Return Not DirectCast(Obj, SolutionHeiarchyItemViewModel).IsDirectory AndAlso DirectCast(Obj, SolutionHeiarchyItemViewModel).GetNodeProject.CanCreateFile("/")
+                Dim node As SolutionHeiarchyItemViewModel = Obj
+                Return Not node.IsDirectory AndAlso node.GetNodeProject.CanCreateFile("/")
             Else
                 Return False
             End If

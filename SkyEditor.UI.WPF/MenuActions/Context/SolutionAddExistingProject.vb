@@ -1,9 +1,7 @@
 ﻿Imports System.Reflection
 Imports System.Windows.Forms
-Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
-Imports SkyEditor.Core.Utilities
 Imports SkyEditor.UI.WPF.ViewModels.Projects
 
 Namespace MenuActions.Context
