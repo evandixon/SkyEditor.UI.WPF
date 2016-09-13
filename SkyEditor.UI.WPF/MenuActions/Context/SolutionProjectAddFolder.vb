@@ -11,7 +11,7 @@ Namespace MenuActions.Context
                 Dim w As New NewNameWindow(My.Resources.Language.NewFolderQuestion, My.Resources.Language.NewFolder)
                 If w.ShowDialog Then
                     Dim node As ProjectBaseHeiarchyItemViewModel = obj
-                    node.Project.CreateDirectory(w.SelectedName)
+                    node.Project.CreateDirectory(node.CurrentPath & "/" & w.SelectedName)
                 End If
             Next
         End Sub

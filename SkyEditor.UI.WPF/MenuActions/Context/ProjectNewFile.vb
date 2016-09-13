@@ -13,7 +13,7 @@ Namespace MenuActions.Context
                 Dim CurrentPath As String
                 Dim ParentProject As Project
                 If TypeOf item Is SolutionHeiarchyItemViewModel Then
-                    CurrentPath = "/"
+                    CurrentPath = ""
                     ParentProject = DirectCast(item, SolutionHeiarchyItemViewModel).GetNodeProject
                 ElseIf TypeOf item Is ProjectHeiarchyItemViewModel Then
                     CurrentPath = DirectCast(item, ProjectHeiarchyItemViewModel).CurrentPath
@@ -43,7 +43,7 @@ Namespace MenuActions.Context
                 Return node.IsDirectory AndAlso node.Project.CanCreateFile(node.CurrentPath)
             ElseIf TypeOf Obj Is SolutionHeiarchyItemViewModel Then
                 Dim node As SolutionHeiarchyItemViewModel = Obj
-                Return Not node.IsDirectory AndAlso node.GetNodeProject.CanCreateFile("/")
+                Return Not node.IsDirectory AndAlso node.GetNodeProject.CanCreateFile("")
             Else
                 Return False
             End If

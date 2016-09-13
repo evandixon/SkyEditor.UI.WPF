@@ -15,7 +15,7 @@
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type projectVM:ProjectBaseHeiarchyItemViewModel}" ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text=""/>
+                        <TextBlock Text="{Binding Prefix}"/>
                         <TextBlock Text="{Binding Name}" />
                     </StackPanel>                    
                 </HierarchicalDataTemplate>

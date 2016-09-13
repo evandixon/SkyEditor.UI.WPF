@@ -12,7 +12,8 @@ Namespace ViewModels.Projects
         ''' <param name="project"></param>
         Public Sub New(project As ProjectBase)
             Me.Project = project
-            Me.CurrentPath = "/"
+            Me.CurrentPath = ""
+            IsDirectory = project.DirectoryExists(CurrentPath) 'Assumed to be file if it doesn't exist.
             Children = New ObservableCollection(Of ProjectBaseHeiarchyItemViewModel)
             PopulateChildren()
         End Sub
@@ -26,7 +27,8 @@ Namespace ViewModels.Projects
         Public Sub New(project As ProjectBase, parent As ProjectBaseHeiarchyItemViewModel, currentPath As String)
             Me.Parent = parent
             Me.Project = project
-            Me.CurrentPath = currentPath 'Order matters, because events.  This should be set last.
+            Me.CurrentPath = currentPath 'Order matters, because events.  This should be set after project and parent
+            IsDirectory = project.DirectoryExists(currentPath) 'Assumed to be file if it doesn't exist.
             Children = New ObservableCollection(Of ProjectBaseHeiarchyItemViewModel)
             PopulateChildren()
         End Sub
@@ -72,6 +74,19 @@ Namespace ViewModels.Projects
         End Property
         Dim _isDirectory As Boolean
 
+        Public Property Prefix As String
+            Get
+                Return _prefix
+            End Get
+            Protected Set(value As String)
+                If _prefix <> value Then
+                    _prefix = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Prefix)))
+                End If
+            End Set
+        End Property
+        Dim _prefix As String
+
         Public Property Name As String
             Get
                 Return _name
@@ -80,7 +95,7 @@ Namespace ViewModels.Projects
             Private Set(value As String)
                 If _name <> value Then
                     _name = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(value)))
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Name)))
                 End If
             End Set
         End Property
@@ -107,14 +122,14 @@ Namespace ViewModels.Projects
 
 #Region "Event Handlers"
         Private Sub ProjectBaseHeiarchyItemViewModel_CurrentPathChanged() Handles Me.CurrentPathChanged
-            Name = IO.Path.GetFileName(CurrentPath.TrimEnd("/"))
+            Name = IO.Path.GetFileName(CurrentPath.TrimEnd(""))
             IsDirectory = Project.DirectoryExists(CurrentPath) 'Assumed to be file if it doesn't exist.
             ResetHandlers()
         End Sub
 
         Private Sub Project_DirectoryCreated(sender As Object, e As DirectoryCreatedEventArgs)
             Dim newNode = CreateNode(Me.Project, e.FullPath)
-            Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/"))
+            Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/").TrimEnd("/"))
             parentNode.AddChild(newNode)
         End Sub
 
@@ -127,7 +142,7 @@ Namespace ViewModels.Projects
 
         Private Sub Project_ItemAdded(sender As Object, e As ItemAddedEventArgs)
             Dim newNode = CreateNode(Me.Project, e.FullPath)
-            Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/"))
+            Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/").TrimStart("/"))
             parentNode.AddChild(newNode)
         End Sub
 
@@ -242,7 +257,7 @@ Namespace ViewModels.Projects
 
                 'Create items
                 For Each item In Project.GetItems(CurrentPath, False)
-                    AddChild(CreateNode(Project, item.Value))
+                    AddChild(CreateNode(Project, item.Key))
                 Next
             End If
         End Sub

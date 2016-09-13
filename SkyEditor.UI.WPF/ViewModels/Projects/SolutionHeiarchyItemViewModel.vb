@@ -6,6 +6,7 @@ Namespace ViewModels.Projects
 
         Public Sub New(solution As Solution)
             MyBase.New(solution)
+            Prefix = My.Resources.Language.DirectoryPrefix
         End Sub
 
         Public Sub New(solution As Solution, parent As SolutionHeiarchyItemViewModel, path As String)

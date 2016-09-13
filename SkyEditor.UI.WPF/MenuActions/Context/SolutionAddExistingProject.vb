@@ -36,7 +36,7 @@ Namespace MenuActions.Context
         Public Overrides Function SupportsObject(Obj As Object) As Boolean
             If TypeOf Obj Is SolutionHeiarchyItemViewModel Then
                 Dim node As SolutionHeiarchyItemViewModel = Obj
-                Return node.Project.CanCreateProject(node.CurrentPath)
+                Return node.IsDirectory AndAlso node.Project.CanCreateProject(node.CurrentPath)
             Else
                 Return False
             End If
