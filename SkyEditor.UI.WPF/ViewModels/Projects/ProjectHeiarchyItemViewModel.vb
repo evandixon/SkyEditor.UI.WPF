@@ -8,10 +8,20 @@ Namespace ViewModels.Projects
 
         Public Sub New(solution As Project)
             MyBase.New(solution)
+            SetPrefix()
         End Sub
 
         Public Sub New(solution As Project, parent As ProjectHeiarchyItemViewModel, path As String)
             MyBase.New(solution, parent, path)
+            SetPrefix()
+        End Sub
+
+        Private Sub SetPrefix()
+            If IsDirectory Then
+                Prefix = My.Resources.Language.DirectoryPrefix
+            Else
+                Prefix = String.Empty
+            End If
         End Sub
 
         Public Shadows Property Project() As Project

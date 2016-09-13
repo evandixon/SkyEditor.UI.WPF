@@ -450,9 +450,9 @@ Sharp Zip Lib﻿ - Copyright © 2000-2016 SharpZipLib Contributors</value>
     <value>Credits: </value>
   </data>
   <data name="DirectoryPrefix" xml:space="preserve">
-    <value>[Directory]</value>
+    <value>[Directory] </value>
   </data>
   <data name="ProjectPrefix" xml:space="preserve">
-    <value>[Project]</value>
+    <value>[Project] </value>
   </data>
 </root>

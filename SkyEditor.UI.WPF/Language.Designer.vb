@@ -200,7 +200,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to [Directory].
+        '''  Looks up a localized string similar to [Directory] .
         '''</summary>
         Public Shared ReadOnly Property DirectoryPrefix() As String
             Get
@@ -897,7 +897,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to [Project].
+        '''  Looks up a localized string similar to [Project] .
         '''</summary>
         Public Shared ReadOnly Property ProjectPrefix() As String
             Get

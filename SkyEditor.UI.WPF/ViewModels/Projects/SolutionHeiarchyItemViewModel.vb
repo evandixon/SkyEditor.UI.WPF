@@ -6,11 +6,20 @@ Namespace ViewModels.Projects
 
         Public Sub New(solution As Solution)
             MyBase.New(solution)
-            Prefix = My.Resources.Language.DirectoryPrefix
+            SetPrefix()
         End Sub
 
         Public Sub New(solution As Solution, parent As SolutionHeiarchyItemViewModel, path As String)
             MyBase.New(solution, parent, path)
+            SetPrefix()
+        End Sub
+
+        Private Sub SetPrefix()
+            If IsDirectory Then
+                Prefix = My.Resources.Language.DirectoryPrefix
+            Else
+                Prefix = My.Resources.Language.ProjectPrefix
+            End If
         End Sub
 
         Protected Property ProjectRootNode As ProjectHeiarchyItemViewModel
