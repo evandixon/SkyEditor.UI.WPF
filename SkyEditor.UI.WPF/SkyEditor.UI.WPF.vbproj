@@ -165,7 +165,6 @@
     <Compile Include="ViewModels\Projects\ProjectBaseHeiarchyItemViewModel.vb" />
     <Compile Include="ViewModels\Projects\ProjectHeiarchyItemViewModel.vb" />
     <Compile Include="ViewModels\Projects\SolutionHeiarchyItemViewModel.vb" />
-    <Compile Include="ViewModels\SolutionViewModel.vb" />
     <Compile Include="Views\Credits.xaml.vb">
       <DependentUpon>Credits.xaml</DependentUpon>
     </Compile>
