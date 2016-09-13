@@ -3,7 +3,7 @@ Imports System.ComponentModel
 Imports SkyEditor.Core.Projects
 
 Namespace ViewModels.Projects
-    Public Class ProjectBaseHeiarchyItemViewModel
+    Public MustInherit Class ProjectBaseHeiarchyItemViewModel
         Implements INotifyPropertyChanged
 
         ''' <summary>
@@ -170,9 +170,7 @@ Namespace ViewModels.Projects
         ''' <param name="project"></param>
         ''' <param name="path"></param>
         ''' <returns></returns>
-        Protected Overridable Function CreateNode(project As ProjectBase, path As String) As ProjectBaseHeiarchyItemViewModel
-            Return New ProjectBaseHeiarchyItemViewModel(project, Me, path)
-        End Function
+        Protected MustOverride Function CreateNode(project As ProjectBase, path As String) As ProjectBaseHeiarchyItemViewModel
 
         ''' <summary>
         ''' Finds the node with the given absolute path.  Should only be called on the root node, will fail on any other node.
@@ -212,18 +210,26 @@ Namespace ViewModels.Projects
             Return Me.Children.Where(Function(x) x.Name.ToLowerInvariant = name.ToLowerInvariant).SingleOrDefault
         End Function
 
-        Protected Sub AddChild(node As ProjectBaseHeiarchyItemViewModel)
+        Public Sub AddChild(node As ProjectBaseHeiarchyItemViewModel)
             Me.Children.Add(node)
         End Sub
 
-        Protected Sub RemoveChild(name As String)
+        Public Sub RemoveChild(name As String)
             Dim toRemove = FindItem(name)
             RemoveChild(toRemove)
         End Sub
 
-        Protected Sub RemoveChild(node As ProjectBaseHeiarchyItemViewModel)
+        Public Sub RemoveChild(node As ProjectBaseHeiarchyItemViewModel)
             If node IsNot Nothing Then
                 Me.Children.Remove(node)
+            End If
+        End Sub
+
+        Public MustOverride Function CanDeleteCurrentNode() As Boolean
+
+        Public Sub RemoveCurrentNode()
+            If CanDeleteCurrentNode() AndAlso Parent IsNot Nothing Then
+                Parent.RemoveChild(Me)
             End If
         End Sub
 

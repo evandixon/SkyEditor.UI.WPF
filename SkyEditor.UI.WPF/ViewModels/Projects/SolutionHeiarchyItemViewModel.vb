@@ -41,5 +41,14 @@ Namespace ViewModels.Projects
             Dim solution As Solution = Me.Project
             Return solution.GetProjectByPath(Me.CurrentPath)
         End Function
+
+        Public Overrides Function CanDeleteCurrentNode() As Boolean
+            If Me.IsDirectory Then
+                Return Project.CanDeleteDirectory(CurrentPath)
+            Else
+                Return Project.CanDeleteProject(CurrentPath)
+            End If
+        End Function
+
     End Class
 End Namespace

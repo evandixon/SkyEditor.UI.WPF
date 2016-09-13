@@ -36,5 +36,13 @@ Namespace ViewModels.Projects
             Dim project As Project = Me.Project
             Return Await project.GetFileByPath(CurrentPath, manager, duplicateMatchSelector)
         End Function
+
+        Public Overrides Function CanDeleteCurrentNode() As Boolean
+            If Me.IsDirectory Then
+                Return Project.CanDeleteDirectory(CurrentPath)
+            Else
+                Return Project.CanDeleteFile(CurrentPath)
+            End If
+        End Function
     End Class
 End Namespace

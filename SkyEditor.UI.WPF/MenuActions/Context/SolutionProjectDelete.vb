@@ -3,6 +3,7 @@ Imports System.Windows
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
+Imports SkyEditor.UI.WPF.ViewModels.Projects
 
 Namespace MenuActions
     Public Class SolutionProjectDelete
@@ -10,25 +11,21 @@ Namespace MenuActions
 
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item In Targets
-                If MessageBox.Show(My.Resources.Language.DeleteItemConfirmation, My.Resources.Language.MainTitle, MessageBoxButton.YesNo) = MessageBoxResult.Yes Then
-                    If TypeOf item Is SolutionNode Then
-                        DirectCast(item, SolutionNode).DeleteCurrentNode()
-                    ElseIf TypeOf item Is ProjectNode Then
-                        DirectCast(item, ProjectNode).DeleteCurrentNode()
+                If TypeOf item Is ProjectBaseHeiarchyItemViewModel Then
+                    If MessageBox.Show(My.Resources.Language.DeleteItemConfirmation, My.Resources.Language.MainTitle, MessageBoxButton.YesNo) = MessageBoxResult.Yes Then
+                        DirectCast(item, ProjectBaseHeiarchyItemViewModel).RemoveCurrentNode()
                     End If
                 End If
             Next
         End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
-            Return {GetType(SolutionNode).GetTypeInfo, GetType(ProjectNode).GetTypeInfo}
+            Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo, GetType(ProjectHeiarchyItemViewModel).GetTypeInfo}
         End Function
 
         Public Overrides Function SupportsObject(Obj As Object) As Boolean
-            If TypeOf Obj Is SolutionNode Then
-                Return DirectCast(Obj, SolutionNode).CanDeleteCurrentNode
-            ElseIf TypeOf Obj Is ProjectNode Then
-                Return DirectCast(Obj, ProjectNode).CanDeleteCurrentNode
+            If TypeOf Obj Is ProjectBaseHeiarchyItemViewModel Then
+                Return DirectCast(Obj, ProjectBaseHeiarchyItemViewModel).CanDeleteCurrentNode
             Else
                 Return False
             End If
