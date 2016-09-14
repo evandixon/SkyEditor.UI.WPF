@@ -55,12 +55,12 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="SkyEditor.Core, Version=4.0.6.115, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.0.6-CI115\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
+    <Reference Include="SkyEditor.Core, Version=4.0.6.118, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\SkyEditor.ROMEditor\packages\SkyEditor.Core.4.0.6-CI118\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkyEditor.Core.Windows, Version=4.0.6.115, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.6-CI115\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
+    <Reference Include="SkyEditor.Core.Windows, Version=4.0.6.118, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\SkyEditor.ROMEditor\packages\SkyEditor.Core.Windows.4.0.6-CI118\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -162,6 +162,7 @@
       <DependentUpon>NewSolutionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjectControl.vb" />
+    <Compile Include="ViewModels\Projects\ProjectBaseBuildViewModel.vb" />
     <Compile Include="ViewModels\Projects\ProjectBaseHeiarchyItemViewModel.vb" />
     <Compile Include="ViewModels\Projects\ProjectHeiarchyItemViewModel.vb" />
     <Compile Include="ViewModels\Projects\SolutionHeiarchyItemViewModel.vb" />

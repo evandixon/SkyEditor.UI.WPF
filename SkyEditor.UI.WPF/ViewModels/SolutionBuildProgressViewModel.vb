@@ -4,6 +4,7 @@ Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
+Imports SkyEditor.UI.WPF.ViewModels.Projects
 
 Namespace ViewModels
     Public Class SolutionBuildProgressViewModel
@@ -11,10 +12,10 @@ Namespace ViewModels
 
         Public Sub New()
             Me.Header = My.Resources.Language.BuildProgress
-            BuildingProjects = New ObservableCollection(Of Project)
+            BuildingProjects = New ObservableCollection(Of ProjectBaseBuildViewModel)
         End Sub
 
-        Public Property BuildingProjects As ObservableCollection(Of Project)
+        Public Property BuildingProjects As ObservableCollection(Of ProjectBaseBuildViewModel)
 
         Private WithEvents CurrentSolution As Solution
 
@@ -41,7 +42,7 @@ Namespace ViewModels
         Private Sub Project_BuildStatusChanged(sender As Object, e As ProgressReportedEventArgs)
             If Not BuildingProjects.Contains(sender) Then
                 Application.Current.Dispatcher.Invoke(Sub()
-                                                          BuildingProjects.Add(sender)
+                                                          BuildingProjects.Add(New ProjectBaseBuildViewModel(sender, CurrentIOUIManager.CurrentPluginManager))
                                                       End Sub)
             End If
         End Sub
