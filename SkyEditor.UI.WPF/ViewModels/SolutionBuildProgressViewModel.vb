@@ -40,7 +40,7 @@ Namespace ViewModels
         End Sub
 
         Private Sub Project_BuildStatusChanged(sender As Object, e As ProgressReportedEventArgs)
-            If Not BuildingProjects.Contains(sender) Then
+            If Not BuildingProjects.Any(Function(x) x.Model Is sender) Then
                 Application.Current.Dispatcher.Invoke(Sub()
                                                           BuildingProjects.Add(New ProjectBaseBuildViewModel(sender, CurrentIOUIManager.CurrentPluginManager))
                                                       End Sub)

@@ -15,6 +15,18 @@ Namespace ViewModels.Projects
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
+        Public Property Name As String
+            Get
+                Return Model.Name
+            End Get
+            Set(value As String)
+                If Not Model.Name = value Then
+                    Model.Name = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.Name)))
+                End If
+            End Set
+        End Property
+
         Public Property BuildStatusMessage As String
             Get
                 Return Model.BuildStatusMessage
