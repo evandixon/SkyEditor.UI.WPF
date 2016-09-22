@@ -20,7 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="21"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="21" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Menu x:Name="menuMain" IsMainMenu="True" Grid.Row="0" ItemsSource="{Binding RootMenuItems}">
             <Menu.ItemContainerStyle>
@@ -80,7 +80,7 @@
             </ad:LayoutRoot>
         </ad:DockingManager>
         <StatusBar Grid.Row="2">
-            <ProgressBar Value="{Binding LoadingProgress}" IsIndeterminate="{Binding IsLoadingIndeterminate}" Width="100" Height="14" />
+            <ProgressBar Value="{Binding LoadingProgress}" IsIndeterminate="{Binding IsLoadingIndeterminate}" Width="100" Height="20" />
             <TextBlock Text="{Binding LoadingMessage}"/>
         </StatusBar>
     </Grid>
