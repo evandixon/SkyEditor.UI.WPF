@@ -455,4 +455,7 @@ Sharp Zip Lib﻿ - Copyright © 2000-2016 SharpZipLib Contributors</value>
   <data name="ProjectPrefix" xml:space="preserve">
     <value>[Project] </value>
   </data>
+  <data name="LoadingCopyingFile" xml:space="preserve">
+    <value>Copying File...</value>
+  </data>
 </root>

@@ -26,7 +26,8 @@ Namespace MenuActions.Context
                 w.Filter = ParentProject.GetImportIOFilter(CurrentPath, CurrentPluginManager)
 
                 If w.ShowDialog = DialogResult.OK Then
-                    ParentProject.AddExistingFile(CurrentPath, w.FileName, CurrentPluginManager.CurrentIOProvider)
+                    Dim fileAddTask = Task.Run(Sub() ParentProject.AddExistingFile(CurrentPath, w.FileName, CurrentPluginManager.CurrentIOProvider))
+                    CurrentPluginManager.CurrentIOUIManager.ShowLoading(fileAddTask, My.Resources.Language.LoadingCopyingFile)
                 End If
             Next
         End Sub

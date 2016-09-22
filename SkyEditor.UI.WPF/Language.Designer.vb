@@ -425,6 +425,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Copying File....
+        '''</summary>
+        Public Shared ReadOnly Property LoadingCopyingFile() As String
+            Get
+                Return ResourceManager.GetString("LoadingCopyingFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Location.
         '''</summary>
         Public Shared ReadOnly Property Location() As String
