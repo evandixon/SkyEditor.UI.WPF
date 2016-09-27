@@ -251,11 +251,7 @@ Namespace ViewModels.Projects
 
         Public MustOverride Function CanDeleteCurrentNode() As Boolean
 
-        Public Sub RemoveCurrentNode()
-            If CanDeleteCurrentNode() AndAlso Parent IsNot Nothing Then
-                Parent.RemoveChild(Me)
-            End If
-        End Sub
+        Public MustOverride Sub RemoveCurrentNode()
 
         Protected Overridable Sub PopulateChildren()
             If IsDirectory Then

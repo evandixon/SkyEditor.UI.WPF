@@ -54,5 +54,15 @@ Namespace ViewModels.Projects
                 Return Project.CanDeleteFile(CurrentPath)
             End If
         End Function
+
+        Public Overrides Sub RemoveCurrentNode()
+            If CanDeleteCurrentNode() Then
+                If IsDirectory Then
+                    Project.DeleteDirectory(CurrentPath)
+                Else
+                    Project.DeleteFile(CurrentPath)
+                End If
+            End If
+        End Sub
     End Class
 End Namespace
