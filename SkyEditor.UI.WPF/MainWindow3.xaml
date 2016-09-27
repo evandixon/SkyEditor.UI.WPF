@@ -80,7 +80,7 @@
             </ad:LayoutRoot>
         </ad:DockingManager>
         <StatusBar Grid.Row="2">
-            <ProgressBar Value="{Binding LoadingProgress}" IsIndeterminate="{Binding IsLoadingIndeterminate}" Width="100" Height="20" />
+            <ProgressBar Value="{Binding LoadingProgress}" IsIndeterminate="{Binding IsLoadingIndeterminate}" Width="100" Height="20" Minimum="0" Maximum="1" />
             <TextBlock Text="{Binding LoadingMessage}"/>
         </StatusBar>
     </Grid>
