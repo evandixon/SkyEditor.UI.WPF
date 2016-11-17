@@ -28,16 +28,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <ApplicationVersion Condition="'$(build_number)' == ''">1.0.0.%2a</ApplicationVersion>
-    <ApplicationVersion Condition="'$(build_number)' != ''">$(ApplicationVersion)</ApplicationVersion>
-    <ApplicationRevision Condition="'$(build_number)' == ''">%2a</ApplicationRevision>
-    <ApplicationRevision Condition="'$(build_number)' != ''">$(build_counter)</ApplicationRevision>
-    <InstallUrl Condition="'$(InstallUrl)' == ''">http://localhost/SkyEditor</InstallUrl>
-    <InstallUrl Condition="'$(InstallUrl)' != ''">$(InstallUrl)</InstallUrl>
-    <UpdateUrl Condition="'$(InstallUrl)' == ''">http://localhost/SkyEditor</UpdateUrl>
-    <UpdateUrl Condition="'$(InstallUrl)' != ''">$(InstallUrl)</UpdateUrl>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -89,12 +80,12 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkyEditor.Core, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.0.4\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
+    <Reference Include="SkyEditor.Core, Version=4.0.6.122, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.4.0.6-CI122\lib\portable45-net45+win8+wpa81\SkyEditor.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkyEditor.Core.Windows, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.4\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
+    <Reference Include="SkyEditor.Core.Windows, Version=4.0.6.122, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.Windows.4.0.6-CI122\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />

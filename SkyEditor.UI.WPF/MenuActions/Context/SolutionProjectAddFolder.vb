@@ -1,6 +1,6 @@
 ﻿Imports System.Reflection
-Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
+Imports SkyEditor.UI.WPF.ViewModels.Projects
 
 Namespace MenuActions.Context
     Public Class SolutionProjectAddFolder
@@ -10,28 +10,20 @@ Namespace MenuActions.Context
             For Each obj In Targets
                 Dim w As New NewNameWindow(My.Resources.Language.NewFolderQuestion, My.Resources.Language.NewFolder)
                 If w.ShowDialog Then
-                    If TypeOf obj Is Solution Then
-                        DirectCast(obj, Solution).CreateDirectory("", w.SelectedName)
-                    ElseIf TypeOf obj Is SolutionNode Then
-                        DirectCast(obj, SolutionNode).CreateChildDirectory(w.SelectedName)
-                    ElseIf TypeOf obj Is ProjectNode Then
-                        DirectCast(obj, ProjectNode).CreateChildDirectory(w.SelectedName)
-                    End If
+                    Dim node As ProjectBaseHeiarchyItemViewModel = obj
+                    node.Project.CreateDirectory(node.CurrentPath & "/" & w.SelectedName)
                 End If
             Next
         End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
-            Return {GetType(Solution).GetTypeInfo, GetType(SolutionNode).GetTypeInfo, GetType(ProjectNode).GetTypeInfo}
+            Return {GetType(ProjectBaseHeiarchyItemViewModel).GetTypeInfo}
         End Function
 
         Public Overrides Function SupportsObject(Obj As Object) As Boolean
-            If TypeOf Obj Is Solution Then
-                Return DirectCast(Obj, Solution).CanCreateDirectory("")
-            ElseIf TypeOf Obj Is SolutionNode Then
-                Return DirectCast(Obj, SolutionNode).CanCreateChildDirectory
-            ElseIf TypeOf Obj Is ProjectNode Then
-                Return DirectCast(Obj, ProjectNode).CanCreateChildDirectory
+            If TypeOf Obj Is ProjectBaseHeiarchyItemViewModel Then
+                Dim node As ProjectBaseHeiarchyItemViewModel = Obj
+                Return node.Project.CanCreateDirectory(node.CurrentPath)
             Else
                 Return False
             End If

@@ -1,5 +1,6 @@
-﻿Imports SkyEditor.Core.IO
+﻿Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
+Imports SkyEditor.Core.Settings
 Imports SkyEditor.UI.WPF.ViewModels
 
 Namespace MenuActions.View
@@ -17,7 +18,7 @@ Namespace MenuActions.View
         End Sub
 
         Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentPluginManagerChanged
-            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1
+            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso (CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode)
         End Sub
     End Class
 End Namespace

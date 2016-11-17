@@ -1,26 +1,23 @@
 ﻿Imports System.Collections.ObjectModel
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
+Imports SkyEditor.UI.WPF.ViewModels.Projects
 
 Namespace ViewModels
     Public Class SolutionExplorerViewModel
         Inherits AnchorableViewModel
 
-        Public ReadOnly Property Solutions As ObservableCollection(Of Solution)
-            Get
-                Return _solutions
-            End Get
-        End Property
-        Dim _solutions As ObservableCollection(Of Solution)
+        Public ReadOnly Property SolutionRoots As ObservableCollection(Of SolutionHeiarchyItemViewModel)
 
         Public Sub New()
             Me.Header = My.Resources.Language.SolutionExplorerToolWindowTitle
-            _solutions = New ObservableCollection(Of Solution)
+            SolutionRoots = New ObservableCollection(Of SolutionHeiarchyItemViewModel)
         End Sub
 
         Private Sub SolutionExplorerViewModel_CurrentSolutionChanged(sender As Object, e As EventArgs) Handles Me.CurrentSolutionChanged
-            _solutions.Clear()
-            _solutions.Add(CurrentIOUIManager.CurrentSolution)
+            SolutionRoots.Clear()
+            SolutionRoots.Add(New SolutionHeiarchyItemViewModel(CurrentIOUIManager.CurrentSolution))
         End Sub
     End Class
 

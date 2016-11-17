@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Reflection
+Imports System.Windows
 Imports System.Windows.Controls
 Imports SkyEditor.Core
 Imports SkyEditor.Core.UI
@@ -12,6 +13,13 @@ Public Class DataBoundObjectControl
     Inherits UserControl
     Implements IObjectControl
     Implements INotifyPropertyChanged
+
+#Region "Dependency Properties"
+    Public Shared ReadOnly HeaderProperty As DependencyProperty = DependencyProperty.Register(NameOf(Header), GetType(Object), GetType(DataBoundObjectControl), New FrameworkPropertyMetadata(AddressOf OnHeaderChanged))
+    Private Shared Sub OnHeaderChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
+        DirectCast(d, DataBoundObjectControl).Header = e.NewValue
+    End Sub
+#End Region
 
 #Region "Events"
     ''' <summary>
@@ -132,9 +140,8 @@ Public Class DataBoundObjectControl
     ''' <summary>
     ''' If True, this control will not be used if another one exists.
     ''' </summary>
-    ''' <param name="Obj"></param>
     ''' <returns></returns>
-    Public Overridable Function GetIsBackupControl(Obj As Object) As Boolean Implements IObjectControl.IsBackupControl
+    Public Overridable Function GetIsBackupControl() As Boolean Implements IObjectControl.IsBackupControl
         Return IsBackupControl
     End Function
 

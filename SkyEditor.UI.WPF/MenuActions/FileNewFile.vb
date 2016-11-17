@@ -1,8 +1,6 @@
-﻿Imports System.Threading.Tasks
-Imports SkyEditor.Core.IO
+﻿Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
-
 Namespace MenuActions
     Public Class FileNewFile
         Inherits MenuAction
@@ -27,7 +25,7 @@ Namespace MenuActions
         End Sub
 
         Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentPluginManagerChanged
-            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso CurrentPluginManager.GetRegisteredObjects(Of ICreatableFile).Any()
+            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso (CurrentPluginManager.GetRegisteredObjects(Of ICreatableFile).Any())
         End Sub
     End Class
 End Namespace

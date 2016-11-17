@@ -4,34 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:coreUI="clr-namespace:SkyEditor.Core.UI;assembly=SkyEditor.Core"
-             xmlns:coreIO="clr-namespace:SkyEditor.Core.IO;assembly=SkyEditor.Core"
+             xmlns:projectVM="clr-namespace:SkyEditor.UI.WPF.ViewModels.Projects"
              xmlns:local="clr-namespace:SkyEditor.UI.WPF"
              xmlns:vm="clr-namespace:SkyEditor.UI.WPF.ViewModels"
              mc:Ignorable="d"
              TargetType="{x:Type vm:SolutionExplorerViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TreeView x:Name="tvSolutions" ItemsSource="{Binding Solutions}">
+        <TreeView x:Name="tvSolutions" ItemsSource="{Binding SolutionRoots}">
             <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type coreIO:Solution}" ItemsSource="{Binding Root.Children}">
+                <HierarchicalDataTemplate DataType="{x:Type projectVM:ProjectBaseHeiarchyItemViewModel}" ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="[Solution] "/>
+                        <TextBlock Text="{Binding Prefix}"/>
                         <TextBlock Text="{Binding Name}" />
                     </StackPanel>                    
-                </HierarchicalDataTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type coreIO:SolutionNode}" ItemsSource="{Binding Children}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Prefix}"/>
-                        <TextBlock Text=" "/>
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type coreIO:ProjectNode}" ItemsSource="{Binding Children}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Prefix}"/>
-                        <TextBlock Text=" "/>
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
             <TreeView.ContextMenu>

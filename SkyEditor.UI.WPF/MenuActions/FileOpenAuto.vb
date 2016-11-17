@@ -1,7 +1,7 @@
-﻿Imports System.Threading.Tasks
-Imports System.Windows.Forms
-Imports SkyEditor.Core.IO
+﻿Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
+Imports SkyEditor.Core.Settings
 
 Namespace MenuActions
     Public Class FileOpenAuto
@@ -25,7 +25,7 @@ Namespace MenuActions
         End Sub
 
         Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentPluginManagerChanged
-            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso (CurrentPluginManager.GetRegisteredObjects(Of IOpenableFile).Any() OrElse CurrentPluginManager.GetRegisteredObjects(Of IFileOpener).Any(Function(x As IFileOpener) TypeOf x IsNot OpenableFileOpener))
+            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso (CurrentPluginManager.GetRegisteredObjects(Of IOpenableFile).Any() OrElse CurrentPluginManager.GetRegisteredObjects(Of IFileOpener).Any(Function(x As IFileOpener) TypeOf x IsNot OpenableFileOpener) OrElse CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode)
         End Sub
 
     End Class

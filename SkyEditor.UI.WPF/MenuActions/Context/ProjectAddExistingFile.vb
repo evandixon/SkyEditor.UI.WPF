@@ -1,8 +1,8 @@
 ﻿Imports System.Reflection
 Imports System.Windows.Forms
-Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
-Imports SkyEditor.Core.Utilities
+Imports SkyEditor.UI.WPF.ViewModels.Projects
 
 Namespace MenuActions.Context
     Public Class ProjectAddExistingFile
@@ -12,12 +12,12 @@ Namespace MenuActions.Context
             For Each item In Targets
                 Dim CurrentPath As String
                 Dim ParentProject As Project
-                If TypeOf item Is SolutionNode Then
+                If TypeOf item Is SolutionHeiarchyItemViewModel Then
                     CurrentPath = ""
-                    ParentProject = DirectCast(item, SolutionNode).Project
-                ElseIf TypeOf item Is ProjectNode Then
-                    CurrentPath = DirectCast(item, ProjectNode).GetCurrentPath
-                    ParentProject = DirectCast(item, ProjectNode).ParentProject
+                    ParentProject = DirectCast(item, SolutionHeiarchyItemViewModel).GetNodeProject
+                ElseIf TypeOf item Is ProjectHeiarchyItemViewModel Then
+                    CurrentPath = DirectCast(item, ProjectHeiarchyItemViewModel).CurrentPath
+                    ParentProject = DirectCast(item, ProjectHeiarchyItemViewModel).Project
                 Else
                     Throw New ArgumentException(String.Format(My.Resources.Language.ErrorUnsupportedType, item.GetType.Name))
                 End If
@@ -26,20 +26,23 @@ Namespace MenuActions.Context
                 w.Filter = ParentProject.GetImportIOFilter(CurrentPath, CurrentPluginManager)
 
                 If w.ShowDialog = DialogResult.OK Then
-                    ParentProject.AddExistingFile(CurrentPath, w.FileName, CurrentPluginManager.CurrentIOProvider)
+                    Dim fileAddTask = Task.Run(Sub() ParentProject.AddExistingFile(CurrentPath, w.FileName, CurrentPluginManager.CurrentIOProvider))
+                    CurrentPluginManager.CurrentIOUIManager.ShowLoading(fileAddTask, My.Resources.Language.LoadingCopyingFile)
                 End If
             Next
         End Sub
 
         Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
-            Return {GetType(SolutionNode).GetTypeInfo, GetType(ProjectNode).GetTypeInfo}
+            Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo, GetType(ProjectHeiarchyItemViewModel).GetTypeInfo}
         End Function
 
         Public Overrides Function SupportsObject(Obj As Object) As Boolean
-            If TypeOf Obj Is ProjectNode Then
-                Return DirectCast(Obj, ProjectNode).IsDirectory AndAlso DirectCast(Obj, ProjectNode).CanCreateFile
-            ElseIf TypeOf Obj Is SolutionNode Then
-                Return Not DirectCast(Obj, SolutionNode).IsDirectory AndAlso DirectCast(Obj, SolutionNode).Project.CanAddExistingFile("")
+            If TypeOf Obj Is ProjectHeiarchyItemViewModel Then
+                Dim node As ProjectHeiarchyItemViewModel = Obj
+                Return node.IsDirectory AndAlso node.Project.CanAddExistingFile(node.CurrentPath)
+            ElseIf TypeOf Obj Is SolutionHeiarchyItemViewModel Then
+                Dim node As SolutionHeiarchyItemViewModel = Obj
+                Return Not node.IsDirectory AndAlso node.GetNodeProject.CanAddExistingFile("")
             Else
                 Return False
             End If

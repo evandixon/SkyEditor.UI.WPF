@@ -200,6 +200,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to [Directory] .
+        '''</summary>
+        Public Shared ReadOnly Property DirectoryPrefix() As String
+            Get
+                Return ResourceManager.GetString("DirectoryPrefix", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Are you sure you want to close this file?  Any unsaved changes will be lost..
         '''</summary>
         Public Shared ReadOnly Property DocumentCloseConfirmation() As String
@@ -412,6 +421,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property Install() As String
             Get
                 Return ResourceManager.GetString("Install", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copying File....
+        '''</summary>
+        Public Shared ReadOnly Property LoadingCopyingFile() As String
+            Get
+                Return ResourceManager.GetString("LoadingCopyingFile", resourceCulture)
             End Get
         End Property
         
@@ -884,6 +902,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property ProjectName() As String
             Get
                 Return ResourceManager.GetString("ProjectName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to [Project] .
+        '''</summary>
+        Public Shared ReadOnly Property ProjectPrefix() As String
+            Get
+                Return ResourceManager.GetString("ProjectPrefix", resourceCulture)
             End Get
         End Property
         

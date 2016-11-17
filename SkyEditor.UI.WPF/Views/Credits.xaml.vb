@@ -1,4 +1,4 @@
-﻿Namespace ObjectControls
+﻿Namespace Views
     Public Class Credits
 
     End Class
