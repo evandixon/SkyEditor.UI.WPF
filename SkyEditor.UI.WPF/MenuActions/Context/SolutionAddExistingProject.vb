@@ -8,14 +8,14 @@ Namespace MenuActions.Context
     Public Class SolutionAddExistingProject
         Inherits MenuAction
 
-        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
-            For Each item In Targets
-                Dim ParentSolution As Solution
-                Dim ParentPath As String
+        Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
+            For Each item In targets
+                Dim parentSolution As Solution
+                Dim parentPath As String
 
                 If TypeOf item Is SolutionHeiarchyItemViewModel Then
-                    ParentSolution = DirectCast(item, SolutionHeiarchyItemViewModel).Project
-                    ParentPath = DirectCast(item, SolutionHeiarchyItemViewModel).CurrentPath
+                    parentSolution = DirectCast(item, SolutionHeiarchyItemViewModel).Project
+                    parentPath = DirectCast(item, SolutionHeiarchyItemViewModel).CurrentPath
                 Else
                     Throw New ArgumentException(String.Format(My.Resources.Language.ErrorUnsupportedType, item.GetType.Name))
                 End If
@@ -24,7 +24,7 @@ Namespace MenuActions.Context
                 w.Filter = CurrentPluginManager.CurrentIOUIManager.GetProjectIOFilter
 
                 If w.ShowDialog = DialogResult.OK Then
-                    ParentSolution.AddExistingProject(ParentPath, w.FileName, CurrentPluginManager)
+                    parentSolution.AddExistingProject(parentPath, w.FileName, CurrentPluginManager)
                 End If
             Next
         End Sub
@@ -33,12 +33,12 @@ Namespace MenuActions.Context
             Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo}
         End Function
 
-        Public Overrides Function SupportsObject(Obj As Object) As Boolean
-            If TypeOf Obj Is SolutionHeiarchyItemViewModel Then
-                Dim node As SolutionHeiarchyItemViewModel = Obj
-                Return node.IsDirectory AndAlso node.Project.CanCreateProject(node.CurrentPath)
+        Public Overrides Function SupportsObject(obj As Object) As Task(Of Boolean)
+            If TypeOf obj Is SolutionHeiarchyItemViewModel Then
+                Dim node As SolutionHeiarchyItemViewModel = obj
+                Return Task.FromResult(node.IsDirectory AndAlso node.Project.CanCreateProject(node.CurrentPath))
             Else
-                Return False
+                Return Task.FromResult(False)
             End If
         End Function
 

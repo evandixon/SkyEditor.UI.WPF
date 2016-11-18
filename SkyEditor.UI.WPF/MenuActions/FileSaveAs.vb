@@ -1,7 +1,5 @@
 ﻿Imports System.Reflection
-Imports System.Threading.Tasks
 Imports System.Windows.Forms
-Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 
 Namespace MenuActions
@@ -11,14 +9,14 @@ Namespace MenuActions
             Return {GetType(FileViewModel).GetTypeInfo}
         End Function
 
-        Public Overrides Function SupportsObject(Obj As Object) As Boolean
-            Return TypeOf Obj Is FileViewModel AndAlso DirectCast(Obj, FileViewModel).CanSaveAs(CurrentPluginManager)
+        Public Overrides Function SupportsObject(obj As Object) As Task(Of Boolean)
+            Return Task.FromResult(TypeOf obj Is FileViewModel AndAlso DirectCast(Obj, FileViewModel).CanSaveAs(CurrentPluginManager))
         End Function
 
-        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
-            For Each item As FileViewModel In Targets
+        Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
+            For Each item As FileViewModel In targets
                 Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(item)
-                If s.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+                If s.ShowDialog = DialogResult.OK Then
                     item.Save(s.FileName, CurrentPluginManager)
                 End If
             Next

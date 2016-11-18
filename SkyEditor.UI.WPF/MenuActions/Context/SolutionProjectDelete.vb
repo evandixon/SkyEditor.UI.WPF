@@ -3,11 +3,11 @@ Imports System.Windows
 Imports SkyEditor.Core.UI
 Imports SkyEditor.UI.WPF.ViewModels.Projects
 
-Namespace MenuActions
+Namespace MenuActions.Context
     Public Class SolutionProjectDelete
         Inherits MenuAction
 
-        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
+        Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
             For Each item In Targets
                 If TypeOf item Is ProjectBaseHeiarchyItemViewModel Then
                     If MessageBox.Show(My.Resources.Language.DeleteItemConfirmation, My.Resources.Language.MainTitle, MessageBoxButton.YesNo) = MessageBoxResult.Yes Then
@@ -21,11 +21,11 @@ Namespace MenuActions
             Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo, GetType(ProjectHeiarchyItemViewModel).GetTypeInfo}
         End Function
 
-        Public Overrides Function SupportsObject(Obj As Object) As Boolean
+        Public Overrides Function SupportsObject(obj As Object) As Task(Of Boolean)
             If TypeOf Obj Is ProjectBaseHeiarchyItemViewModel Then
-                Return DirectCast(Obj, ProjectBaseHeiarchyItemViewModel).CanDeleteCurrentNode
+                Return Task.FromResult(DirectCast(Obj, ProjectBaseHeiarchyItemViewModel).CanDeleteCurrentNode)
             Else
-                Return False
+                Return Task.FromResult(False)
             End If
         End Function
 

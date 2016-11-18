@@ -26,7 +26,7 @@ Namespace MenuActions.Context
 
 
 
-        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
+        Public Overrides Async Sub DoAction(targets As IEnumerable(Of Object))
             For Each item As ProjectHeiarchyItemViewModel In Targets
                 Await OpenFile(item, CurrentPluginManager)
             Next
@@ -36,8 +36,8 @@ Namespace MenuActions.Context
             Return {GetType(ProjectHeiarchyItemViewModel).GetTypeInfo}
         End Function
 
-        Public Overrides Function SupportsObject(Obj As Object) As Boolean
-            Return TypeOf Obj Is ProjectHeiarchyItemViewModel AndAlso Not DirectCast(Obj, ProjectHeiarchyItemViewModel).IsDirectory
+        Public Overrides Function SupportsObject(obj As Object) As Task(Of Boolean)
+            Return Task.FromResult(TypeOf Obj Is ProjectHeiarchyItemViewModel AndAlso Not DirectCast(Obj, ProjectHeiarchyItemViewModel).IsDirectory)
         End Function
 
         Public Sub New()
