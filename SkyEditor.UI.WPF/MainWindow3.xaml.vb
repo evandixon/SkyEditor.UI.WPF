@@ -57,7 +57,7 @@ Public Class MainWindow3
         End If
     End Sub
 
-    Private Sub MainWindow3_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+    Private Async Sub MainWindow3_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         With CurrentPluginManager.CurrentSettingsProvider
             Dim height = .GetMainWindowHeight
             Dim width = .GetMainWindowWidth
@@ -78,6 +78,7 @@ Public Class MainWindow3
             End If
 
         End With
+        menuMain.ItemsSource = Await CurrentPluginManager.CurrentIOUIManager.GetRootMenuItems
     End Sub
 
     Private Sub MainWindow3_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
