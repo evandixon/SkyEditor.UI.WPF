@@ -29,8 +29,8 @@ Public Class TargetedContextMenu
 
     Public Property CurrentPluginManager As PluginManager
 
-    Private Sub UpdateDataContext()
-        Dim actions = UIHelper.GenerateLogicalMenuItems(UIHelper.GetContextMenuItemInfo(_target, CurrentPluginManager, CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode), CurrentPluginManager.CurrentIOUIManager, {Target})
+    Private Async Sub UpdateDataContext()
+        Dim actions = UIHelper.GenerateLogicalMenuItems(Await UIHelper.GetContextMenuItemInfo(_target, CurrentPluginManager, CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode), CurrentPluginManager.CurrentIOUIManager, {Target})
         Me.DataContext = actions
     End Sub
 

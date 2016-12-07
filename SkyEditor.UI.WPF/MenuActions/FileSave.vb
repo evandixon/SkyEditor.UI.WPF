@@ -11,11 +11,11 @@ Namespace MenuActions
             Return {GetType(FileViewModel).GetTypeInfo}
         End Function
 
-        Public Overrides Function SupportsObject(Obj As Object) As Boolean
-            Return TypeOf Obj Is FileViewModel AndAlso (DirectCast(Obj, FileViewModel).CanSave(CurrentPluginManager) OrElse DirectCast(Obj, FileViewModel).CanSaveAs(CurrentPluginManager))
+        Public Overrides  Function SupportsObject(obj As Object) As Task(Of Boolean)
+            Return task.FromResult(TypeOf Obj Is FileViewModel AndAlso (DirectCast(Obj, FileViewModel).CanSave(CurrentPluginManager) OrElse DirectCast(Obj, FileViewModel).CanSaveAs(CurrentPluginManager)))
         End Function
 
-        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
+        Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
             For Each item As FileViewModel In Targets
                 If item.CanSave(CurrentPluginManager) Then
                     item.Save(CurrentPluginManager)

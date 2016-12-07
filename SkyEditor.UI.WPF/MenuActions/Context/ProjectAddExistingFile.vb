@@ -8,10 +8,10 @@ Namespace MenuActions.Context
     Public Class ProjectAddExistingFile
         Inherits MenuAction
 
-        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
-            For Each item In Targets
-                Dim CurrentPath As String
-                Dim ParentProject As Project
+        Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
+            For Each item In targets
+                Dim currentPath As String
+                Dim parentProject As Project
                 If TypeOf item Is SolutionHeiarchyItemViewModel Then
                     CurrentPath = ""
                     ParentProject = DirectCast(item, SolutionHeiarchyItemViewModel).GetNodeProject
@@ -36,15 +36,15 @@ Namespace MenuActions.Context
             Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo, GetType(ProjectHeiarchyItemViewModel).GetTypeInfo}
         End Function
 
-        Public Overrides Function SupportsObject(Obj As Object) As Boolean
+        Public Overrides Function SupportsObject(obj As Object) As Task(Of Boolean)
             If TypeOf Obj Is ProjectHeiarchyItemViewModel Then
                 Dim node As ProjectHeiarchyItemViewModel = Obj
-                Return node.IsDirectory AndAlso node.Project.CanAddExistingFile(node.CurrentPath)
+                Return Task.FromResult(node.IsDirectory AndAlso node.Project.CanAddExistingFile(node.CurrentPath))
             ElseIf TypeOf Obj Is SolutionHeiarchyItemViewModel Then
                 Dim node As SolutionHeiarchyItemViewModel = Obj
-                Return Not node.IsDirectory AndAlso node.GetNodeProject.CanAddExistingFile("")
+                Return Task.FromResult(Not node.IsDirectory AndAlso node.GetNodeProject.CanAddExistingFile(""))
             Else
-                Return False
+                Return Task.FromResult(False)
             End If
         End Function
 

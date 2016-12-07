@@ -22,7 +22,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
-        <Menu x:Name="menuMain" IsMainMenu="True" Grid.Row="0" ItemsSource="{Binding RootMenuItems}">
+        <Menu x:Name="menuMain" IsMainMenu="True" Grid.Row="0">
             <Menu.ItemContainerStyle>
                 <Style TargetType="MenuItem">
                     <Setter Property="Header" Value="{Binding Header}" />
