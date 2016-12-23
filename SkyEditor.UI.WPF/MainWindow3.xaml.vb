@@ -20,6 +20,19 @@ Public Class MainWindow3
     End Sub
 
 #Region "Properties"
+    Public Property DisplayStatusBar As Boolean
+        Get
+            Return statusBarRow.Height.Value > 0
+        End Get
+        Set(value As Boolean)
+            If value Then
+                statusBarRow.Height = New GridLength(30)
+            Else
+                statusBarRow.Height = New GridLength(0)
+            End If
+        End Set
+    End Property
+
     ''' <summary>
     ''' 
     ''' </summary>
