@@ -15,14 +15,14 @@ Namespace MenuActions
             Return task.FromResult(TypeOf Obj Is FileViewModel AndAlso (DirectCast(Obj, FileViewModel).CanSave(CurrentPluginManager) OrElse DirectCast(Obj, FileViewModel).CanSaveAs(CurrentPluginManager)))
         End Function
 
-        Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
-            For Each item As FileViewModel In Targets
+        Public Overrides Async Sub DoAction(targets As IEnumerable(Of Object))
+            For Each item As FileViewModel In targets
                 If item.CanSave(CurrentPluginManager) Then
-                    item.Save(CurrentPluginManager)
+                    Await item.Save(CurrentPluginManager)
                 ElseIf item.CanSaveAs(CurrentPluginManager) Then
                     Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(item)
                     If s.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                        item.Save(s.FileName, CurrentPluginManager)
+                        Await item.Save(s.FileName, CurrentPluginManager)
                     End If
                     'If the dialog result is not OK, then the user can click the menu item again
                 End If

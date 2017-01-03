@@ -44,10 +44,11 @@ Namespace ViewModels
         Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
-        Public Sub Save(provider As IOProvider) Implements ISavable.Save
+        Public Function Save(provider As IOProvider) As Task Implements ISavable.Save
             Model.Save(provider)
             RaiseEvent FileSaved(Me, New EventArgs)
-        End Sub
+            Return Task.CompletedTask
+        End Function
     End Class
 End Namespace
 

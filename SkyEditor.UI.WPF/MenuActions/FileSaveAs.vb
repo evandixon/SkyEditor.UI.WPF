@@ -13,11 +13,11 @@ Namespace MenuActions
             Return Task.FromResult(TypeOf obj Is FileViewModel AndAlso DirectCast(Obj, FileViewModel).CanSaveAs(CurrentPluginManager))
         End Function
 
-        Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
+        Public Overrides Async Sub DoAction(targets As IEnumerable(Of Object))
             For Each item As FileViewModel In targets
                 Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(item)
                 If s.ShowDialog = DialogResult.OK Then
-                    item.Save(s.FileName, CurrentPluginManager)
+                    Await item.Save(s.FileName, CurrentPluginManager)
                 End If
             Next
         End Sub
