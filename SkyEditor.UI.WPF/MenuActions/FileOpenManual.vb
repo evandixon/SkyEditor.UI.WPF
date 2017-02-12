@@ -15,22 +15,22 @@ Namespace MenuActions
             SortOrder = 1.22
         End Sub
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
-            Dim o = CurrentPluginManager.CurrentIOUIManager.GetOpenFileDialog
+            Dim o = CurrentApplicationViewModel.GetOpenFileDialog
             If o.ShowDialog = DialogResult.OK Then
                 Dim w As New FileTypeSelector()
                 Dim games As New Dictionary(Of String, TypeInfo)
-                For Each item In IOHelper.GetOpenableFileTypes(CurrentPluginManager)
+                For Each item In IOHelper.GetOpenableFileTypes(CurrentApplicationViewModel.CurrentPluginManager)
                     games.Add(ReflectionHelpers.GetTypeFriendlyName(item), item)
                 Next
                 w.SetFileTypeSource(games)
                 If w.ShowDialog Then
-                    Await CurrentPluginManager.CurrentIOUIManager.OpenFile(o.FileName, w.SelectedFileType)
+                    Await CurrentApplicationViewModel.OpenFile(o.FileName, w.SelectedFileType)
                 End If
             End If
         End Sub
 
-        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentPluginManagerChanged
-            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso (CurrentPluginManager.GetRegisteredObjects(Of IOpenableFile).Any() OrElse CurrentPluginManager.GetRegisteredObjects(Of IFileOpener).Any(Function(x As IFileOpener) TypeOf x IsNot OpenableFileOpener))
+        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentApplicationViewModelChanged
+            Me.AlwaysVisible = CurrentApplicationViewModel IsNot Nothing AndAlso (CurrentApplicationViewModel.CurrentPluginManager.GetRegisteredObjects(Of IOpenableFile).Any() OrElse CurrentApplicationViewModel.CurrentPluginManager.GetRegisteredObjects(Of IFileOpener).Any(Function(x As IFileOpener) TypeOf x IsNot OpenableFileOpener))
         End Sub
     End Class
 End Namespace

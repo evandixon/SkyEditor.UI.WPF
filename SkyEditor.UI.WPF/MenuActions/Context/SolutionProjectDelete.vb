@@ -17,7 +17,7 @@ Namespace MenuActions.Context
             Next
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo, GetType(ProjectHeiarchyItemViewModel).GetTypeInfo}
         End Function
 

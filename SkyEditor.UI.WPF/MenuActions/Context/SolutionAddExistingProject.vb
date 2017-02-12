@@ -21,15 +21,15 @@ Namespace MenuActions.Context
                 End If
 
                 Dim w As New OpenFileDialog
-                w.Filter = CurrentPluginManager.CurrentIOUIManager.GetProjectIOFilter
+                w.Filter = CurrentApplicationViewModel.GetIOFilter({Project.ProjectFileExt})
 
                 If w.ShowDialog = DialogResult.OK Then
-                    parentSolution.AddExistingProject(parentPath, w.FileName, CurrentPluginManager)
+                    parentSolution.AddExistingProject(parentPath, w.FileName, CurrentApplicationViewModel.CurrentPluginManager)
                 End If
             Next
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo}
         End Function
 

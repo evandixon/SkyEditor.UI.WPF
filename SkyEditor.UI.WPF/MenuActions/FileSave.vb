@@ -7,20 +7,23 @@ Imports SkyEditor.Core.UI
 Namespace MenuActions
     Public Class FileSave
         Inherits MenuAction
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(FileViewModel).GetTypeInfo}
         End Function
 
         Public Overrides  Function SupportsObject(obj As Object) As Task(Of Boolean)
-            Return task.FromResult(TypeOf Obj Is FileViewModel AndAlso (DirectCast(Obj, FileViewModel).CanSave(CurrentPluginManager) OrElse DirectCast(Obj, FileViewModel).CanSaveAs(CurrentPluginManager)))
+            Return Task.FromResult(TypeOf obj Is FileViewModel AndAlso
+                                   (DirectCast(obj, FileViewModel).CanSave(CurrentApplicationViewModel.CurrentPluginManager) OrElse
+                                   DirectCast(obj, FileViewModel).CanSaveAs(CurrentApplicationViewModel.CurrentPluginManager)))
         End Function
 
         Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
-            For Each item As FileViewModel In Targets
+            Dim CurrentPluginManager = CurrentApplicationViewModel.CurrentPluginManager
+            For Each item As FileViewModel In targets
                 If item.CanSave(CurrentPluginManager) Then
                     item.Save(CurrentPluginManager)
                 ElseIf item.CanSaveAs(CurrentPluginManager) Then
-                    Dim s = CurrentPluginManager.CurrentIOUIManager.GetSaveFileDialog(item)
+                    Dim s = CurrentApplicationViewModel.GetSaveFileDialog(item)
                     If s.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                         item.Save(s.FileName, CurrentPluginManager)
                     End If

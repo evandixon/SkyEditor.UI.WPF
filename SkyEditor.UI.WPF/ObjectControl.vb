@@ -6,7 +6,7 @@ Imports SkyEditor.Core.Utilities
 
 <Obsolete("Will be deleted in the future.  Use DataBoundObjectControl instead.")> Public Class ObjectControl
     Inherits UserControl
-    Implements IObjectControl
+    Implements IViewControl
 
     ''' <summary>
     ''' Updates UI elements to display certain properties.
@@ -26,7 +26,7 @@ Imports SkyEditor.Core.Utilities
     ''' Returns an IEnumeriable of Types that this control can display or edit.
     ''' </summary>
     ''' <returns></returns>
-    Public Overridable Function GetSupportedTypes() As IEnumerable(Of Type) Implements IObjectControl.GetSupportedTypes
+    Public Overridable Function GetSupportedTypes() As IEnumerable(Of TypeInfo) Implements IViewControl.GetSupportedTypes
         Dim context = Me.DataContext
         If context IsNot Nothing Then
             Return context.GetType
@@ -41,7 +41,7 @@ Imports SkyEditor.Core.Utilities
     ''' </summary>
     ''' <param name="Obj"></param>
     ''' <returns></returns>
-    Public Overridable Function SupportsObject(Obj As Object) As Boolean Implements IObjectControl.SupportsObject
+    Public Overridable Function SupportsObject(Obj As Object) As Boolean Implements IViewControl.SupportsObject
         Return True
     End Function
 
@@ -49,41 +49,40 @@ Imports SkyEditor.Core.Utilities
     ''' If True, this control will not be used if another one exists.
     ''' </summary>
     ''' <returns></returns>
-    Public Overridable Function IsBackupControl() As Boolean Implements IObjectControl.IsBackupControl
+    Public Overridable Function IsBackupControl() As Boolean Implements IViewControl.GetIsBackupControl
         Return False
     End Function
 
-    Public Overridable Function GetSortOrder(CurrentType As Type, IsTab As Boolean) As Integer Implements IObjectControl.GetSortOrder
+    Public Overridable Function GetSortOrder(currentType As TypeInfo, isTab As Boolean) As Integer Implements IViewControl.GetSortOrder
         Return 0
     End Function
 
     ''' <summary>
     ''' Called when Header is changed.
     ''' </summary>
-    Public Event HeaderUpdated(sender As Object, e As HeaderUpdatedEventArgs) Implements IObjectControl.HeaderUpdated
+    Public Event HeaderUpdated(sender As Object, e As HeaderUpdatedEventArgs) Implements IViewControl.HeaderUpdated
 
     ''' <summary>
     ''' Called when IsModified is changed.
     ''' </summary>
-    Public Event IsModifiedChanged As IObjectControl.IsModifiedChangedEventHandler Implements IObjectControl.IsModifiedChanged
+    Public Event IsModifiedChanged As EventHandler Implements IViewControl.IsModifiedChanged
 
     ''' <summary>
     ''' Returns the value of the Header.  Only used when the iObjectControl is behaving as a tab.
     ''' </summary>
     ''' <returns></returns>
-    Public Property Header As String Implements IObjectControl.Header
+    Public Property Header As String Implements IViewControl.Header
         Get
             Return _header
         End Get
         Set(value As String)
-            Dim oldValue = _header
             _header = value
-            RaiseEvent HeaderUpdated(Me, New HeaderUpdatedEventArgs(oldValue, value))
+            RaiseEvent HeaderUpdated(Me, New HeaderUpdatedEventArgs With {.NewValue = value})
         End Set
     End Property
     Dim _header As String
 
-    Public Property CurrentPluginManager As PluginManager
+    Public Property CurrentApplicationViewModel As ApplicationViewModel
 
     ''' <summary>
     ''' Returns the current EditingObject, after casting it to type T.
@@ -116,8 +115,8 @@ Imports SkyEditor.Core.Utilities
         End If
     End Sub
 
-    Public Sub SetPluginManager(manager As PluginManager) Implements IObjectControl.SetPluginManager
-        CurrentPluginManager = manager
+    Public Sub SetApplicationViewModel(appViewModel As ApplicationViewModel) Implements IViewControl.SetApplicationViewModel
+        CurrentApplicationViewModel = appViewModel
     End Sub
 
     ''' <summary>
@@ -125,7 +124,7 @@ Imports SkyEditor.Core.Utilities
     ''' Calling this from inside this class could result in a stack overflow, especially if called from UpdateObject, so use GetEditingObject or GetEditingObject(Of T) instead.
     ''' </summary>
     ''' <returns></returns>
-    Public Overridable Property EditingObject As Object Implements IObjectControl.EditingObject
+    Public Overridable Property EditingObject As Object Implements IViewControl.ViewModel
         Get
             UpdateObject()
             Return _editingObject
@@ -143,7 +142,7 @@ Imports SkyEditor.Core.Utilities
     ''' Set to false when the object is saved, or if the user undoes every change.
     ''' </summary>
     ''' <returns></returns>
-    Public Property IsModified As Boolean Implements IObjectControl.IsModified
+    Public Property IsModified As Boolean Implements IViewControl.IsModified
         Get
             Return _isModified
         End Get

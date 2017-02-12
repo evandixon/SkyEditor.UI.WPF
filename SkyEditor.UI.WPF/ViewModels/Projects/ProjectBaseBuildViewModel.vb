@@ -9,8 +9,8 @@ Namespace ViewModels.Projects
         Inherits GenericViewModel(Of ProjectBase)
         Implements INotifyPropertyChanged
 
-        Public Sub New(model As ProjectBase, manager As PluginManager)
-            MyBase.New(model, manager)
+        Public Sub New(model As ProjectBase, appViewModel As ApplicationViewModel)
+            MyBase.New(model, appViewModel)
         End Sub
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
@@ -29,56 +29,56 @@ Namespace ViewModels.Projects
 
         Public Property BuildStatusMessage As String
             Get
-                Return Model.BuildStatusMessage
+                Return Model.Message
             End Get
             Set(value As String)
-                If Not Model.BuildStatusMessage = value Then
-                    Model.BuildStatusMessage = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.BuildStatusMessage)))
+                If Not Model.Message = value Then
+                    Model.Message = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.Message)))
                 End If
             End Set
         End Property
 
         Public Property BuildProgress As Single
             Get
-                Return Model.BuildProgress
+                Return Model.Progress
             End Get
             Set(value As Single)
-                If Not Model.BuildProgress = value Then
-                    Model.BuildProgress = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.BuildProgress)))
+                If Not Model.Progress = value Then
+                    Model.Progress = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.Progress)))
                 End If
             End Set
         End Property
 
         Public Property IsBuildProgressIndeterminate As Boolean
             Get
-                Return Model.IsBuildProgressIndeterminate
+                Return Model.IsIndeterminate
             End Get
             Set(value As Boolean)
-                If Not Model.IsBuildProgressIndeterminate = value Then
-                    Model.IsBuildProgressIndeterminate = value
-                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.IsBuildProgressIndeterminate)))
+                If Not Model.IsIndeterminate = value Then
+                    Model.IsIndeterminate = value
+                    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.IsIndeterminate)))
                 End If
             End Set
         End Property
 
         Public Overrides Sub SetModel(model As Object)
             If Me.Model IsNot Nothing Then
-                RemoveHandler Me.Model.BuildStatusChanged, AddressOf Project_BuildStatusChanged
+                RemoveHandler Me.Model.ProgressChanged, AddressOf Project_BuildStatusChanged
             End If
 
             MyBase.SetModel(model)
 
             If Me.Model IsNot Nothing Then
-                AddHandler Me.Model.BuildStatusChanged, AddressOf Project_BuildStatusChanged
+                AddHandler Me.Model.ProgressChanged, AddressOf Project_BuildStatusChanged
             End If
         End Sub
 
         Private Sub Project_BuildStatusChanged(sender As Object, e As ProgressReportedEventArgs)
-            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.BuildStatusMessage)))
-            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.BuildProgress)))
-            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.IsBuildProgressIndeterminate)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.Message)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.Progress)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.IsIndeterminate)))
         End Sub
     End Class
 End Namespace

@@ -43,12 +43,12 @@
                 <avalonHelpers:PanesTemplateSelector>
                     <avalonHelpers:PanesTemplateSelector.DocumentTemplate>
                         <DataTemplate DataType="{x:Type avalonHelpers:AvalonDockFileWrapper}">
-                            <coreui:ObjectControlPlaceholder CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=Window}}" ObjectToEdit="{Binding File, UpdateSourceTrigger=PropertyChanged}" EnableTabs="True"/>
+                            <coreui:ObjectControlPlaceholder CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=Window}}" ObjectToEdit="{Binding File, UpdateSourceTrigger=PropertyChanged}" EnableTabs="True"/>
                         </DataTemplate>                        
                     </avalonHelpers:PanesTemplateSelector.DocumentTemplate>
                     <avalonHelpers:PanesTemplateSelector.AnchorableTemplate>
                         <DataTemplate>
-                            <coreui:ObjectControlPlaceholder CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=Window}}" ObjectToEdit="{Binding ., UpdateSourceTrigger=PropertyChanged}" EnableTabs="True"/>
+                            <coreui:ObjectControlPlaceholder CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=Window}}" ObjectToEdit="{Binding ., UpdateSourceTrigger=PropertyChanged}" EnableTabs="True"/>
                         </DataTemplate>
                     </avalonHelpers:PanesTemplateSelector.AnchorableTemplate>
                 </avalonHelpers:PanesTemplateSelector>

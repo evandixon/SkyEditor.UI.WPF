@@ -1,4 +1,4 @@
-﻿<local:DataBoundObjectControl x:Class="ObjectControls.SettingsEditor"
+﻿<local:DataBoundViewControl x:Class="Views.SettingsEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,4 +14,4 @@
         <CheckBox Content="{x:Static res:Language.EnableDevMode}" IsChecked="{Binding IsDevMode}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label" Content="{x:Static res:Language.SettingsApplyRestartWarning}" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom"/>
     </Grid>
-</local:DataBoundObjectControl>
+</local:DataBoundViewControl>

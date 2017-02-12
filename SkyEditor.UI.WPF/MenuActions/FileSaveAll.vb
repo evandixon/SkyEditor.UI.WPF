@@ -8,21 +8,22 @@ Namespace MenuActions
     Public Class FileSaveAll
         Inherits MenuAction
         Private Property SaveAction As MenuAction
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(Solution).GetTypeInfo, GetType(ISavable).GetTypeInfo}
         End Function
         Public Overrides Function SupportsObjects(objects As IEnumerable(Of Object)) As Task(Of Boolean)
-            Dim hasProject = From o In Objects Where TypeOf o Is Solution
-            Dim hasSavable = From o In Objects Where TypeOf o Is FileViewModel AndAlso (DirectCast(o, FileViewModel).CanSave(CurrentPluginManager) OrElse DirectCast(o, FileViewModel).CanSaveAs(CurrentPluginManager))
+            Dim CurrentPluginManager = CurrentApplicationViewModel.CurrentPluginManager
+            Dim hasProject = From o In objects Where TypeOf o Is Solution
+            Dim hasSavable = From o In objects Where TypeOf o Is FileViewModel AndAlso (DirectCast(o, FileViewModel).CanSave(CurrentPluginManager) OrElse DirectCast(o, FileViewModel).CanSaveAs(CurrentPluginManager))
 
             Return Task.FromResult(hasProject.Any AndAlso hasSavable.Any)
         End Function
         Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
             For Each item In Targets
                 If TypeOf item Is Solution Then
-                    DirectCast(item, Solution).SaveAllProjects(CurrentPluginManager.CurrentIOProvider)
+                    DirectCast(item, Solution).SaveAllProjects(CurrentApplicationViewModel.CurrentPluginManager.CurrentIOProvider)
                 ElseIf TypeOf item Is FileViewModel Then
-                    SaveAction.CurrentPluginManager = CurrentPluginManager
+                    SaveAction.CurrentApplicationViewModel = CurrentApplicationViewModel
                     SaveAction.DoAction({item})
                 End If
             Next

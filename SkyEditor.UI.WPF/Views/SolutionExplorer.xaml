@@ -1,4 +1,4 @@
-﻿<local:DataBoundObjectControl x:Class="ObjectControls.SolutionExplorer"
+﻿<local:DataBoundViewControl x:Class="ObjectControls.SolutionExplorer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -25,4 +25,4 @@
             </TreeView.ContextMenu>
         </TreeView>
     </Grid>
-</local:DataBoundObjectControl>
+</local:DataBoundViewControl>

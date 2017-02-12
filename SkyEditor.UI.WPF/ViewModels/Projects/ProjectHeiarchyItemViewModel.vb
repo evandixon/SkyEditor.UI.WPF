@@ -44,7 +44,7 @@ Namespace ViewModels.Projects
 
         Public Async Function GetFile(manager As PluginManager, duplicateMatchSelector As IOHelper.DuplicateMatchSelector) As Task(Of Object)
             Dim project As Project = Me.Project
-            Return Await project.GetFileByPath(CurrentPath, manager, duplicateMatchSelector)
+            Return Await project.GetFile(CurrentPath, duplicateMatchSelector, manager)
         End Function
 
         Public Overrides Function CanDeleteCurrentNode() As Boolean

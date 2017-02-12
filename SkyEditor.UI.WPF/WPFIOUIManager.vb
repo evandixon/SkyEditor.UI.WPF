@@ -2,12 +2,12 @@
 Imports SkyEditor.Core.UI
 Imports SkyEditor.UI.WPF.AvalonHelpers
 
-Public Class WPFIOUIManager
-    Inherits IOUIManager
+Public Class WPFApplicationViewModel
+    Inherits ApplicationViewModel
 
     Public Sub New(manager As PluginManager)
         MyBase.New(manager)
-        AvalonDockLayout = New AvalonDockLayoutViewModel(manager)
+        AvalonDockLayout = New AvalonDockLayoutViewModel(Me)
     End Sub
 
     Public Property AvalonDockLayout As AvalonDockLayoutViewModel

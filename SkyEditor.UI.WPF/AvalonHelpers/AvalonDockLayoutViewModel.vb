@@ -21,13 +21,13 @@ Namespace AvalonHelpers
     Public Class AvalonDockLayoutViewModel
         Private Const AvalonDockLayoutFilename = "AvalonDock.Layout.config"
 
-        Public Sub New(manager As PluginManager)
-            Me.CurrentPluginManager = manager
+        Public Sub New(appViewModel As ApplicationViewModel)
+            Me.CurrentApplicationViewModel = appViewModel
         End Sub
 #Region "fields"
         Private mLoadLayoutCommand As RelayCommand = Nothing
         Private mSaveLayoutCommand As RelayCommand = Nothing
-        Public Property CurrentPluginManager As PluginManager
+        Public Property CurrentApplicationViewModel As ApplicationViewModel
 #End Region
 
 #Region "command properties"
@@ -134,10 +134,10 @@ Namespace AvalonHelpers
                 '    args.Cancel = True
                 'End If
             Else
-                Dim targetType = ReflectionHelpers.GetTypeByName(args.Model.ContentId, CurrentPluginManager)
+                Dim targetType = ReflectionHelpers.GetTypeByName(args.Model.ContentId, CurrentApplicationViewModel.CurrentPluginManager)
                 If targetType IsNot Nothing AndAlso ReflectionHelpers.IsOfType(targetType, GetType(AnchorableViewModel).GetTypeInfo) Then
                     Dim model As AnchorableViewModel = ReflectionHelpers.CreateInstance(targetType)
-                    model.CurrentIOUIManager = CurrentPluginManager.CurrentIOUIManager
+                    model.CurrentApplicationViewModel = CurrentApplicationViewModel
                     args.Content = model
                 End If
             End If

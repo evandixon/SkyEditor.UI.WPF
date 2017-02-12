@@ -6,14 +6,14 @@ Imports SkyEditor.Core.UI
 Namespace MenuActions
     Public Class FileSaveSolution
         Inherits MenuAction
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(Solution).GetTypeInfo}
         End Function
 
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item As Solution In Targets
-                item.Save(CurrentPluginManager.CurrentIOProvider)
-                item.SaveAllProjects(CurrentPluginManager.CurrentIOProvider)
+                item.Save(CurrentApplicationViewModel.CurrentPluginManager.CurrentIOProvider)
+                item.SaveAllProjects(CurrentApplicationViewModel.CurrentPluginManager.CurrentIOProvider)
             Next
         End Sub
 

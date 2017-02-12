@@ -12,7 +12,7 @@ Public Class WpfUiHelper
     ''' </summary>
     ''' <param name="ObjectControls"></param>
     ''' <returns></returns>
-    Public Shared Function GenerateObjectTabs(objectControls As IEnumerable(Of IObjectControl)) As List(Of ObjectTab)
+    Public Shared Function GenerateObjectTabs(objectControls As IEnumerable(Of IViewControl)) As List(Of ObjectTab)
         If objectControls Is Nothing Then
             Throw New ArgumentNullException(NameOf(objectControls))
         End If

@@ -38,7 +38,7 @@ Namespace ViewModels.Projects
                 MyBase.PopulateChildren()
             Else
                 Dim solution As Solution = Me.Project
-                ProjectRootNode = New ProjectHeiarchyItemViewModel(solution.GetProjectByPath(Me.CurrentPath))
+                ProjectRootNode = New ProjectHeiarchyItemViewModel(solution.GetProject(Me.CurrentPath))
                 Me.Children = ProjectRootNode.Children
             End If
         End Sub
@@ -49,7 +49,7 @@ Namespace ViewModels.Projects
 
         Public Function GetNodeProject() As Project
             Dim solution As Solution = Me.Project
-            Return solution.GetProjectByPath(Me.CurrentPath)
+            Return solution.GetProject(Me.CurrentPath)
         End Function
 
         Public Overrides Function CanDeleteCurrentNode() As Boolean

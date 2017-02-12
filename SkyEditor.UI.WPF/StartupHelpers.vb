@@ -39,15 +39,14 @@ Public Class StartupHelpers
         'If args.Contains("-console") Then
         '    Await StartupHelpers.StartConsole()
         'Else
-        Dim manager As New PluginManager
-        Await manager.LoadCore(CoreMod)
-
-
-        'manager.CurrentIOUIManager.SupportedToolWindowTypes = {GetType(UserControl)}
-        Dim m As New MainWindow3 'UI.MainWindow(manager)
-        m.CurrentPluginManager = manager
-        m.DataContext = manager.CurrentIOUIManager
-        m.Show()
+        Using manager As New PluginManager
+            Await manager.LoadCore(CoreMod)
+            Using appViewModel As New WPFApplicationViewModel(manager)
+                Dim m As New MainWindow3 'UI.MainWindow(manager)
+                m.CurrentApplicationViewModel = appViewModel
+                m.Show()
+            End Using
+        End Using
     End Function
 
     Public Shared Sub RunExitSequence()

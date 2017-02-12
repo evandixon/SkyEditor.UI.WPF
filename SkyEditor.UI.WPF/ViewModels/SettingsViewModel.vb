@@ -40,14 +40,14 @@ Namespace ViewModels
             End Get
         End Property
 
-        Public Event FileSaved As ISavable.FileSavedEventHandler Implements ISavable.FileSaved
-        Public Event Modified As INotifyModified.ModifiedEventHandler Implements INotifyModified.Modified
+        Public Event FileSaved As EventHandler Implements ISavable.FileSaved
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
-        Public Sub Save(provider As IOProvider) Implements ISavable.Save
-            Model.Save(provider)
+        Public Async Function Save(provider As IIOProvider) As Task Implements ISavable.Save
+            Await Model.Save(provider)
             RaiseEvent FileSaved(Me, New EventArgs)
-        End Sub
+        End Function
     End Class
 End Namespace
 
