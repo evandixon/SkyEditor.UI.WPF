@@ -36,7 +36,7 @@
                            Grid.Row="1"
                            DocumentsSource="{Binding OpenFiles}"
                            AnchorablesSource="{Binding AnchorableViewModels}"
-                           ActiveContent="{Binding ActiveContent, Mode=TwoWay}"
+                           ActiveContent="{Binding ActiveViewModel, Mode=TwoWay}"
                            avalonHelpers:AvalonDockLayoutSerializer.LoadLayoutCommand="{Binding AvalonDockLayout.LoadLayoutCommand}"
                            avalonHelpers:AvalonDockLayoutSerializer.SaveLayoutCommand="{Binding AvalonDockLayout.SaveLayoutCommand}">
             <ad:DockingManager.LayoutItemTemplateSelector>
@@ -80,8 +80,8 @@
             </ad:LayoutRoot>
         </ad:DockingManager>
         <StatusBar Grid.Row="2">
-            <ProgressBar Value="{Binding LoadingProgress}" IsIndeterminate="{Binding IsLoadingIndeterminate}" Width="100" Height="20" Minimum="0" Maximum="1" />
-            <TextBlock Text="{Binding LoadingMessage}"/>
+            <ProgressBar Value="{Binding Progress}" IsIndeterminate="{Binding IsIndeterminate}" Width="100" Height="20" Minimum="0" Maximum="1" />
+            <TextBlock Text="{Binding Message}"/>
         </StatusBar>
     </Grid>
 </Window>

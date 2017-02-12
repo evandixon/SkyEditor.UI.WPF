@@ -20,11 +20,11 @@ Public Class StartupHelpers
 
     '    Application.Current.Shutdown()
     'End Function
-    Public Shared Async Function RunWPFStartupSequence() As Task
-        Await RunWPFStartupSequence(New WPFCoreSkyEditorPlugin)
+    Public Shared Async Function RunWPFStartupSequence() As Task(Of MainWindow3)
+        Return Await RunWPFStartupSequence(New WPFCoreSkyEditorPlugin)
     End Function
 
-    Public Shared Async Function RunWPFStartupSequence(CoreMod As CoreSkyEditorPlugin) As Task
+    Public Shared Async Function RunWPFStartupSequence(CoreMod As CoreSkyEditorPlugin) As Task(Of MainWindow3)
         'Run the program
         Dim args As New List(Of String)
         args.AddRange(Environment.GetCommandLineArgs())
@@ -39,14 +39,13 @@ Public Class StartupHelpers
         'If args.Contains("-console") Then
         '    Await StartupHelpers.StartConsole()
         'Else
-        Using manager As New PluginManager
-            Await manager.LoadCore(CoreMod)
-            Using appViewModel As New WPFApplicationViewModel(manager)
-                Dim m As New MainWindow3 'UI.MainWindow(manager)
-                m.CurrentApplicationViewModel = appViewModel
-                m.Show()
-            End Using
-        End Using
+        Dim manager As New PluginManager
+        Await manager.LoadCore(CoreMod)
+        Dim appViewModel As New WPFApplicationViewModel(manager)
+        Dim m As New MainWindow3 'UI.MainWindow(manager)
+        m.CurrentApplicationViewModel = appViewModel
+        m.Show()
+        Return m
     End Function
 
     Public Shared Sub RunExitSequence()

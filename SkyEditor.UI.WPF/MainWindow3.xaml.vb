@@ -16,7 +16,11 @@ Public Class MainWindow3
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.Title = String.Format(CultureInfo.InvariantCulture, My.Resources.Language.FormattedTitle, My.Resources.Language.VersionPrefix, Assembly.GetEntryAssembly.GetName.Version.ToString)
+        Dim versionAssembly = Assembly.GetEntryAssembly
+        If versionAssembly Is Nothing Then
+            versionAssembly = Assembly.GetExecutingAssembly
+        End If
+        Me.Title = String.Format(CultureInfo.InvariantCulture, My.Resources.Language.FormattedTitle, My.Resources.Language.VersionPrefix, versionAssembly.GetName.Version.ToString)
 
         AddHandler RedistributionHelpers.ApplicationRestartRequested, AddressOf OnRestartRequested
     End Sub
