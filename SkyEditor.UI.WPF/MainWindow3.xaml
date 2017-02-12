@@ -36,19 +36,19 @@
                            Grid.Row="1"
                            DocumentsSource="{Binding OpenFiles}"
                            AnchorablesSource="{Binding AnchorableViewModels}"
-                           ActiveContent="{Binding ActiveContent, Mode=TwoWay}"
+                           ActiveContent="{Binding ActiveViewModel, Mode=TwoWay}"
                            avalonHelpers:AvalonDockLayoutSerializer.LoadLayoutCommand="{Binding AvalonDockLayout.LoadLayoutCommand}"
                            avalonHelpers:AvalonDockLayoutSerializer.SaveLayoutCommand="{Binding AvalonDockLayout.SaveLayoutCommand}">
             <ad:DockingManager.LayoutItemTemplateSelector>
                 <avalonHelpers:PanesTemplateSelector>
                     <avalonHelpers:PanesTemplateSelector.DocumentTemplate>
                         <DataTemplate DataType="{x:Type avalonHelpers:AvalonDockFileWrapper}">
-                            <coreui:ObjectControlPlaceholder CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=Window}}" ObjectToEdit="{Binding File, UpdateSourceTrigger=PropertyChanged}" EnableTabs="True"/>
+                            <coreui:ObjectControlPlaceholder CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=Window}}" ObjectToEdit="{Binding File, UpdateSourceTrigger=PropertyChanged}" EnableTabs="True"/>
                         </DataTemplate>                        
                     </avalonHelpers:PanesTemplateSelector.DocumentTemplate>
                     <avalonHelpers:PanesTemplateSelector.AnchorableTemplate>
                         <DataTemplate>
-                            <coreui:ObjectControlPlaceholder CurrentPluginManager="{Binding Path=CurrentPluginManager,RelativeSource={RelativeSource AncestorType=Window}}" ObjectToEdit="{Binding ., UpdateSourceTrigger=PropertyChanged}" EnableTabs="True"/>
+                            <coreui:ObjectControlPlaceholder CurrentApplicationViewModel="{Binding Path=CurrentApplicationViewModel,RelativeSource={RelativeSource AncestorType=Window}}" ObjectToEdit="{Binding ., UpdateSourceTrigger=PropertyChanged}" EnableTabs="True"/>
                         </DataTemplate>
                     </avalonHelpers:PanesTemplateSelector.AnchorableTemplate>
                 </avalonHelpers:PanesTemplateSelector>
@@ -80,8 +80,8 @@
             </ad:LayoutRoot>
         </ad:DockingManager>
         <StatusBar Grid.Row="2">
-            <ProgressBar Value="{Binding LoadingProgress}" IsIndeterminate="{Binding IsLoadingIndeterminate}" Width="100" Height="20" Minimum="0" Maximum="1" />
-            <TextBlock Text="{Binding LoadingMessage}"/>
+            <ProgressBar Value="{Binding Progress}" IsIndeterminate="{Binding IsIndeterminate}" Width="100" Height="20" Minimum="0" Maximum="1" />
+            <TextBlock Text="{Binding Message}"/>
         </StatusBar>
     </Grid>
 </Window>

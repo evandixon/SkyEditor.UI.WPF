@@ -14,18 +14,23 @@ Namespace MenuActions
         End Sub
 
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
-            Dim o = CurrentPluginManager.CurrentIOUIManager.GetOpenFileDialog
+            Dim o = CurrentApplicationViewModel.GetOpenFileDialog
             If o.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                 If o.FileName.ToLower.EndsWith(".skysln") Then
-                    CurrentPluginManager.CurrentIOUIManager.CurrentSolution = Solution.OpenSolutionFile(o.FileName, CurrentPluginManager)
+                    CurrentApplicationViewModel.CurrentSolution = Await ProjectBase.OpenProjectFile(Of Solution)(o.FileName, CurrentApplicationViewModel.CurrentPluginManager)
                 Else
-                    Await CurrentPluginManager.CurrentIOUIManager.OpenFile(o.FileName, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
+                    Await CurrentApplicationViewModel.OpenFile(o.FileName, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
                 End If
             End If
         End Sub
 
-        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentPluginManagerChanged
-            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso (CurrentPluginManager.GetRegisteredObjects(Of IOpenableFile).Any() OrElse CurrentPluginManager.GetRegisteredObjects(Of IFileOpener).Any(Function(x As IFileOpener) TypeOf x IsNot OpenableFileOpener) OrElse CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode)
+        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentApplicationViewModelChanged
+            With CurrentApplicationViewModel?.CurrentPluginManager
+                Me.AlwaysVisible = CurrentApplicationViewModel?.CurrentPluginManager IsNot Nothing AndAlso
+                (.GetRegisteredObjects(Of IOpenableFile).Any() OrElse
+                .GetRegisteredObjects(Of IFileOpener).Any(Function(x As IFileOpener) TypeOf x IsNot OpenableFileOpener) OrElse
+                .CurrentSettingsProvider.GetIsDevMode)
+            End With
         End Sub
 
     End Class

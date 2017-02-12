@@ -7,17 +7,17 @@ Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
 
 ''' <summary>
-''' An IObjectControl that directly supports WPF DataBinding.
+''' A view that directly supports WPF DataBinding.
 ''' </summary>
-Public Class DataBoundObjectControl
+Public Class DataBoundViewControl
     Inherits UserControl
-    Implements IObjectControl
+    Implements IViewControl
     Implements INotifyPropertyChanged
 
 #Region "Dependency Properties"
-    Public Shared ReadOnly HeaderProperty As DependencyProperty = DependencyProperty.Register(NameOf(Header), GetType(Object), GetType(DataBoundObjectControl), New FrameworkPropertyMetadata(AddressOf OnHeaderChanged))
+    Public Shared ReadOnly HeaderProperty As DependencyProperty = DependencyProperty.Register(NameOf(Header), GetType(Object), GetType(DataBoundViewControl), New FrameworkPropertyMetadata(AddressOf OnHeaderChanged))
     Private Shared Sub OnHeaderChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
-        DirectCast(d, DataBoundObjectControl).Header = e.NewValue
+        DirectCast(d, DataBoundViewControl).Header = e.NewValue
     End Sub
 #End Region
 
@@ -25,12 +25,12 @@ Public Class DataBoundObjectControl
     ''' <summary>
     ''' Raised when Header is changed.
     ''' </summary>
-    Public Event HeaderUpdated(sender As Object, e As HeaderUpdatedEventArgs) Implements IObjectControl.HeaderUpdated
+    Public Event HeaderUpdated As EventHandler(Of HeaderUpdatedEventArgs) Implements IViewControl.HeaderUpdated
 
     ''' <summary>
     ''' Raised when IsModified is changed.
     ''' </summary>
-    Public Event IsModifiedChanged As IObjectControl.IsModifiedChangedEventHandler Implements IObjectControl.IsModifiedChanged
+    Public Event IsModifiedChanged As EventHandler Implements IViewControl.IsModifiedChanged
 
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 #End Region
@@ -40,15 +40,14 @@ Public Class DataBoundObjectControl
     ''' Returns the value of the Header.  Only used when the iObjectControl is behaving as a tab.
     ''' </summary>
     ''' <returns></returns>
-    Public Property Header As String Implements IObjectControl.Header
+    Public Property Header As String Implements IViewControl.Header
         Get
             Return _header
         End Get
         Set(value As String)
-            If Not value = _header Then
-                Dim oldValue = _header
+            If Not _header = value Then
                 _header = value
-                RaiseEvent HeaderUpdated(Me, New HeaderUpdatedEventArgs(oldValue, value))
+                RaiseEvent HeaderUpdated(Me, New HeaderUpdatedEventArgs With {.NewValue = value})
                 RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Header)))
             End If
         End Set
@@ -61,7 +60,7 @@ Public Class DataBoundObjectControl
     ''' Set to false when the object is saved, or if the user undoes every change.
     ''' </summary>
     ''' <returns></returns>
-    Public Property IsModified As Boolean Implements IObjectControl.IsModified
+    Public Property IsModified As Boolean Implements IViewControl.IsModified
         Get
             Return _isModified
         End Get
@@ -80,7 +79,7 @@ Public Class DataBoundObjectControl
     ''' The object the control edits
     ''' </summary>
     ''' <returns></returns>
-    Public Overridable Property ObjectToEdit As Object Implements IObjectControl.EditingObject
+    Public Overridable Property ViewModel As Object Implements IViewControl.ViewModel
         Get
             Return Me.DataContext
         End Get
@@ -93,25 +92,21 @@ Public Class DataBoundObjectControl
     ''' Returns the sort order of this control when editing the given type.
     ''' Note: The returned value is context-specific.  Higher values make a Control more likely to be used, but lower values make tabs appear higher in the list of tabs.
     ''' </summary>
-    ''' <returns></returns>
     Public Property SortOrder As Integer
 
     ''' <summary>
-    ''' The current instance of the plugin manager
+    ''' The instance of the current application ViewModel
     ''' </summary>
-    ''' <returns></returns>
-    Public Property CurrentPluginManager As PluginManager
+    Public Property CurrentApplicationViewModel As ApplicationViewModel
 
     ''' <summary>
     ''' The type of the object to edit
     ''' </summary>
-    ''' <returns></returns>
     Public Property TargetType As Type
 
     ''' <summary>
     ''' If True, this control will not be used if another one exists.
     ''' </summary>
-    ''' <returns></returns>
     Public Property IsBackupControl As Boolean
 #End Region
 
@@ -119,7 +114,7 @@ Public Class DataBoundObjectControl
     ''' Returns an IEnumeriable of Types that this control can display or edit.
     ''' </summary>
     ''' <returns></returns>
-    Public Overridable Function GetSupportedTypes() As IEnumerable(Of Type) Implements IObjectControl.GetSupportedTypes
+    Public Overridable Function GetSupportedTypes() As IEnumerable(Of TypeInfo) Implements IViewControl.GetSupportedTypes
         If TargetType IsNot Nothing Then
             Return {TargetType}
         Else
@@ -133,7 +128,7 @@ Public Class DataBoundObjectControl
     ''' </summary>
     ''' <param name="Obj"></param>
     ''' <returns></returns>
-    Public Overridable Function SupportsObject(Obj As Object) As Boolean Implements IObjectControl.SupportsObject
+    Public Overridable Function SupportsObject(Obj As Object) As Boolean Implements IViewControl.SupportsObject
         Return True
     End Function
 
@@ -141,16 +136,16 @@ Public Class DataBoundObjectControl
     ''' If True, this control will not be used if another one exists.
     ''' </summary>
     ''' <returns></returns>
-    Public Overridable Function GetIsBackupControl() As Boolean Implements IObjectControl.IsBackupControl
+    Public Overridable Function GetIsBackupControl() As Boolean Implements IViewControl.GetIsBackupControl
         Return IsBackupControl
     End Function
 
-    Public Overridable Function GetSortOrder(CurrentType As Type, IsTab As Boolean) As Integer Implements IObjectControl.GetSortOrder
+    Public Overridable Function GetSortOrder(currentType As TypeInfo, isTab As Boolean) As Integer Implements IViewControl.GetSortOrder
         Return SortOrder
     End Function
 
-    Public Sub SetPluginManager(manager As PluginManager) Implements IObjectControl.SetPluginManager
-        CurrentPluginManager = manager
+    Public Sub SetApplicationViewModel(appViewModel As ApplicationViewModel) Implements IViewControl.SetApplicationViewModel
+        CurrentApplicationViewModel = appViewModel
     End Sub
 
 End Class

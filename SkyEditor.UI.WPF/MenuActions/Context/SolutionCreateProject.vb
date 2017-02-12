@@ -22,18 +22,18 @@ Namespace MenuActions.Context
 
                 Dim w As New NewFileWindow
                 Dim types As New Dictionary(Of String, Type)
-                For Each supported In parentSolution.GetSupportedProjectTypes(parentPath, CurrentPluginManager)
+                For Each supported In parentSolution.GetSupportedProjectTypes(parentPath, CurrentApplicationViewModel.CurrentPluginManager)
                     types.Add(ReflectionHelpers.GetTypeFriendlyName(supported), supported)
                 Next
                 w.SetGames(types)
 
                 If w.ShowDialog Then
-                    DirectCast(item, SolutionHeiarchyItemViewModel).Project.CreateProject(parentPath, w.SelectedName, w.SelectedType, CurrentPluginManager)
+                    DirectCast(item, SolutionHeiarchyItemViewModel).Project.CreateProject(parentPath, w.SelectedName, w.SelectedType, CurrentApplicationViewModel.CurrentPluginManager)
                 End If
             Next
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo}
         End Function
 

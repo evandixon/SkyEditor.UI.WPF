@@ -10,11 +10,11 @@ Namespace MenuActions.Context
     Public Class ProjectNodeOpenFile
         Inherits MenuAction
 
-        Public Shared Async Function OpenFile(target As ProjectHeiarchyItemViewModel, manager As PluginManager) As Task
+        Public Shared Async Function OpenFile(target As ProjectHeiarchyItemViewModel, appViewModel As ApplicationViewModel) As Task
             If Not target.IsDirectory Then
-                Dim obj = Await target.GetFile(manager, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
+                Dim obj = Await target.GetFile(appViewModel.CurrentPluginManager, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
                 If obj IsNot Nothing Then
-                    manager.CurrentIOUIManager.OpenFile(obj, target.Project)
+                    appViewModel.OpenFile(obj, target.Project)
                 Else
                     Dim f = Path.Combine(Path.GetDirectoryName(target.Project.Filename), target.GetFilename)
                     If Not File.Exists(f) Then
@@ -27,12 +27,12 @@ Namespace MenuActions.Context
 
 
         Public Overrides Async Sub DoAction(targets As IEnumerable(Of Object))
-            For Each item As ProjectHeiarchyItemViewModel In Targets
-                Await OpenFile(item, CurrentPluginManager)
+            For Each item As ProjectHeiarchyItemViewModel In targets
+                Await OpenFile(item, CurrentApplicationViewModel)
             Next
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(ProjectHeiarchyItemViewModel).GetTypeInfo}
         End Function
 

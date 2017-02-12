@@ -6,7 +6,7 @@ Namespace MenuActions
         Inherits MenuAction
 
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
-            CurrentPluginManager.CurrentIOUIManager.OpenFile(New ExtensionHelper, False)
+            CurrentApplicationViewModel.OpenFile(New ExtensionHelper, False)
         End Sub
 
         Public Sub New()

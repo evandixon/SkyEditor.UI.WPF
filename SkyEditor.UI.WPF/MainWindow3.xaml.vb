@@ -5,6 +5,8 @@ Imports System.Windows
 Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
+Imports SkyEditor.Core.UI
+Imports SkyEditor.Core.Utilities
 Imports SkyEditor.UI.WPF.Settings
 
 Public Class MainWindow3
@@ -14,9 +16,13 @@ Public Class MainWindow3
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.Title = String.Format(CultureInfo.InvariantCulture, My.Resources.Language.FormattedTitle, My.Resources.Language.VersionPrefix, Assembly.GetEntryAssembly.GetName.Version.ToString)
+        Dim versionAssembly = Assembly.GetEntryAssembly
+        If versionAssembly Is Nothing Then
+            versionAssembly = Assembly.GetExecutingAssembly
+        End If
+        Me.Title = String.Format(CultureInfo.InvariantCulture, My.Resources.Language.FormattedTitle, My.Resources.Language.VersionPrefix, versionAssembly.GetName.Version.ToString)
 
-        AddHandler SkyEditor.Core.Windows.Utilities.RedistributionHelpers.ApplicationRestartRequested, AddressOf OnRestartRequested
+        AddHandler RedistributionHelpers.ApplicationRestartRequested, AddressOf OnRestartRequested
     End Sub
 
 #Region "Properties"
@@ -38,23 +44,16 @@ Public Class MainWindow3
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks>Currently, this window only supports plugin managers that have a WPFIOUIManager as the CurrentIOUIManager</remarks>
-    Public Property CurrentPluginManager As PluginManager
+    Public Property CurrentApplicationViewModel As WPFApplicationViewModel
         Get
-            Return _currentPluginManager
+            Return _currentApplicationViewModel
         End Get
-        Set(value As PluginManager)
-            If _currentPluginManager?.CurrentIOUIManager IsNot Nothing Then
-                RemoveHandler _currentPluginManager.CurrentIOUIManager.FileClosing, AddressOf OnIOUIManagerFileClosing
-            End If
-
-            _currentPluginManager = value
-
-            If _currentPluginManager?.CurrentIOUIManager IsNot Nothing Then
-                AddHandler _currentPluginManager.CurrentIOUIManager.FileClosing, AddressOf OnIOUIManagerFileClosing
-            End If
+        Set(value As WPFApplicationViewModel)
+            _currentApplicationViewModel = value
+            DataContext = value
         End Set
     End Property
-    Dim _currentPluginManager As PluginManager
+    Private WithEvents _currentApplicationViewModel As WPFApplicationViewModel
 
     ''' <summary>
     ''' If true, application will be restarted when the form is closed.
@@ -64,14 +63,14 @@ Public Class MainWindow3
 #End Region
 
 #Region "Event Handlers"
-    Private Sub OnIOUIManagerFileClosing(sender As Object, e As FileClosingEventArgs)
+    Private Sub OnIOUIManagerFileClosing(sender As Object, e As FileClosingEventArgs) Handles _currentApplicationViewModel.FileClosing
         If e.File.IsFileModified Then
             e.Cancel = Not (MessageBox.Show(My.Resources.Language.DocumentCloseConfirmation, My.Resources.Language.MainTitle, MessageBoxButton.YesNo) = MessageBoxResult.Yes)
         End If
     End Sub
 
     Private Async Sub MainWindow3_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        With CurrentPluginManager.CurrentSettingsProvider
+        With CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider
             Dim height = .GetMainWindowHeight
             Dim width = .GetMainWindowWidth
             Dim isMax = .GetMainWindowIsMaximized
@@ -91,11 +90,11 @@ Public Class MainWindow3
             End If
 
         End With
-        menuMain.ItemsSource = Await CurrentPluginManager.CurrentIOUIManager.GetRootMenuItems
+        menuMain.ItemsSource = Await CurrentApplicationViewModel.GetRootMenuItems
     End Sub
 
     Private Sub MainWindow3_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        If CurrentPluginManager.CurrentIOUIManager.OpenFiles.Where(Function(x) x.IsFileModified).Any Then
+        If CurrentApplicationViewModel.OpenFiles.Where(Function(x) x.IsFileModified).Any Then
             Dim closeConfirmation = MessageBox.Show(My.Resources.Language.MainWindowCloseConfirmation, My.Resources.Language.MainTitle, MessageBoxButton.YesNo)
             If closeConfirmation <> MessageBoxResult.Yes Then
                 'Don't close the window
@@ -107,7 +106,7 @@ Public Class MainWindow3
         End If
 
         'Save the settings
-        With CurrentPluginManager.CurrentSettingsProvider
+        With CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider
             If Not Me.WindowState = WindowState.Maximized Then
                 'Setting width and height while maximized results in the window being the same size when restored
                 .SetMainWindowHeight(Me.Height)
@@ -115,7 +114,7 @@ Public Class MainWindow3
             End If
 
             .SetMainWindowIsMaximized(Me.WindowState = WindowState.Maximized)
-            .Save(CurrentPluginManager.CurrentIOProvider)
+            .Save(CurrentApplicationViewModel.CurrentPluginManager.CurrentIOProvider)
         End With
     End Sub
 
@@ -126,7 +125,6 @@ Public Class MainWindow3
 
     Private Sub MainWindow3_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         If RestartOnExit Then
-            CurrentPluginManager.Dispose()
             Forms.Application.Restart()
             Process.GetCurrentProcess().Kill()
         End If

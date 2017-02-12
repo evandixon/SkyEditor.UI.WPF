@@ -11,10 +11,10 @@ Public Class ObjectControlPlaceholder
     Inherits UserControl
     Implements IDisposable
 
-    Public Shared ReadOnly CurrentPluginManagerProperty As DependencyProperty = DependencyProperty.Register(NameOf(CurrentPluginManager), GetType(PluginManager), GetType(ObjectControlPlaceholder), New FrameworkPropertyMetadata(AddressOf OnCurrentPluginManagerChanged))
+    Public Shared ReadOnly CurrentApplicationViewModelProperty As DependencyProperty = DependencyProperty.Register(NameOf(CurrentApplicationViewModel), GetType(PluginManager), GetType(ObjectControlPlaceholder), New FrameworkPropertyMetadata(AddressOf OnCurrentApplicationViewModelChanged))
     Public Shared ReadOnly ObjectToEditProperty As DependencyProperty = DependencyProperty.Register(NameOf(ObjectToEdit), GetType(Object), GetType(ObjectControlPlaceholder), New FrameworkPropertyMetadata(AddressOf OnObjectToEditChanged))
-    Private Shared Sub OnCurrentPluginManagerChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
-        DirectCast(d, ObjectControlPlaceholder).CurrentPluginManager = e.NewValue
+    Private Shared Sub OnCurrentApplicationViewModelChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
+        DirectCast(d, ObjectControlPlaceholder).CurrentApplicationViewModel = e.NewValue
     End Sub
 
     Private Shared Sub OnObjectToEditChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
@@ -36,7 +36,7 @@ Public Class ObjectControlPlaceholder
     Public Event Modified(sender As Object, e As EventArgs)
 
     Private Sub ObjectToEditFVM_Changed(sender As Object, e As PropertyChangedEventArgs)
-        If e.PropertyName = NameOf(FileViewModel.File) Then
+        If e.PropertyName = NameOf(FileViewModel.Model) Then
             'Refresh the UI
             ObjectToEdit = _object
         End If
@@ -55,19 +55,19 @@ Public Class ObjectControlPlaceholder
     ''' <returns></returns>
     Public Property ObjectToEdit As Object
         Get
-            If TypeOf Me.Content Is IObjectControl Then
-                _object = DirectCast(Me.Content, IObjectControl).EditingObject()
+            If TypeOf Me.Content Is IViewControl Then
+                _object = DirectCast(Me.Content, IViewControl).ViewModel
             ElseIf TypeOf Me.Content Is TabControl Then
                 For Each item In DirectCast(Me.Content, TabControl).Items
-                    If TypeOf item.Content Is IObjectControl Then
-                        _object = DirectCast(item.Content, IObjectControl).EditingObject()
+                    If TypeOf item.Content Is IViewControl Then
+                        _object = DirectCast(item.Content, IViewControl).ViewModel
                     End If
                 Next
             End If
             Return _object
         End Get
         Set(value As Object)
-            If CurrentPluginManager Is Nothing Then
+            If CurrentApplicationViewModel Is Nothing Then
                 _pendingObject = value
             Else
                 If _object IsNot Nothing AndAlso TypeOf _object Is FileViewModel Then
@@ -89,14 +89,14 @@ Public Class ObjectControlPlaceholder
                 If EnableTabs Then
                     'Tab control if applicable
                     If value IsNot Nothing Then
-                        Dim tabs = SkyEditor.Core.UI.UIHelper.GetRefreshedTabs(value, {GetType(UserControl)}, CurrentPluginManager)
+                        Dim tabs = UIHelper.GetViewControlTabs(value, {GetType(UserControl)}, CurrentApplicationViewModel)
                         Dim count = tabs.Count '- (From t In ucTabs Where t.GetSortOrder(value.GetType, True) < 0).Count
                         If count > 1 Then
                             Dim tabControl As New TabControl
                             tabControl.TabStripPlacement = TabControlOrientation
                             For Each item In WPFUiHelper.GenerateObjectTabs(tabs)
                                 tabControl.Items.Add(item)
-                                AddHandler item.ContainedObjectControl.IsModifiedChanged, AddressOf OnModified
+                                AddHandler item.ContainedViewControl.IsModifiedChanged, AddressOf OnModified
                             Next
                             Me.Content = tabControl
 
@@ -114,7 +114,7 @@ Public Class ObjectControlPlaceholder
 
                 Else
                     'Always one control
-                    Dim objControl = SkyEditor.Core.UI.UIHelper.GetObjectControl(value, {GetType(UserControl)}, CurrentPluginManager)
+                    Dim objControl = UIHelper.GetViewControl(value, {GetType(UserControl)}, CurrentApplicationViewModel)
                     If objControl IsNot Nothing Then
                         Content = objControl
                     Else
@@ -131,18 +131,18 @@ Public Class ObjectControlPlaceholder
 
     Public Property TabControlOrientation As Dock
 
-    Public Property CurrentPluginManager As PluginManager
+    Public Property CurrentApplicationViewModel As ApplicationViewModel
         Get
             Return _currentPluginManager
         End Get
-        Set(value As PluginManager)
+        Set(value As ApplicationViewModel)
             _currentPluginManager = value
             If _pendingObject IsNot Nothing Then
                 ObjectToEdit = _pendingObject
             End If
         End Set
     End Property
-    Dim _currentPluginManager As PluginManager
+    Dim _currentPluginManager As ApplicationViewModel
     Dim _pendingObject As Object
 
     Private Sub ObjectControlPlaceholder_DataContextChanged(sender As Object, e As DependencyPropertyChangedEventArgs) Handles Me.DataContextChanged

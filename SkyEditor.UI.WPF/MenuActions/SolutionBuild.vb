@@ -8,7 +8,7 @@ Namespace MenuActions
     Public Class SolutionBuild
         Inherits MenuAction
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(Solution).GetTypeInfo}
         End Function
 

@@ -41,12 +41,9 @@ Public Class StartupHelpers
         'Else
         Dim manager As New PluginManager
         Await manager.LoadCore(CoreMod)
-
-
-        'manager.CurrentIOUIManager.SupportedToolWindowTypes = {GetType(UserControl)}
+        Dim appViewModel As New WPFApplicationViewModel(manager)
         Dim m As New MainWindow3 'UI.MainWindow(manager)
-        m.CurrentPluginManager = manager
-        m.DataContext = manager.CurrentIOUIManager
+        m.CurrentApplicationViewModel = appViewModel
         m.Show()
         Return m
     End Function

@@ -130,15 +130,15 @@ Namespace ViewModels.Projects
 
         Private Sub Project_DirectoryCreated(sender As Object, e As DirectoryCreatedEventArgs)
             Application.Current.Dispatcher.Invoke(Sub()
-                                                      Dim newNode = CreateNode(Me.Project, e.FullPath)
-                                                      Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/").TrimEnd("/"))
+                                                      Dim newNode = CreateNode(Me.Project, e.Path)
+                                                      Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.Path).Replace("\", "/").TrimEnd("/"))
                                                       parentNode.AddChild(newNode)
                                                   End Sub)
         End Sub
 
         Private Sub Project_DirectoryDeleted(sender As Object, e As DirectoryDeletedEventArgs)
             Application.Current.Dispatcher.Invoke(Sub()
-                                                      Dim targetNode = FindNode(e.FullPath)
+                                                      Dim targetNode = FindNode(e.Path)
                                                       If targetNode IsNot Nothing Then
                                                           targetNode.Parent.RemoveChild(targetNode)
                                                       End If
@@ -147,15 +147,15 @@ Namespace ViewModels.Projects
 
         Private Sub Project_ItemAdded(sender As Object, e As ItemAddedEventArgs)
             Application.Current.Dispatcher.Invoke(Sub()
-                                                      Dim newNode = CreateNode(Me.Project, e.FullPath)
-                                                      Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.FullPath).Replace("\", "/").TrimStart("/"))
+                                                      Dim newNode = CreateNode(Me.Project, e.Path)
+                                                      Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.Path).Replace("\", "/").TrimStart("/"))
                                                       parentNode.AddChild(newNode)
                                                   End Sub)
         End Sub
 
         Private Sub Project_ItemRemoved(sender As Object, e As ItemRemovedEventArgs)
             Application.Current.Dispatcher.Invoke(Sub()
-                                                      Dim targetNode = FindNode(e.FullPath)
+                                                      Dim targetNode = FindNode(e.Path)
                                                       If targetNode IsNot Nothing Then
                                                           targetNode.Parent.RemoveChild(targetNode)
                                                       End If

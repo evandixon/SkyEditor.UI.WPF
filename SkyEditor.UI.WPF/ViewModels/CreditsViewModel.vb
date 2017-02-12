@@ -18,7 +18,7 @@ Namespace Models
 
         Public ReadOnly Property CurrentPlugins As List(Of SkyEditorPlugin)
             Get
-                Return CurrentPluginManager.Plugins
+                Return CurrentPluginManager.GetPlugins
             End Get
         End Property
 

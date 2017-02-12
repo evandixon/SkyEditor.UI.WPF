@@ -1,4 +1,4 @@
-﻿<local:DataBoundObjectControl x:Class="Views.Credits"
+﻿<local:DataBoundViewControl x:Class="Views.Credits"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -26,4 +26,4 @@
             <TextBox Text="{Binding SelectedPlugin.Credits, Mode=OneWay}" Margin="10,73,10,10" VerticalScrollBarVisibility="Visible" IsReadOnly="True" IsReadOnlyCaretVisible="True" TextWrapping="Wrap" />
         </Grid>
     </Grid>
-</local:DataBoundObjectControl>
+</local:DataBoundViewControl>

@@ -6,10 +6,10 @@ Namespace MenuActions
         Inherits MenuAction
 
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
-            If Not CurrentPluginManager.CurrentIOUIManager.OpenFiles.Any(Function(x As FileViewModel) As Boolean
-                                                                             Return TypeOf x.File Is CreditsModel
-                                                                         End Function) Then
-                CurrentPluginManager.CurrentIOUIManager.OpenFile(New CreditsModel(CurrentPluginManager), False)
+            If Not CurrentApplicationViewModel.OpenFiles.Any(Function(x As FileViewModel) As Boolean
+                                                                 Return TypeOf x.Model Is CreditsModel
+                                                             End Function) Then
+                CurrentApplicationViewModel.OpenFile(New CreditsModel(CurrentApplicationViewModel.CurrentPluginManager), False)
             End If
         End Sub
 

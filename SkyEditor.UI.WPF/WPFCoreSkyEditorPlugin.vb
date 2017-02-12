@@ -1,12 +1,13 @@
 ﻿Imports System.Reflection
 Imports SkyEditor.Core
+Imports SkyEditor.Core.CoreMods
 Imports SkyEditor.Core.UI
-Imports SkyEditor.Core.Windows.CoreMods
 Imports SkyEditor.UI.WPF.MenuActions
 Imports SkyEditor.UI.WPF.MenuActions.Context
 Imports SkyEditor.UI.WPF.MenuActions.View
 Imports SkyEditor.UI.WPF.ObjectControls
 Imports SkyEditor.UI.WPF.ViewModels
+Imports SkyEditor.UI.WPF.Views
 
 Public Class WPFCoreSkyEditorPlugin
     Inherits WindowsCoreSkyEditorPlugin
@@ -47,10 +48,10 @@ Public Class WPFCoreSkyEditorPlugin
     Public Overrides Sub Load(manager As PluginManager)
         MyBase.Load(manager)
 
-        manager.RegisterTypeRegister(GetType(IObjectControl))
-        manager.RegisterType(GetType(IObjectControl).GetTypeInfo, GetType(GenericIList).GetTypeInfo)
-        manager.RegisterType(GetType(IObjectControl).GetTypeInfo, GetType(SolutionExplorer).GetTypeInfo)
-        manager.RegisterType(GetType(IObjectControl).GetTypeInfo, GetType(SolutionBuildProgress).GetTypeInfo)
+        manager.RegisterTypeRegister(GetType(IViewControl))
+        manager.RegisterType(GetType(IViewControl).GetTypeInfo, GetType(GenericIList).GetTypeInfo)
+        manager.RegisterType(GetType(IViewControl).GetTypeInfo, GetType(SolutionExplorer).GetTypeInfo)
+        manager.RegisterType(GetType(IViewControl).GetTypeInfo, GetType(SolutionBuildProgress).GetTypeInfo)
 
         manager.RegisterType(GetType(AnchorableViewModel).GetTypeInfo, GetType(SolutionExplorerViewModel).GetTypeInfo)
         manager.RegisterType(GetType(AnchorableViewModel).GetTypeInfo, GetType(SolutionBuildProgressViewModel).GetTypeInfo)
@@ -84,9 +85,5 @@ Public Class WPFCoreSkyEditorPlugin
             manager.LoadRequiredPlugin(_plugin, Me)
         End If
     End Sub
-
-    Public Overrides Function GetIOUIManager(manager As PluginManager) As IOUIManager
-        Return New WPFIOUIManager(manager)
-    End Function
 
 End Class

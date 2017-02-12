@@ -1,4 +1,4 @@
-﻿<local:DataBoundObjectControl x:Class="ObjectControls.SolutionBuildProgress"
+﻿<local:DataBoundViewControl x:Class="ObjectControls.SolutionBuildProgress"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -25,4 +25,4 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-</local:DataBoundObjectControl>
+</local:DataBoundViewControl>

@@ -17,7 +17,7 @@ Namespace ViewModels
 
         Private Sub SolutionExplorerViewModel_CurrentSolutionChanged(sender As Object, e As EventArgs) Handles Me.CurrentSolutionChanged
             SolutionRoots.Clear()
-            SolutionRoots.Add(New SolutionHeiarchyItemViewModel(CurrentIOUIManager.CurrentSolution))
+            SolutionRoots.Add(New SolutionHeiarchyItemViewModel(CurrentApplicationViewModel.CurrentSolution))
         End Sub
     End Class
 

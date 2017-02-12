@@ -6,9 +6,9 @@ Namespace MenuActions
     Public Class DevConsole
         Inherits MenuAction
 
-        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
+        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             Internal.ConsoleManager.Show()
-            ConsoleHelper.RunConsole(CurrentPluginManager)
+            Await CurrentApplicationViewModel.CurrentConsoleManager.RunConsole()
         End Sub
 
         Public Sub New()

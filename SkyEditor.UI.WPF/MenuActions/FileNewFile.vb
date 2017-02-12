@@ -14,18 +14,18 @@ Namespace MenuActions
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             Dim w As New NewFileWindow()
             Dim games As New Dictionary(Of String, Type)
-            For Each item In IOHelper.GetCreatableFileTypes(CurrentPluginManager)
+            For Each item In IOHelper.GetCreateableFileTypes(CurrentApplicationViewModel.CurrentPluginManager)
                 games.Add(ReflectionHelpers.GetTypeFriendlyName(item), item)
             Next
             w.SetGames(games)
             If w.ShowDialog Then
                 Dim file As Object = IOHelper.CreateNewFile(w.SelectedName, w.SelectedType)
-                CurrentPluginManager.CurrentIOUIManager.OpenFile(file, True)
+                CurrentApplicationViewModel.OpenFile(file, True)
             End If
         End Sub
 
-        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentPluginManagerChanged
-            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso (CurrentPluginManager.GetRegisteredObjects(Of ICreatableFile).Any())
+        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentApplicationViewModelChanged
+            Me.AlwaysVisible = CurrentApplicationViewModel IsNot Nothing AndAlso (CurrentApplicationViewModel.CurrentPluginManager.GetRegisteredObjects(Of ICreatableFile).Any())
         End Sub
     End Class
 End Namespace

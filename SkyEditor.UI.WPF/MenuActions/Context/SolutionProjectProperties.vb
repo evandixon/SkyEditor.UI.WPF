@@ -12,16 +12,16 @@ Namespace MenuActions.Context
                     Dim target As SolutionHeiarchyItemViewModel = item
                     If target.IsRoot Then
                         'Open the solution
-                        CurrentPluginManager.CurrentIOUIManager.OpenFile(target.Project, False)
+                        CurrentApplicationViewModel.OpenFile(target.Project, False)
                     ElseIf Not target.IsDirectory Then
                         'Open the selected project
-                        CurrentPluginManager.CurrentIOUIManager.OpenFile(target.GetNodeProject, False)
+                        CurrentApplicationViewModel.OpenFile(target.GetNodeProject, False)
                     End If
                 End If
             Next
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo}
         End Function
 

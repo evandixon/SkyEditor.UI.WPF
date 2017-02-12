@@ -13,14 +13,14 @@ Namespace MenuActions
         End Sub
 
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
-            Dim newSol As New NewSolutionWindow(CurrentPluginManager)
+            Dim newSol As New NewSolutionWindow(CurrentApplicationViewModel)
             If newSol.ShowDialog Then
-                CurrentPluginManager.CurrentIOUIManager.CurrentSolution = Solution.CreateSolution(newSol.SelectedLocation, newSol.SelectedName, newSol.SelectedSolution.GetType, CurrentPluginManager)
+                CurrentApplicationViewModel.CurrentSolution = ProjectBase.CreateProject(Of Solution)(newSol.SelectedLocation, newSol.SelectedName, newSol.SelectedSolution.GetType, CurrentApplicationViewModel.CurrentPluginManager)
             End If
         End Sub
 
-        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentPluginManagerChanged
-            Me.AlwaysVisible = CurrentPluginManager IsNot Nothing AndAlso (CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode)
+        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentApplicationViewModelChanged
+            Me.AlwaysVisible = CurrentApplicationViewModel IsNot Nothing AndAlso (CurrentApplicationViewModel.CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode)
         End Sub
     End Class
 End Namespace

@@ -20,7 +20,7 @@ Namespace ViewModels
         Private WithEvents CurrentSolution As Solution
 
         Private Sub SolutionBuildProgressViewModel_CurrentSolutionChanged(sender As Object, e As EventArgs) Handles Me.CurrentSolutionChanged, Me.CurrentIOUIManagerChanged
-            CurrentSolution = CurrentIOUIManager.CurrentSolution
+            CurrentSolution = CurrentApplicationViewModel.CurrentSolution
         End Sub
 
         Private Sub Solution_BuildStarted(sender As Object, e As EventArgs) Handles CurrentSolution.SolutionBuildStarted
@@ -29,20 +29,20 @@ Namespace ViewModels
                                                   End Sub)
 
             For Each item In DirectCast(sender, Solution).GetAllProjects
-                AddHandler item.BuildStatusChanged, AddressOf Project_BuildStatusChanged
+                AddHandler item.ProgressChanged, AddressOf Project_BuildStatusChanged
             Next
         End Sub
 
         Private Sub Solution_BuildCompleted(sender As Object, e As EventArgs) Handles CurrentSolution.SolutionBuildCompleted
             For Each item In DirectCast(sender, Solution).GetAllProjects
-                RemoveHandler item.BuildStatusChanged, AddressOf Project_BuildStatusChanged
+                RemoveHandler item.ProgressChanged, AddressOf Project_BuildStatusChanged
             Next
         End Sub
 
         Private Sub Project_BuildStatusChanged(sender As Object, e As ProgressReportedEventArgs)
             If Not BuildingProjects.Any(Function(x) x.Model Is sender) Then
                 Application.Current.Dispatcher.Invoke(Sub()
-                                                          BuildingProjects.Add(New ProjectBaseBuildViewModel(sender, CurrentIOUIManager.CurrentPluginManager))
+                                                          BuildingProjects.Add(New ProjectBaseBuildViewModel(sender, CurrentApplicationViewModel))
                                                       End Sub)
             End If
         End Sub

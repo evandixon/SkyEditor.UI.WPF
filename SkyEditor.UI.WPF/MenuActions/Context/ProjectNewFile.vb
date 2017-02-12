@@ -23,7 +23,7 @@ Namespace MenuActions.Context
                 End If
                 Dim w As New NewFileWindow
                 Dim types As New Dictionary(Of String, Type)
-                For Each supported In ParentProject.GetSupportedFileTypes(CurrentPath, CurrentPluginManager)
+                For Each supported In parentProject.GetSupportedFileTypes(currentPath, CurrentApplicationViewModel.CurrentPluginManager)
                     types.Add(ReflectionHelpers.GetTypeFriendlyName(supported), supported)
                 Next
                 w.SetGames(types)
@@ -33,7 +33,7 @@ Namespace MenuActions.Context
             Next
         End Sub
 
-        Public Overrides Function SupportedTypes() As IEnumerable(Of TypeInfo)
+        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
             Return {GetType(SolutionHeiarchyItemViewModel).GetTypeInfo, GetType(ProjectHeiarchyItemViewModel).GetTypeInfo}
         End Function
 
