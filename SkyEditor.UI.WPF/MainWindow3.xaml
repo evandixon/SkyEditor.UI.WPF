@@ -20,7 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="21"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30" />
+            <RowDefinition Name="statusBarRow" Height="30" /> <!-- This value must be updated in the code-behind if changed. -->
         </Grid.RowDefinitions>
         <Menu x:Name="menuMain" IsMainMenu="True" Grid.Row="0">
             <Menu.ItemContainerStyle>

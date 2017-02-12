@@ -11,7 +11,7 @@ Namespace MenuActions
             Return {GetType(FileViewModel).GetTypeInfo}
         End Function
 
-        Public Overrides  Function SupportsObject(obj As Object) As Task(Of Boolean)
+        Public Overrides Function SupportsObject(obj As Object) As Task(Of Boolean)
             Return Task.FromResult(TypeOf obj Is FileViewModel AndAlso
                                    (DirectCast(obj, FileViewModel).CanSave(CurrentApplicationViewModel.CurrentPluginManager) OrElse
                                    DirectCast(obj, FileViewModel).CanSaveAs(CurrentApplicationViewModel.CurrentPluginManager)))
@@ -21,11 +21,11 @@ Namespace MenuActions
             Dim CurrentPluginManager = CurrentApplicationViewModel.CurrentPluginManager
             For Each item As FileViewModel In targets
                 If item.CanSave(CurrentPluginManager) Then
-                    item.Save(CurrentPluginManager)
+                    Await item.Save(CurrentPluginManager)
                 ElseIf item.CanSaveAs(CurrentPluginManager) Then
                     Dim s = CurrentApplicationViewModel.GetSaveFileDialog(item)
                     If s.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                        item.Save(s.FileName, CurrentPluginManager)
+                        Await item.Save(s.FileName, CurrentPluginManager)
                     End If
                     'If the dialog result is not OK, then the user can click the menu item again
                 End If
