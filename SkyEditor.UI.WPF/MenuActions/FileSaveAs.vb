@@ -17,7 +17,7 @@ Namespace MenuActions
             For Each item As FileViewModel In targets
                 Dim s = CurrentApplicationViewModel.GetSaveFileDialog(item)
                 If s.ShowDialog = DialogResult.OK Then
-                    Await item.Save(s.FileName, CurrentPluginManager)
+                    Await item.Save(s.FileName, CurrentApplicationViewModel.CurrentPluginManager)
                 End If
             Next
         End Sub

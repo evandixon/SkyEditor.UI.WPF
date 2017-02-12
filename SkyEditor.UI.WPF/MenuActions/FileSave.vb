@@ -17,7 +17,7 @@ Namespace MenuActions
                                    DirectCast(obj, FileViewModel).CanSaveAs(CurrentApplicationViewModel.CurrentPluginManager)))
         End Function
 
-        Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
+        Public Overrides Async Sub DoAction(targets As IEnumerable(Of Object))
             Dim CurrentPluginManager = CurrentApplicationViewModel.CurrentPluginManager
             For Each item As FileViewModel In targets
                 If item.CanSave(CurrentPluginManager) Then
