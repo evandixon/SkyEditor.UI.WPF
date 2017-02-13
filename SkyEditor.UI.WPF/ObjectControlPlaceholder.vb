@@ -36,7 +36,7 @@ Public Class ObjectControlPlaceholder
     Public Event Modified(sender As Object, e As EventArgs)
 
     Private Sub ObjectToEditFVM_Changed(sender As Object, e As PropertyChangedEventArgs)
-        If e.PropertyName = NameOf(ViewModel.Model) Then
+        If e.PropertyName = NameOf(FileViewModel.Model) Then
             'Refresh the UI
             ObjectToEdit = _object
         End If
