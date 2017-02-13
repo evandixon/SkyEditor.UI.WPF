@@ -11,7 +11,7 @@ Public Class ObjectControlPlaceholder
     Inherits UserControl
     Implements IDisposable
 
-    Public Shared ReadOnly CurrentApplicationViewModelProperty As DependencyProperty = DependencyProperty.Register(NameOf(CurrentApplicationViewModel), GetType(PluginManager), GetType(ObjectControlPlaceholder), New FrameworkPropertyMetadata(AddressOf OnCurrentApplicationViewModelChanged))
+    Public Shared ReadOnly CurrentApplicationViewModelProperty As DependencyProperty = DependencyProperty.Register(NameOf(CurrentApplicationViewModel), GetType(ApplicationViewModel), GetType(ObjectControlPlaceholder), New FrameworkPropertyMetadata(AddressOf OnCurrentApplicationViewModelChanged))
     Public Shared ReadOnly ObjectToEditProperty As DependencyProperty = DependencyProperty.Register(NameOf(ObjectToEdit), GetType(Object), GetType(ObjectControlPlaceholder), New FrameworkPropertyMetadata(AddressOf OnObjectToEditChanged))
     Private Shared Sub OnCurrentApplicationViewModelChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
         DirectCast(d, ObjectControlPlaceholder).CurrentApplicationViewModel = e.NewValue
@@ -36,7 +36,7 @@ Public Class ObjectControlPlaceholder
     Public Event Modified(sender As Object, e As EventArgs)
 
     Private Sub ObjectToEditFVM_Changed(sender As Object, e As PropertyChangedEventArgs)
-        If e.PropertyName = NameOf(FileViewModel.Model) Then
+        If e.PropertyName = NameOf(ViewModel.Model) Then
             'Refresh the UI
             ObjectToEdit = _object
         End If
