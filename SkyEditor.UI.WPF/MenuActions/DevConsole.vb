@@ -8,7 +8,7 @@ Namespace MenuActions
 
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             Internal.ConsoleManager.Show()
-            Await CurrentApplicationViewModel.CurrentConsoleManager.RunConsole()
+            Await CurrentApplicationViewModel.CurrentConsoleShell.RunConsole()
         End Sub
 
         Public Sub New()

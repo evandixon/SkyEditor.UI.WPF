@@ -458,4 +458,15 @@ Sharp Zip Lib﻿ - Copyright © 2000-2016 SharpZipLib Contributors</value>
   <data name="LoadingCopyingFile" xml:space="preserve">
     <value>Copying File...</value>
   </data>
+  <data name="ErrorHandling_FatalError" xml:space="preserve">
+    <value>A fatal error has been occurred, and the details could not be displayed.  The original error message: {0}</value>
+  </data>
+  <data name="ErrorHandling_UIThreadErrorMessage" xml:space="preserve">
+    <value>An unhandle exception has been thrown.
+You may continue using the application, but there may be side-effects.  Please report this error regardless.</value>
+  </data>
+  <data name="ErrorHandling_UnhandledExceptionMessage" xml:space="preserve">
+    <value>An unhandled exception has been thrown.
+The application must now close.  Please report this error.</value>
+  </data>
 </root>

@@ -59,10 +59,10 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SkyEditor.Core, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI44\lib\netstandard1.3\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI50\lib\netstandard1.3\SkyEditor.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SkyEditor.Core.Windows, Version=4.1.0.44, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.Windows.4.1.0-CI44\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
+    <Reference Include="SkyEditor.Core.Windows, Version=4.1.0.50, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkyEditor.Core.Windows.4.1.0-CI50\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -166,6 +166,12 @@
     <Compile Include="AvalonHelpers\PanesTemplateSelector.vb" />
     <Compile Include="DataBoundObjectControl.vb" />
     <Compile Include="DrawingImageConverter.vb" />
+    <Compile Include="ErrorWindow.Designer.vb">
+      <DependentUpon>ErrorWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FileTypeSelector.xaml.vb">
       <DependentUpon>FileTypeSelector.xaml</DependentUpon>
     </Compile>
@@ -214,6 +220,7 @@
     <Compile Include="ViewModels\Projects\ProjectBaseHeiarchyItemViewModel.vb" />
     <Compile Include="ViewModels\Projects\ProjectHeiarchyItemViewModel.vb" />
     <Compile Include="ViewModels\Projects\SolutionHeiarchyItemViewModel.vb" />
+    <Compile Include="ViewModels\TextFileViewModel.vb" />
     <Compile Include="Views\Credits.xaml.vb">
       <DependentUpon>Credits.xaml</DependentUpon>
     </Compile>
@@ -281,11 +288,17 @@
     <Compile Include="ViewModels\SettingsViewModel.vb" />
     <Compile Include="ViewModels\SolutionBuildProgressViewModel.vb" />
     <Compile Include="ViewModels\SolutionExplorerViewModel.vb" />
+    <Compile Include="Views\TextFileView.xaml.vb">
+      <DependentUpon>TextFileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPFCoreSkyEditorPlugin.vb" />
     <Compile Include="WPFIOUIManager.vb" />
     <Compile Include="WPFUiHelper.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ErrorWindow.resx">
+      <DependentUpon>ErrorWindow.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Language.fr.resx" />
     <EmbeddedResource Include="Language.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
@@ -380,6 +393,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="TargetedContextMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TextFileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

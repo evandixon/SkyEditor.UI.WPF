@@ -263,6 +263,35 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to A fatal error has been occurred, and the details could not be displayed.  The original error message: {0}.
+        '''</summary>
+        Public Shared ReadOnly Property ErrorHandling_FatalError() As String
+            Get
+                Return ResourceManager.GetString("ErrorHandling_FatalError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to An unhandle exception has been thrown.
+        '''You may continue using the application, but there may be side-effects.  Please report this error regardless..
+        '''</summary>
+        Public Shared ReadOnly Property ErrorHandling_UIThreadErrorMessage() As String
+            Get
+                Return ResourceManager.GetString("ErrorHandling_UIThreadErrorMessage", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to An unhandled exception has been thrown.
+        '''The application must now close.  Please report this error..
+        '''</summary>
+        Public Shared ReadOnly Property ErrorHandling_UnhandledExceptionMessage() As String
+            Get
+                Return ResourceManager.GetString("ErrorHandling_UnhandledExceptionMessage", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to The type &quot;{0}&quot; of the given object is not supported..
         '''</summary>
         Public Shared ReadOnly Property ErrorUnsupportedType() As String
