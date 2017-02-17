@@ -64,7 +64,7 @@
                     <avalonHelpers:PanesStyleSelector.AnchorableStyle>
                         <Style TargetType="{x:Type ad:LayoutAnchorableItem}">
                             <Setter Property="Title" Value="{Binding Model.Header}" />
-                            <Setter Property="ContentId" Value="{Binding Model.ModelID}" />
+                            <Setter Property="ContentId" Value="{Binding Model.ID}" />
                         </Style>
                     </avalonHelpers:PanesStyleSelector.AnchorableStyle>
                 </avalonHelpers:PanesStyleSelector>
