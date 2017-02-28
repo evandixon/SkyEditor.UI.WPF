@@ -58,9 +58,6 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="SkyEditor.Core, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI54\lib\netstandard1.3\SkyEditor.Core.dll</HintPath>
-    </Reference>
     <Reference Include="SkyEditor.Core.Windows, Version=4.1.0.54, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SkyEditor.Core.Windows.4.1.0-CI54\lib\net46\SkyEditor.Core.Windows.dll</HintPath>
     </Reference>
@@ -206,6 +203,7 @@
     <Compile Include="MenuActions\View\MenuViewSolutionBuildProgress.vb" />
     <Compile Include="MenuActions\View\MenuViewSolutionExplorer.vb" />
     <Compile Include="ObjectControl.vb" />
+    <Compile Include="ViewModels\ApplicationErrors.vb" />
     <Compile Include="ViewModels\CreditsViewModel.vb" />
     <Compile Include="NewFileWindow.xaml.vb">
       <DependentUpon>NewFileWindow.xaml</DependentUpon>
@@ -292,7 +290,7 @@
       <DependentUpon>TextFileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPFCoreSkyEditorPlugin.vb" />
-    <Compile Include="WPFIOUIManager.vb" />
+    <Compile Include="WPFApplicationViewModel.vb" />
     <Compile Include="WPFUiHelper.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -403,6 +401,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SkyEditor.Core\SkyEditor.Core\SkyEditor.Core.csproj">
+      <Project>{4985bc22-88b5-422d-a0d3-b772470b2aa8}</Project>
+      <Name>SkyEditor.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

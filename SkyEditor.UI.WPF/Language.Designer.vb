@@ -74,6 +74,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Errors.
+        '''</summary>
+        Public Shared ReadOnly Property Anchorable_Errors_Header() As String
+            Get
+                Return ResourceManager.GetString("Anchorable_Errors_Header", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Author.
         '''</summary>
         Public Shared ReadOnly Property Author() As String
