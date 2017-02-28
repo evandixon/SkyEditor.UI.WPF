@@ -13,9 +13,10 @@ Namespace MenuActions
         End Function
 
 
-        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
+        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
+            CurrentApplicationViewModel.ClearErrors()
             For Each item As Solution In Targets
-                Await item.Build()
+                CurrentApplicationViewModel.ShowLoading(item.Build())
             Next
         End Sub
 

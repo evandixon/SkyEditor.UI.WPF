@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4EA8B18A
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SkyEditor.UI.WPF.Tests", "Tests\SkyEditor.UI.WPF.Tests\SkyEditor.UI.WPF.Tests.vbproj", "{410DEA3F-13E4-4E7D-B3EC-B92BA44C1F4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyEditor.Core", "..\SkyEditor.Core\SkyEditor.Core\SkyEditor.Core.csproj", "{4985BC22-88B5-422D-A0D3-B772470B2AA8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +29,6 @@ Global
 		{410DEA3F-13E4-4E7D-B3EC-B92BA44C1F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{410DEA3F-13E4-4E7D-B3EC-B92BA44C1F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{410DEA3F-13E4-4E7D-B3EC-B92BA44C1F4A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4985BC22-88B5-422D-A0D3-B772470B2AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4985BC22-88B5-422D-A0D3-B772470B2AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4985BC22-88B5-422D-A0D3-B772470B2AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4985BC22-88B5-422D-A0D3-B772470B2AA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
