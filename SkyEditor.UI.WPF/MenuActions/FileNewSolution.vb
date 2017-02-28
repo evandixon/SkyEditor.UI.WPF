@@ -16,6 +16,8 @@ Namespace MenuActions
             Dim newSol As New NewSolutionWindow(CurrentApplicationViewModel)
             If newSol.ShowDialog Then
                 CurrentApplicationViewModel.CurrentSolution = Await ProjectBase.CreateProject(Of Solution)(newSol.SelectedLocation, newSol.SelectedName, newSol.SelectedSolution.GetType, CurrentApplicationViewModel.CurrentPluginManager)
+                CurrentApplicationViewModel.ShowLoading(CurrentApplicationViewModel.CurrentSolution.Initialize())
+                CurrentApplicationViewModel.ShowLoading(CurrentApplicationViewModel.CurrentSolution.LoadingTask)
             End If
         End Sub
 
