@@ -12,10 +12,12 @@ Namespace MenuActions
             SortOrder = 1.12
         End Sub
 
-        Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
+        Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             Dim newSol As New NewSolutionWindow(CurrentApplicationViewModel)
             If newSol.ShowDialog Then
-                CurrentApplicationViewModel.CurrentSolution = ProjectBase.CreateProject(Of Solution)(newSol.SelectedLocation, newSol.SelectedName, newSol.SelectedSolution.GetType, CurrentApplicationViewModel.CurrentPluginManager)
+                CurrentApplicationViewModel.CurrentSolution = Await ProjectBase.CreateProject(Of Solution)(newSol.SelectedLocation, newSol.SelectedName, newSol.SelectedSolution.GetType, CurrentApplicationViewModel.CurrentPluginManager)
+                CurrentApplicationViewModel.ShowLoading(CurrentApplicationViewModel.CurrentSolution.Initialize())
+                CurrentApplicationViewModel.ShowLoading(CurrentApplicationViewModel.CurrentSolution.LoadingTask)
             End If
         End Sub
 

@@ -13,7 +13,7 @@ Namespace MenuActions
         Public Overrides Sub DoAction(Targets As IEnumerable(Of Object))
             For Each item As Solution In Targets
                 item.Save(CurrentApplicationViewModel.CurrentPluginManager.CurrentIOProvider)
-                item.SaveAllProjects(CurrentApplicationViewModel.CurrentPluginManager.CurrentIOProvider)
+                item.SaveAllProjects()
             Next
         End Sub
 
