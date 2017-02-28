@@ -21,7 +21,7 @@ Namespace MenuActions
         Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
             For Each item In Targets
                 If TypeOf item Is Solution Then
-                    DirectCast(item, Solution).SaveAllProjects(CurrentApplicationViewModel.CurrentPluginManager.CurrentIOProvider)
+                    DirectCast(item, Solution).SaveAllProjects()
                 ElseIf TypeOf item Is FileViewModel Then
                     SaveAction.CurrentApplicationViewModel = CurrentApplicationViewModel
                     SaveAction.DoAction({item})
