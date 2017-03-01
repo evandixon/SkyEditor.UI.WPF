@@ -76,9 +76,9 @@ Namespace ViewModels.Projects
         End Sub
 
         Private Sub Project_BuildStatusChanged(sender As Object, e As ProgressReportedEventArgs)
-            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.Message)))
-            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.Progress)))
-            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Model.IsIndeterminate)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(BuildStatusMessage)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(BuildProgress)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsBuildProgressIndeterminate)))
         End Sub
     End Class
 End Namespace
