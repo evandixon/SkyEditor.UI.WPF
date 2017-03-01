@@ -469,4 +469,13 @@ You may continue using the application, but there may be side-effects.  Please r
     <value>An unhandled exception has been thrown.
 The application must now close.  Please report this error.</value>
   </data>
+  <data name="Anchorable_Errors_Header" xml:space="preserve">
+    <value>Errors</value>
+  </data>
+  <data name="Anchorable_Errors_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="MenuViewApplicationErrors" xml:space="preserve">
+    <value>Errors</value>
+  </data>
 </root>

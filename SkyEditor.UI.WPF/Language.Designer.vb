@@ -74,6 +74,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Errors.
+        '''</summary>
+        Public Shared ReadOnly Property Anchorable_Errors_Header() As String
+            Get
+                Return ResourceManager.GetString("Anchorable_Errors_Header", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Message.
+        '''</summary>
+        Public Shared ReadOnly Property Anchorable_Errors_Message() As String
+            Get
+                Return ResourceManager.GetString("Anchorable_Errors_Message", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Author.
         '''</summary>
         Public Shared ReadOnly Property Author() As String
@@ -765,6 +783,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property MenuView() As String
             Get
                 Return ResourceManager.GetString("MenuView", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Errors.
+        '''</summary>
+        Public Shared ReadOnly Property MenuViewApplicationErrors() As String
+            Get
+                Return ResourceManager.GetString("MenuViewApplicationErrors", resourceCulture)
             End Get
         End Property
         

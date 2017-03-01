@@ -28,7 +28,7 @@ Namespace MenuActions.Context
                 w.SetGames(types)
 
                 If w.ShowDialog Then
-                    DirectCast(item, SolutionHeiarchyItemViewModel).Project.AddNewProject(parentPath, w.SelectedName, w.SelectedType, CurrentApplicationViewModel.CurrentPluginManager)
+                    CurrentApplicationViewModel.ShowLoading(DirectCast(item, SolutionHeiarchyItemViewModel).Project.AddNewProject(parentPath, w.SelectedName, w.SelectedType, CurrentApplicationViewModel.CurrentPluginManager))
                 End If
             Next
         End Sub
