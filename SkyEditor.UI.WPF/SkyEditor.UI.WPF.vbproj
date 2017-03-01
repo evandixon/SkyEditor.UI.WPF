@@ -413,12 +413,6 @@
   <ItemGroup>
     <Resource Include="Resources\favicon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\SkyEditor.Core\SkyEditor.Core\SkyEditor.Core.csproj">
-      <Project>{4985bc22-88b5-422d-a0d3-b772470b2aa8}</Project>
-      <Name>SkyEditor.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
