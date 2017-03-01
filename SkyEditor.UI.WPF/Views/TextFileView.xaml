@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SkyEditor.UI.WPF"
              xmlns:localVM="clr-namespace:SkyEditor.UI.WPF.ViewModels"
              TargetType="{x:Type localVM:TextFileViewModel}"
+             IsBackupControl="True"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
