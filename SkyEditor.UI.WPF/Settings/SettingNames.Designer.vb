@@ -65,6 +65,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to SkyEditor.UI.WPF.Settings.Font.
+        '''</summary>
+        Friend Shared ReadOnly Property Font() As String
+            Get
+                Return ResourceManager.GetString("Font", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to SkyEditor.UI.WPF.Settings.MainWindowHeight.
         '''</summary>
         Friend Shared ReadOnly Property MainWindowHeight() As String

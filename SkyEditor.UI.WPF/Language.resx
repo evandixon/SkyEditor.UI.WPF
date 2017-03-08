@@ -478,4 +478,17 @@ The application must now close.  Please report this error.</value>
   <data name="MenuViewApplicationErrors" xml:space="preserve">
     <value>Errors</value>
   </data>
+  <data name="Settings_Font" xml:space="preserve">
+    <value>Font: </value>
+  </data>
+  <data name="Settings_FontDefault" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Settings_FontDisplay" xml:space="preserve">
+    <value>{0}, {1}pt</value>
+    <comment>{0} = Font Family, {1} = Font Size, in points</comment>
+  </data>
+  <data name="Settings_SetFont" xml:space="preserve">
+    <value>Set Font</value>
+  </data>
 </root>

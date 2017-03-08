@@ -998,6 +998,42 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Font: .
+        '''</summary>
+        Public Shared ReadOnly Property Settings_Font() As String
+            Get
+                Return ResourceManager.GetString("Settings_Font", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Default.
+        '''</summary>
+        Public Shared ReadOnly Property Settings_FontDefault() As String
+            Get
+                Return ResourceManager.GetString("Settings_FontDefault", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {0}, {1}pt.
+        '''</summary>
+        Public Shared ReadOnly Property Settings_FontDisplay() As String
+            Get
+                Return ResourceManager.GetString("Settings_FontDisplay", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Set Font.
+        '''</summary>
+        Public Shared ReadOnly Property Settings_SetFont() As String
+            Get
+                Return ResourceManager.GetString("Settings_SetFont", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Changes will not be applied until the program has been restarted..
         '''</summary>
         Public Shared ReadOnly Property SettingsApplyRestartWarning() As String

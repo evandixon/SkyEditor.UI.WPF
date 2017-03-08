@@ -1,4 +1,5 @@
-﻿Imports System.Runtime.CompilerServices
+﻿Imports System.Drawing
+Imports System.Runtime.CompilerServices
 Imports SkyEditor.Core
 
 Namespace Settings
@@ -41,6 +42,19 @@ Namespace Settings
 
         <Extension> Sub SetMainWindowIsMaximized(provider As ISettingsProvider, value As Boolean)
             provider.SetSetting(My.Resources.SettingNames.MainWindowMaximized, value)
+        End Sub
+
+        <Extension> Function GetFont(provider As ISettingsProvider) As Font
+            Dim setting = provider.GetSetting(My.Resources.SettingNames.Font)
+            If TypeOf setting Is Font Then
+                Return setting
+            Else
+                Return Nothing
+            End If
+        End Function
+
+        <Extension> Sub SetFont(provider As ISettingsProvider, value As Font)
+            provider.SetSetting(My.Resources.SettingNames.Font, value)
         End Sub
 
     End Module

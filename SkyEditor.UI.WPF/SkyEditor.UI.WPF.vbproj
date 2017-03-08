@@ -241,8 +241,8 @@
     <Compile Include="ObjectControls\ProjectReferences.xaml.vb">
       <DependentUpon>ProjectReferences.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsEditor.xaml.vb">
-      <DependentUpon>SettingsEditor.xaml</DependentUpon>
+    <Compile Include="Views\Settings\GeneralSettingsEditor.xaml.vb">
+      <DependentUpon>GeneralSettingsEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SolutionBuildProgress.xaml.vb">
       <DependentUpon>SolutionBuildProgress.xaml</DependentUpon>
@@ -290,7 +290,7 @@
     <Compile Include="TargetedContextMenu.xaml.vb">
       <DependentUpon>TargetedContextMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\SettingsViewModel.vb" />
+    <Compile Include="ViewModels\Settings\GeneralSettingsViewModel.vb" />
     <Compile Include="ViewModels\SolutionBuildProgressViewModel.vb" />
     <Compile Include="ViewModels\SolutionExplorerViewModel.vb" />
     <Compile Include="Views\TextFileView.xaml.vb">
@@ -381,7 +381,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SettingsEditor.xaml">
+    <Page Include="Views\Settings\GeneralSettingsEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

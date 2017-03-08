@@ -6,8 +6,8 @@ Imports System.Windows.Controls
 Imports System.Windows
 Imports SkyEditor.Core.Utilities
 
-Namespace Views
-    Public Class SettingsEditor
+Namespace Views.Settings
+    Public Class GeneralSettingsEditor
 
     End Class
 
