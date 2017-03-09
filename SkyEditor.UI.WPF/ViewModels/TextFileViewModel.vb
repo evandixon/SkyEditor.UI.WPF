@@ -10,6 +10,9 @@ Namespace ViewModels
         Implements INotifyModified
         Implements INotifyPropertyChanged
 
+        Public Event Modified As EventHandler Implements INotifyModified.Modified
+        Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+
         Public Property Text As String
             Get
                 Return Model.Contents
@@ -36,7 +39,10 @@ Namespace ViewModels
             End Get
         End Property
 
-        Public Event Modified As EventHandler Implements INotifyModified.Modified
-        Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+        Public Sub RefreshFont()
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(FontSize)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(FontFamily)))
+        End Sub
+
     End Class
 End Namespace
