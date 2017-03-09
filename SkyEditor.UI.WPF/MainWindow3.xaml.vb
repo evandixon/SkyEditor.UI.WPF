@@ -2,6 +2,7 @@
 Imports System.Globalization
 Imports System.Reflection
 Imports System.Windows
+Imports System.Windows.Input
 Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
@@ -63,9 +64,21 @@ Public Class MainWindow3
 #End Region
 
 #Region "Event Handlers"
+
     Private Sub OnIOUIManagerFileClosing(sender As Object, e As FileClosingEventArgs) Handles _currentApplicationViewModel.FileClosing
         If e.File.IsFileModified Then
             e.Cancel = Not (MessageBox.Show(My.Resources.Language.DocumentCloseConfirmation, My.Resources.Language.MainTitle, MessageBoxButton.YesNo) = MessageBoxResult.Yes)
+        End If
+    End Sub
+
+    Private Async Sub MainWindow3_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If My.Computer.Keyboard.CtrlKeyDown Then
+            For Each item In CurrentApplicationViewModel.CurrentPluginManager.GetRegisteredObjects(Of ControlKeyAction)
+                item.CurrentApplicationViewModel = CurrentApplicationViewModel
+                If item.Keys.All(Function(x) e.KeyboardDevice.IsKeyDown(x)) Then
+                    Await item.DoAction
+                End If
+            Next
         End If
     End Sub
 
@@ -129,6 +142,7 @@ Public Class MainWindow3
             Process.GetCurrentProcess().Kill()
         End If
     End Sub
+
 #End Region
 
 End Class

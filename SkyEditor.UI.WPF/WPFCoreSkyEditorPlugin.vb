@@ -2,6 +2,7 @@
 Imports SkyEditor.Core
 Imports SkyEditor.Core.CoreMods
 Imports SkyEditor.Core.UI
+Imports SkyEditor.UI.WPF.KeyShortcuts
 Imports SkyEditor.UI.WPF.MenuActions
 Imports SkyEditor.UI.WPF.MenuActions.Context
 Imports SkyEditor.UI.WPF.MenuActions.View
@@ -48,38 +49,42 @@ Public Class WPFCoreSkyEditorPlugin
     Public Overrides Sub Load(manager As PluginManager)
         MyBase.Load(manager)
 
-        manager.RegisterTypeRegister(GetType(IViewControl))
-        manager.RegisterType(GetType(IViewControl).GetTypeInfo, GetType(GenericIList).GetTypeInfo)
-        manager.RegisterType(GetType(IViewControl).GetTypeInfo, GetType(SolutionExplorer).GetTypeInfo)
-        manager.RegisterType(GetType(IViewControl).GetTypeInfo, GetType(SolutionBuildProgress).GetTypeInfo)
+        manager.RegisterTypeRegister(Of IViewControl)()
+        manager.RegisterTypeRegister(Of ControlKeyAction)()
 
-        manager.RegisterType(GetType(AnchorableViewModel).GetTypeInfo, GetType(SolutionExplorerViewModel).GetTypeInfo)
-        manager.RegisterType(GetType(AnchorableViewModel).GetTypeInfo, GetType(SolutionBuildProgressViewModel).GetTypeInfo)
+        manager.RegisterType(Of IViewControl, GenericIList)()
+        manager.RegisterType(Of IViewControl, SolutionExplorer)()
+        manager.RegisterType(Of IViewControl, SolutionBuildProgress)()
 
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(DevConsole).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(DevPlugins).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(FileNewFile).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(FileNewSolution).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(FileOpenAuto).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(FileOpenManual).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(FileSave).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(FileSaveAll).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(FileSaveAs).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(FileSaveSolution).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(SolutionBuild).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(ToolsExtensions).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(ToolsSettings).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(MenuViewSolutionExplorer).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(MenuViewSolutionBuildProgress).GetTypeInfo)
+        manager.RegisterType(Of ControlKeyAction, ControlS)()
 
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(SolutionProjectAddFolder).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(ProjectNodeOpenFile).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(SolutionCreateProject).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(ProjectNewFile).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(SolutionAddExistingProject).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(ProjectAddExistingFile).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(SolutionProjectProperties).GetTypeInfo)
-        manager.RegisterType(GetType(MenuAction).GetTypeInfo, GetType(SolutionProjectDelete).GetTypeInfo)
+        manager.RegisterType(Of AnchorableViewModel, SolutionExplorerViewModel)()
+        manager.RegisterType(Of AnchorableViewModel, SolutionBuildProgressViewModel)()
+
+        manager.RegisterType(Of MenuAction, DevConsole)()
+        manager.RegisterType(Of MenuAction, DevPlugins)()
+        manager.RegisterType(Of MenuAction, FileNewFile)()
+        manager.RegisterType(Of MenuAction, FileNewSolution)()
+        manager.RegisterType(Of MenuAction, FileOpenAuto)()
+        manager.RegisterType(Of MenuAction, FileOpenManual)()
+        manager.RegisterType(Of MenuAction, FileSave)()
+        manager.RegisterType(Of MenuAction, FileSaveAll)()
+        manager.RegisterType(Of MenuAction, FileSaveAs)()
+        manager.RegisterType(Of MenuAction, FileSaveSolution)()
+        manager.RegisterType(Of MenuAction, SolutionBuild)()
+        manager.RegisterType(Of MenuAction, ToolsExtensions)()
+        manager.RegisterType(Of MenuAction, ToolsSettings)()
+        manager.RegisterType(Of MenuAction, MenuViewSolutionExplorer)()
+        manager.RegisterType(Of MenuAction, MenuViewSolutionBuildProgress)()
+
+        manager.RegisterType(Of MenuAction, SolutionProjectAddFolder)()
+        manager.RegisterType(Of MenuAction, ProjectNodeOpenFile)()
+        manager.RegisterType(Of MenuAction, SolutionCreateProject)()
+        manager.RegisterType(Of MenuAction, ProjectNewFile)()
+        manager.RegisterType(Of MenuAction, SolutionAddExistingProject)()
+        manager.RegisterType(Of MenuAction, ProjectAddExistingFile)()
+        manager.RegisterType(Of MenuAction, SolutionProjectProperties)()
+        manager.RegisterType(Of MenuAction, SolutionProjectDelete)()
 
         If _plugin IsNot Nothing Then
             manager.LoadRequiredPlugin(_plugin, Me)

@@ -164,6 +164,7 @@
     <Compile Include="AvalonHelpers\AvalonDockLayoutViewModel.vb" />
     <Compile Include="AvalonHelpers\PanesStyleSelector.vb" />
     <Compile Include="AvalonHelpers\PanesTemplateSelector.vb" />
+    <Compile Include="ControlKeyAction.vb" />
     <Compile Include="DataBoundObjectControl.vb" />
     <Compile Include="DrawingImageConverter.vb" />
     <Compile Include="ErrorWindow.Designer.vb">
@@ -178,6 +179,7 @@
     <Compile Include="GenericListItem.vb" />
     <Compile Include="Internal\ConsoleManager.vb" />
     <Compile Include="IOUIManagerExtensions.vb" />
+    <Compile Include="KeyShortcuts\ControlS.vb" />
     <Compile Include="MainWindow3.xaml.vb">
       <DependentUpon>MainWindow3.xaml</DependentUpon>
     </Compile>
