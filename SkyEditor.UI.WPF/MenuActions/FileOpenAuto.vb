@@ -17,7 +17,9 @@ Namespace MenuActions
             Dim o = CurrentApplicationViewModel.GetOpenFileDialog
             If o.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                 If o.FileName.ToLower.EndsWith(".skysln") Then
-                    CurrentApplicationViewModel.CurrentSolution = Await ProjectBase.OpenProjectFile(Of Solution)(o.FileName, CurrentApplicationViewModel.CurrentPluginManager)
+                    Dim openProjectTask = ProjectBase.OpenProjectFile(Of Solution)(o.FileName, CurrentApplicationViewModel.CurrentPluginManager)
+                    CurrentApplicationViewModel.ShowLoading(openProjectTask)
+                    CurrentApplicationViewModel.CurrentSolution = Await openProjectTask
                 Else
                     Await CurrentApplicationViewModel.OpenFile(o.FileName, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
                 End If

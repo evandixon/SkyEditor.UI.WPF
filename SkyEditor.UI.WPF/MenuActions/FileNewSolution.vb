@@ -15,9 +15,9 @@ Namespace MenuActions
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
             Dim newSol As New NewSolutionWindow(CurrentApplicationViewModel)
             If newSol.ShowDialog Then
-                CurrentApplicationViewModel.CurrentSolution = Await ProjectBase.CreateProject(Of Solution)(newSol.SelectedLocation, newSol.SelectedName, newSol.SelectedSolution.GetType, CurrentApplicationViewModel.CurrentPluginManager)
-                CurrentApplicationViewModel.ShowLoading(CurrentApplicationViewModel.CurrentSolution.Initialize())
-                CurrentApplicationViewModel.ShowLoading(CurrentApplicationViewModel.CurrentSolution.LoadingTask)
+                Dim projectCreateTask = ProjectBase.CreateProject(Of Solution)(newSol.SelectedLocation, newSol.SelectedName, newSol.SelectedSolution.GetType, CurrentApplicationViewModel.CurrentPluginManager)
+                CurrentApplicationViewModel.ShowLoading(projectCreateTask)
+                CurrentApplicationViewModel.CurrentSolution = Await projectCreateTask
             End If
         End Sub
 
