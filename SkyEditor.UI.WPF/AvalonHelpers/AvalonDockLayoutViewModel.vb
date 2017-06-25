@@ -5,7 +5,6 @@ Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
-Imports SkyEditor.Core.Windows
 Imports SkyEditor.UI.WPF.AvalonHelpers
 Imports Xceed.Wpf.AvalonDock
 Imports Xceed.Wpf.AvalonDock.Layout.Serialization

@@ -1,6 +1,5 @@
 ﻿Imports System.Reflection
 Imports SkyEditor.Core
-Imports SkyEditor.Core.CoreMods
 Imports SkyEditor.Core.UI
 Imports SkyEditor.UI.WPF.KeyShortcuts
 Imports SkyEditor.UI.WPF.MenuActions
@@ -11,7 +10,7 @@ Imports SkyEditor.UI.WPF.ViewModels
 Imports SkyEditor.UI.WPF.Views
 
 Public Class WPFCoreSkyEditorPlugin
-    Inherits WindowsCoreSkyEditorPlugin
+    Inherits CoreSkyEditorPlugin
 
     ''' <summary>
     ''' Creates a new instance of <see cref="WPFCoreSkyEditorPlugin"/>

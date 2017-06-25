@@ -4,11 +4,21 @@ Imports System.Windows.Controls
 Imports System.Windows.Forms
 Imports SkyEditor.Core.Extensions
 Imports SkyEditor.Core.Utilities
-Imports SkyEditor.Core.Windows
 
 Namespace ObjectControls
     Public Class ExtensionManager
         Inherits ObjectControl
+
+        Public Sub New(mainWindow As MainWindow3)
+
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            ' Add any initialization after the InitializeComponent() call.
+            Me.MainWindow = mainWindow
+        End Sub
+
+        Private Property MainWindow As MainWindow3
 
         Private Function GetTVItem(Collection As IExtensionCollection) As TreeViewItem
             Dim item As New TreeViewItem
@@ -84,7 +94,7 @@ Namespace ObjectControls
                     Forms.MessageBox.Show(My.Resources.Language.ExtensionInstallSuccess)
                 Case ExtensionInstallResult.RestartRequired
                     If Forms.MessageBox.Show(My.Resources.Language.ExtensionInstallRestart, My.Resources.Language.MainTitle, MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                        RedistributionHelpers.RequestRestartProgram()
+                        MainWindow.RestartApplication()
                     End If
                 Case ExtensionInstallResult.InvalidFormat
                     Forms.MessageBox.Show(My.Resources.Language.ExtensionInstallInvalid, My.Resources.Language.MainTitle)
@@ -101,7 +111,7 @@ Namespace ObjectControls
                     Forms.MessageBox.Show(My.Resources.Language.ExtensionUninstallSuccess)
                 Case ExtensionUninstallResult.RestartRequired
                     If Forms.MessageBox.Show(My.Resources.Language.ExtensionUninstallRestart, My.Resources.Language.MainTitle, MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                        RedistributionHelpers.RequestRestartProgram()
+                        MainWindow.RestartApplication()
                     End If
                 Case Else
                     Forms.MessageBox.Show(My.Resources.Language.ExtensionUninstallUnknownFailure, My.Resources.Language.MainTitle)

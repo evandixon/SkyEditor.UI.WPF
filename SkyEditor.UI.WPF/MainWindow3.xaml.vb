@@ -22,8 +22,6 @@ Public Class MainWindow3
             versionAssembly = Assembly.GetExecutingAssembly
         End If
         Me.Title = String.Format(CultureInfo.InvariantCulture, My.Resources.Language.FormattedTitle, My.Resources.Language.VersionPrefix, versionAssembly.GetName.Version.ToString)
-
-        AddHandler RedistributionHelpers.ApplicationRestartRequested, AddressOf OnRestartRequested
     End Sub
 
 #Region "Properties"
@@ -131,7 +129,7 @@ Public Class MainWindow3
         End With
     End Sub
 
-    Private Sub OnRestartRequested(sender As Object, e As EventArgs)
+    Public Sub RestartApplication()
         RestartOnExit = True
         Me.Close()
     End Sub
