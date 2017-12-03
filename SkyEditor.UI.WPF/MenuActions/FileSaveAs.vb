@@ -15,7 +15,7 @@ Namespace MenuActions
 
         Public Overrides Async Sub DoAction(targets As IEnumerable(Of Object))
             For Each item As FileViewModel In targets
-                Dim s = CurrentApplicationViewModel.GetSaveFileDialog(item)
+                Dim s = CurrentApplicationViewModel.GetSaveFileDialog(item, False)
                 If s.ShowDialog = DialogResult.OK Then
                     Await item.Save(s.FileName, CurrentApplicationViewModel.CurrentPluginManager)
                 End If

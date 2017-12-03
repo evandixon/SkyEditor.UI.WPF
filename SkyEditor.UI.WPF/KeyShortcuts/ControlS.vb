@@ -16,7 +16,7 @@ Namespace KeyShortcuts
             If file.CanSave(manager) Then
                 Await file.Save(manager)
             ElseIf file.CanSaveAs(manager) Then
-                Dim s = CurrentApplicationViewModel.GetSaveFileDialog(file)
+                Dim s = CurrentApplicationViewModel.GetSaveFileDialog(file, False)
 
                 If s.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                     Await file.Save(s.FileName, manager)

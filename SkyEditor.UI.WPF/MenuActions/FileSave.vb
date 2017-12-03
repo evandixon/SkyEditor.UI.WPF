@@ -23,7 +23,7 @@ Namespace MenuActions
                 If item.CanSave(CurrentPluginManager) Then
                     Await item.Save(CurrentPluginManager)
                 ElseIf item.CanSaveAs(CurrentPluginManager) Then
-                    Dim s = CurrentApplicationViewModel.GetSaveFileDialog(item)
+                    Dim s = CurrentApplicationViewModel.GetSaveFileDialog(item, False)
                     If s.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                         Await item.Save(s.FileName, CurrentPluginManager)
                     End If

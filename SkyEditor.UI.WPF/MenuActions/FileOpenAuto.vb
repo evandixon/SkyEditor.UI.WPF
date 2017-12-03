@@ -14,7 +14,7 @@ Namespace MenuActions
         End Sub
 
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
-            Dim o = CurrentApplicationViewModel.GetOpenFileDialog
+            Dim o = CurrentApplicationViewModel.GetOpenFileDialog(True)
             If o.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                 If o.FileName.ToLower.EndsWith(".skysln") Then
                     Dim openProjectTask = ProjectBase.OpenProjectFile(Of Solution)(o.FileName, CurrentApplicationViewModel.CurrentPluginManager)

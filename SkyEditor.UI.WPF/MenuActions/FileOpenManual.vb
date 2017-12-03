@@ -15,7 +15,7 @@ Namespace MenuActions
             SortOrder = 1.22
         End Sub
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
-            Dim o = CurrentApplicationViewModel.GetOpenFileDialog
+            Dim o = CurrentApplicationViewModel.GetOpenFileDialog(False)
             If o.ShowDialog = DialogResult.OK Then
                 Dim w As New FileTypeSelector()
                 Dim games As New Dictionary(Of String, TypeInfo)
