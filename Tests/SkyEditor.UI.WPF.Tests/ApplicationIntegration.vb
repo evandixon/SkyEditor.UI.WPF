@@ -5,7 +5,8 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
     <TestMethod()> Public Sub TestOpenClose()
         'Ensure no exceptions are thrown when opening then closing
-        Dim window = StartupHelpers.RunWPFStartupSequence().Result
+        Dim window = StartupHelpers.GetMainWindow().Result
+        window.Show()
         window.Close()
     End Sub
 
