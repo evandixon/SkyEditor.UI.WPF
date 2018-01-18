@@ -10,7 +10,7 @@ Public Class StartupHelpers
         Return Await GetMainWindow(New WPFCoreSkyEditorPlugin)
     End Function
 
-    Public Shared Async Function GetMainWindow(CoreMod As CoreSkyEditorPlugin) As Task(Of MainWindow3)
+    Public Shared Async Function GetMainWindow(coreMod As CoreSkyEditorPlugin) As Task(Of MainWindow3)
         Dim args = Environment.GetCommandLineArgs()
 
         'Set the current culture if in the command-line args
@@ -24,7 +24,7 @@ Public Class StartupHelpers
         End If
 
         Dim manager As New PluginManager
-        Await manager.LoadCore(CoreMod)
+        Await manager.LoadCore(coreMod)
 
         Dim appViewModel As New WPFApplicationViewModel(manager)
 
@@ -35,6 +35,10 @@ Public Class StartupHelpers
     End Function
 
     Public Shared Async Function ShowMainWindow() As Task
+        Await ShowMainWindow(New WPFCoreSkyEditorPlugin)
+    End Function
+
+    Public Shared Async Function ShowMainWindow(coreMod As CoreSkyEditorPlugin) As Task
         Try
             Dim mainWindow = Await GetMainWindow()
             mainWindow.ShowDialog()
