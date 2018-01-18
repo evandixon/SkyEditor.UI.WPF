@@ -3,10 +3,14 @@ Imports System.Windows.Forms
 
 Public Class ErrorWindow
 
+    Public Shared Function ShowErrorDialog(ex As Exception, allowContinue As Boolean) As DialogResult
+        Return ShowErrorDialog(Nothing, ex, allowContinue)
+    End Function
+
     Public Shared Function ShowErrorDialog(friendlyMessage As String, ex As Exception, allowContinue As Boolean) As DialogResult
         Dim dialog As New ErrorWindow
         dialog.ShowContinue = allowContinue
-        dialog.Message = friendlyMessage
+        dialog.Message = If(friendlyMessage, "")
         dialog.ContainedException = ex
 
         Dim result = dialog.ShowDialog()

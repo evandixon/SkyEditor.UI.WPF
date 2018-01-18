@@ -6,49 +6,56 @@ Imports SkyEditor.Core.Utilities
 
 Public Class StartupHelpers
 
-    '''' <summary>
-    '''' Starts the console core.
-    '''' Will shut down the current application when complete.
-    '''' </summary>
-    'Public Shared Async Function StartConsole() As Task
-    '    Dim manager As New PluginManager
-    '    Await manager.LoadCore(New ConsoleCoreMod)
-
-    '    PluginHelper.ShowConsole()
-    '    Await ConsoleHelper.RunConsole(manager)
-
-    '    Application.Current.Shutdown()
-    'End Function
-    Public Shared Async Function RunWPFStartupSequence() As Task(Of MainWindow3)
-        Return Await RunWPFStartupSequence(New WPFCoreSkyEditorPlugin)
+    Public Shared Async Function GetMainWindow() As Task(Of MainWindow3)
+        Return Await GetMainWindow(New WPFCoreSkyEditorPlugin)
     End Function
 
-    Public Shared Async Function RunWPFStartupSequence(CoreMod As CoreSkyEditorPlugin) As Task(Of MainWindow3)
+    Public Shared Async Function GetMainWindow(CoreMod As CoreSkyEditorPlugin) As Task(Of MainWindow3)
+        Dim args = Environment.GetCommandLineArgs()
 
-        'Run the program
-        Dim args As New List(Of String)
-        args.AddRange(Environment.GetCommandLineArgs())
+        'Set the current culture if in the command-line args
         If args.Contains("-culture") Then
-            Dim index = args.IndexOf("-culture")
+            Dim index = Array.IndexOf(args, "-culture")
             If args.Count > index + 1 Then
                 Dim culture = args(index + 1)
                 Thread.CurrentThread.CurrentCulture = New Globalization.CultureInfo(culture)
                 Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo(culture)
             End If
         End If
-        'If args.Contains("-console") Then
-        '    Await StartupHelpers.StartConsole()
-        'Else
+
         Dim manager As New PluginManager
         Await manager.LoadCore(CoreMod)
+
         Dim appViewModel As New WPFApplicationViewModel(manager)
-        Dim m As New MainWindow3 'UI.MainWindow(manager)
+
+        Dim m As New MainWindow3
         m.CurrentApplicationViewModel = appViewModel
-        m.Show()
+
         Return m
     End Function
 
-    Public Shared Sub RunExitSequence()
+    Public Shared Async Function ShowMainWindow() As Task
+        Try
+            Dim mainWindow = Await GetMainWindow()
+            mainWindow.ShowDialog()
+            Cleanup()
+        Catch originalException As Exception
+            Try
+                ErrorWindow.ShowErrorDialog(originalException, False)
+            Catch secondaryException As Exception
+                'Something went really bad, and we can't tell the user.
+                'Let's save the error message to the current working directory so this isn't just a mystery crash
+
+                Dim errorMessage = "A fatal exception occurred and the details could not be displayed." & vbCrLf &
+                                   "Original exception: " & originalException.ToString() & vbCrLf &
+                                   "Reporting exception: " & secondaryException.ToString() & vbCrLf
+
+                File.WriteAllText("Error-" & DateTime.Now.ToString("YYYY-MM-DD-hh-mm-ss") & ".txt", errorMessage)
+            End Try
+        End Try
+    End Function
+
+    Public Shared Sub Cleanup()
         'Delete .tmp files
         For Each item In Directory.GetFiles(EnvironmentPaths.GetRootResourceDirectory, "*.tmp", SearchOption.AllDirectories)
             Try
@@ -83,7 +90,7 @@ Public Class StartupHelpers
     'Handle the UI exceptions by showing a dialog box, and asking the user whether or not they wish to abort execution.
     Private Shared Sub UIThreadException(sender As Object, t As ThreadExceptionEventArgs)
         Try
-            ErrorWindow.ShowErrorDialog("", t.Exception, True)
+            ErrorWindow.ShowErrorDialog(t.Exception, True)
         Catch ex As Exception
             MessageBox.Show(String.Format(My.Resources.Language.ErrorHandling_FatalError, t.Exception.ToString))
         End Try
@@ -95,7 +102,7 @@ Public Class StartupHelpers
     'log the event, and inform the user about it. 
     Private Shared Sub CurrentDomain_UnhandledException(sender As Object, e As UnhandledExceptionEventArgs)
         Try
-            ErrorWindow.ShowErrorDialog("", DirectCast(e.ExceptionObject, Exception), True)
+            ErrorWindow.ShowErrorDialog(DirectCast(e.ExceptionObject, Exception), True)
         Catch ex As Exception
             MessageBox.Show(String.Format(My.Resources.Language.ErrorHandling_FatalError, e.ExceptionObject.ToString))
         End Try
