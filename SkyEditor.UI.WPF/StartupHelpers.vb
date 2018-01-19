@@ -40,7 +40,7 @@ Public Class StartupHelpers
 
     Public Shared Async Function ShowMainWindow(coreMod As CoreSkyEditorPlugin) As Task
         Try
-            Dim mainWindow = Await GetMainWindow()
+            Dim mainWindow = Await GetMainWindow(coreMod)
             mainWindow.ShowDialog()
             Cleanup()
         Catch originalException As Exception
