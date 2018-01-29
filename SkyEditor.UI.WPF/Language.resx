@@ -494,4 +494,19 @@ The application must now close.  Please report this error.</value>
   <data name="Menu_FileOpenAuto_SolutionOpenFailed" xml:space="preserve">
     <value>Failed to open the solution file. Either the file is corrupt or a plugin is missing.</value>
   </data>
+  <data name="Wizard_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Wizard_DefaultTitle" xml:space="preserve">
+    <value>Wizard</value>
+  </data>
+  <data name="Wizard_Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="Wizard_Next" xml:space="preserve">
+    <value>Next &gt;</value>
+  </data>
+  <data name="Wizard_Previous" xml:space="preserve">
+    <value>&lt; Back</value>
+  </data>
 </root>

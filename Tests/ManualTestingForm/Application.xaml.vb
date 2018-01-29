@@ -7,7 +7,6 @@ Class Application
 
     Private Async Sub Application_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
         StartupHelpers.EnableErrorDialog()
-        Await StartupHelpers.ShowMainWindow()
+        Await StartupHelpers.ShowMainWindow(New CorePlugin)
     End Sub
-
 End Class

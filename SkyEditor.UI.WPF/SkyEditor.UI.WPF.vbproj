@@ -52,7 +52,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SkyEditor.Core, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI174\lib\net462\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI177\lib\net462\SkyEditor.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -263,6 +263,9 @@
     <Compile Include="Views\TextFileView.xaml.vb">
       <DependentUpon>TextFileView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WizardForm.xaml.vb">
+      <DependentUpon>WizardForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPFCoreSkyEditorPlugin.vb" />
     <Compile Include="WPFApplicationViewModel.vb" />
     <Compile Include="WPFUiHelper.vb" />
@@ -373,6 +376,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TextFileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WizardForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1160,6 +1160,51 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Cancel.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_Cancel() As String
+            Get
+                Return ResourceManager.GetString("Wizard_Cancel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Wizard.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_DefaultTitle() As String
+            Get
+                Return ResourceManager.GetString("Wizard_DefaultTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Finish.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_Finish() As String
+            Get
+                Return ResourceManager.GetString("Wizard_Finish", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Next &gt;.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_Next() As String
+            Get
+                Return ResourceManager.GetString("Wizard_Next", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt; Back.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_Previous() As String
+            Get
+                Return ResourceManager.GetString("Wizard_Previous", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Zip Files.
         '''</summary>
         Public Shared ReadOnly Property ZipFiles() As String
