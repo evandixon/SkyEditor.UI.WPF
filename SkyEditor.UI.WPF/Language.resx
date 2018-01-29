@@ -491,4 +491,7 @@ The application must now close.  Please report this error.</value>
   <data name="Settings_SetFont" xml:space="preserve">
     <value>Set Font</value>
   </data>
+  <data name="Menu_FileOpenAuto_SolutionOpenFailed" xml:space="preserve">
+    <value>Failed to open the solution file. Either the file is corrupt or a plugin is missing.</value>
+  </data>
 </root>
