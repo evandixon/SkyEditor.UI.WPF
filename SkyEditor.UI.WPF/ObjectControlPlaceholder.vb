@@ -42,6 +42,11 @@ Public Class ObjectControlPlaceholder
         End If
     End Sub
 
+    Private Sub ObjectControlPlaceholder_Unloaded(sender As Object, e As RoutedEventArgs) Handles Me.Unloaded
+        ClearEventHandlers()
+        _object = Nothing
+    End Sub
+
     ''' <summary>
     ''' Whether or not to enable tabs.
     ''' When true, multiple object controls will be used
@@ -70,12 +75,7 @@ Public Class ObjectControlPlaceholder
             If CurrentApplicationViewModel Is Nothing Then
                 _pendingObject = value
             Else
-                If _object IsNot Nothing AndAlso TypeOf _object Is FileViewModel Then
-                    RemoveHandler DirectCast(_object, FileViewModel).PropertyChanged, AddressOf ObjectToEditFVM_Changed
-                End If
-                If _object IsNot Nothing AndAlso TypeOf _object Is INotifyModified Then
-                    RemoveHandler DirectCast(_object, INotifyModified).Modified, AddressOf OnModified
-                End If
+                ClearEventHandlers()
 
                 _object = value
 
@@ -163,6 +163,15 @@ Public Class ObjectControlPlaceholder
         'End If
     End Sub
 
+    Private Sub ClearEventHandlers()
+        If _object IsNot Nothing AndAlso TypeOf _object Is FileViewModel Then
+            RemoveHandler DirectCast(_object, FileViewModel).PropertyChanged, AddressOf ObjectToEditFVM_Changed
+        End If
+        If _object IsNot Nothing AndAlso TypeOf _object Is INotifyModified Then
+            RemoveHandler DirectCast(_object, INotifyModified).Modified, AddressOf OnModified
+        End If
+    End Sub
+
     Private Sub OnModified(sender As Object, e As EventArgs)
         RaiseEvent Modified(sender, e)
     End Sub
@@ -174,14 +183,11 @@ Public Class ObjectControlPlaceholder
     Protected Overridable Sub Dispose(disposing As Boolean)
         If Not disposedValue Then
             If disposing Then
-                ' TODO: dispose managed state (managed objects).
+                ClearEventHandlers()
                 If _object IsNot Nothing AndAlso TypeOf _object Is IDisposable Then
                     DirectCast(_object, IDisposable).Dispose()
                 End If
             End If
-
-            ' TODO: free unmanaged resources (unmanaged objects) and override Finalize() below.
-            ' TODO: set large fields to null.
         End If
         disposedValue = True
     End Sub
@@ -200,6 +206,7 @@ Public Class ObjectControlPlaceholder
         ' TODO: uncomment the following line if Finalize() is overridden above.
         ' GC.SuppressFinalize(Me)
     End Sub
+
 #End Region
 
 End Class
