@@ -20,8 +20,19 @@ Namespace MenuActions
 
                 Dim solution = Await solutionCreateTask
                 CurrentApplicationViewModel.CurrentSolution = solution
-                CurrentApplicationViewModel.ShowLoading(solution.Initialize())
+
+                Dim initTask = solution.Initialize()
+                CurrentApplicationViewModel.ShowLoading(initTask)
                 CurrentApplicationViewModel.ShowLoading(solution.LoadingTask)
+
+                Await initTask
+                Await solution.LoadingTask
+
+                If solution.RequiresInitializationWizard Then
+                    Dim w As New WizardForm(solution.InitializationWizard, CurrentApplicationViewModel)
+                    w.ShowDialog()
+                    'To-do: do something if dialog result is not true
+                End If
             End If
         End Sub
 
