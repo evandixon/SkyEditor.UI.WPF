@@ -10,7 +10,7 @@ Public Class AddingWizardTestMenuItem
     End Sub
 
     Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
-        Dim wizardForm As New WizardForm(New AddingWizard(CurrentApplicationViewModel), CurrentApplicationViewModel)
+        Dim wizardForm As New WizardForm(New AddingWizard(CurrentApplicationViewModel.CurrentPluginManager), CurrentApplicationViewModel)
         wizardForm.ShowDialog()
     End Sub
 End Class

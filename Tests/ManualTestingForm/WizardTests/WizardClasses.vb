@@ -7,8 +7,8 @@ Public Class AddingWizard
     Inherits Wizard
     Implements INamed
 
-    Public Sub New(ByVal applicationViewModel As ApplicationViewModel)
-        MyBase.New(applicationViewModel)
+    Public Sub New(ByVal currentPluginManager As PluginManager)
+        MyBase.New(currentPluginManager)
 
         Term1Step = New AddingWizardTerm1()
         Term2Step = New AddingWizardTerm2()

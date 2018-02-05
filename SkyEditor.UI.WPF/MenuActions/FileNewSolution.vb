@@ -29,15 +29,18 @@ Namespace MenuActions
                 Await solution.LoadingTask
 
                 If solution.RequiresInitializationWizard Then
-                    Dim w As New WizardForm(solution.InitializationWizard, CurrentApplicationViewModel)
-                    w.ShowDialog()
+                    Dim wizard = solution.GetInitializationWizard
+                    Dim wizardForm As New WizardForm(wizard, CurrentApplicationViewModel)
+                    wizardForm.ShowDialog()
                     'To-do: do something if dialog result is not true
                 End If
             End If
         End Sub
 
         Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentApplicationViewModelChanged
-            Me.AlwaysVisible = CurrentApplicationViewModel IsNot Nothing AndAlso (CurrentApplicationViewModel.CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode)
+            Me.AlwaysVisible = CurrentApplicationViewModel IsNot Nothing AndAlso
+                (CurrentApplicationViewModel.CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse
+                CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode)
         End Sub
     End Class
 End Namespace
