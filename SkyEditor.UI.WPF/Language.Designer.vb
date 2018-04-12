@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Public Class Language
@@ -504,6 +504,15 @@ Namespace My.Resources
         Public Shared ReadOnly Property MainWindowCloseConfirmation() As String
             Get
                 Return ResourceManager.GetString("MainWindowCloseConfirmation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Failed to open the solution file. Either the file is corrupt or a plugin is missing..
+        '''</summary>
+        Public Shared ReadOnly Property Menu_FileOpenAuto_SolutionOpenFailed() As String
+            Get
+                Return ResourceManager.GetString("Menu_FileOpenAuto_SolutionOpenFailed", resourceCulture)
             End Get
         End Property
         
@@ -1147,6 +1156,51 @@ Namespace My.Resources
         Public Shared ReadOnly Property WelcomeMessage() As String
             Get
                 Return ResourceManager.GetString("WelcomeMessage", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Cancel.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_Cancel() As String
+            Get
+                Return ResourceManager.GetString("Wizard_Cancel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Wizard.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_DefaultTitle() As String
+            Get
+                Return ResourceManager.GetString("Wizard_DefaultTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Finish.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_Finish() As String
+            Get
+                Return ResourceManager.GetString("Wizard_Finish", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Next &gt;.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_Next() As String
+            Get
+                Return ResourceManager.GetString("Wizard_Next", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt; Back.
+        '''</summary>
+        Public Shared ReadOnly Property Wizard_Previous() As String
+            Get
+                Return ResourceManager.GetString("Wizard_Previous", resourceCulture)
             End Get
         End Property
         

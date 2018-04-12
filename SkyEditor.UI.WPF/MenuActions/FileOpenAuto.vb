@@ -2,6 +2,7 @@
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Settings
+Imports System.Windows
 
 Namespace MenuActions
     Public Class FileOpenAuto
@@ -17,9 +18,15 @@ Namespace MenuActions
             Dim o = CurrentApplicationViewModel.GetOpenFileDialog(True)
             If o.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                 If o.FileName.ToLower.EndsWith(".skysln") Then
-                    Dim openProjectTask = ProjectBase.OpenProjectFile(Of Solution)(o.FileName, CurrentApplicationViewModel.CurrentPluginManager)
+                    Dim openProjectTask = ProjectBase.OpenProjectFile(o.FileName, CurrentApplicationViewModel.CurrentPluginManager)
                     CurrentApplicationViewModel.ShowLoading(openProjectTask)
-                    CurrentApplicationViewModel.CurrentSolution = Await openProjectTask
+
+                    Dim solution = Await openProjectTask
+                    If TypeOf solution Is Solution Then
+                        CurrentApplicationViewModel.CurrentSolution = solution
+                    Else
+                        MessageBox.Show(My.Resources.Language.Menu_FileOpenAuto_SolutionOpenFailed)
+                    End If
                 Else
                     Await CurrentApplicationViewModel.OpenFile(o.FileName, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
                 End If

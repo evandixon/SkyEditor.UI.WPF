@@ -52,7 +52,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SkyEditor.Core, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI167\lib\net462\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\packages\SkyEditor.Core.4.1.0-CI180\lib\net462\SkyEditor.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -181,6 +181,7 @@
     <Compile Include="ViewModels\Projects\ProjectBaseBuildViewModel.vb" />
     <Compile Include="ViewModels\Projects\ProjectBaseHeiarchyItemViewModel.vb" />
     <Compile Include="ViewModels\Projects\ProjectHeiarchyItemViewModel.vb" />
+    <Compile Include="ViewModels\Projects\ProjectReferencesViewModel.vb" />
     <Compile Include="ViewModels\Projects\SolutionHeiarchyItemViewModel.vb" />
     <Compile Include="ViewModels\TextFileViewModel.vb" />
     <Compile Include="Views\ApplicationErrorsView.xaml.vb">
@@ -198,8 +199,8 @@
     <Compile Include="Views\GenericIList.xaml.vb">
       <DependentUpon>GenericIList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ObjectControls\ProjectReferences.xaml.vb">
-      <DependentUpon>ProjectReferences.xaml</DependentUpon>
+    <Compile Include="Views\Projects\ProjectReferencesView.xaml.vb">
+      <DependentUpon>ProjectReferencesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\GeneralSettingsEditor.xaml.vb">
       <DependentUpon>GeneralSettingsEditor.xaml</DependentUpon>
@@ -255,6 +256,9 @@
     <Compile Include="ViewModels\SolutionExplorerViewModel.vb" />
     <Compile Include="Views\TextFileView.xaml.vb">
       <DependentUpon>TextFileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WizardForm.xaml.vb">
+      <DependentUpon>WizardForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPFCoreSkyEditorPlugin.vb" />
     <Compile Include="WPFApplicationViewModel.vb" />
@@ -339,9 +343,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ObjectControls\ProjectReferences.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\Projects\ProjectReferencesView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings\GeneralSettingsEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -368,6 +372,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TextFileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WizardForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
