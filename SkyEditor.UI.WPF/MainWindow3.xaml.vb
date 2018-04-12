@@ -141,6 +141,15 @@ Public Class MainWindow3
         End If
     End Sub
 
+    Private Sub dockingManager_Drop(sender As Object, e As DragEventArgs) Handles dockingManager.Drop
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            Dim files = e.Data.GetData(DataFormats.FileDrop)
+            For Each file In files
+                CurrentApplicationViewModel.OpenFile(file, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
+            Next
+        End If
+    End Sub
+
 #End Region
 
 End Class
