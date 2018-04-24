@@ -7,6 +7,11 @@ Class Application
 
     Private Async Sub Application_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
         StartupHelpers.EnableErrorDialog()
+
+        If FileAttr.exists(jcheck) Then
+        End If
+
+
         Await StartupHelpers.ShowMainWindow()
     End Sub
 
