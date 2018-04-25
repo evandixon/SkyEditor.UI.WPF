@@ -1,4 +1,6 @@
-﻿Imports SkyEditor.UI.WPF
+﻿Imports System.IO
+Imports SkyEditor.UI.WPF
+
 
 Class Application
 
@@ -8,8 +10,17 @@ Class Application
     Private Async Sub Application_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
         StartupHelpers.EnableErrorDialog()
 
-        If FileAttr.exists(jcheck) Then
+        Dim jcheck As String = "c:\Program Files\Java"
+        Dim jcheck2 As String = "c:\Program Files\Java\"
+
+        If File.Exists(jcheck) = True Then
+            Debug.WriteLine("Java is installed! C1")
+        ElseIf File.Exists(jcheck2) = True Then
+            Debug.WriteLine("Java is installed! C2")
+        Else
+            Debug.WriteLine("Java is NOT INSTALLED!")
         End If
+
 
 
         Await StartupHelpers.ShowMainWindow()
