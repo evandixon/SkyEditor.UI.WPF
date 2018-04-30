@@ -10,13 +10,9 @@ Class Application
     Private Async Sub Application_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
         StartupHelpers.EnableErrorDialog()
 
-        Dim jcheck As String = "c:\Program Files\Java"
-        Dim jcheck2 As String = "c:\Program Files\Java\"
-
-        If File.Exists(jcheck) = True Then
-            Debug.WriteLine("Java is installed! C1")
-        ElseIf File.Exists(jcheck2) = True Then
-            Debug.WriteLine("Java is installed! C2")
+        'Checks if Java is installed'
+        If File.Exists("C:\Program Files (x86)\Common Files\Oracle\Java\javapath\java.exe") Then
+            Debug.WriteLine("Java is installed!")
         Else
             Debug.WriteLine("Java is NOT INSTALLED!")
         End If
