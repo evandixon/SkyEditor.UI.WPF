@@ -56,7 +56,7 @@
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SkyEditor.Core, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkyEditor.Core.4.1.0-CI180\lib\net462\SkyEditor.Core.dll</HintPath>
+      <HintPath>..\..\packages\SkyEditor.Core.4.1.0-CI185\lib\net462\SkyEditor.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
@@ -137,6 +137,15 @@
     </Compile>
     <Compile Include="CorePlugin.vb" />
     <Compile Include="WizardTests\AddingSolution.vb" />
+    <Compile Include="WizardTests\AddingWizardResultView.xaml.vb">
+      <DependentUpon>AddingWizardResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WizardTests\AddingWizardTerm2View.xaml.vb">
+      <DependentUpon>AddingWizardTerm2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WizardTests\AddingWizardTerm1View.xaml.vb">
+      <DependentUpon>AddingWizardTerm1View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WizardTests\AddingWizardTestMenuItem.vb" />
     <Compile Include="WizardTests\WizardClasses.vb" />
   </ItemGroup>
@@ -196,6 +205,20 @@
       <Project>{00afce08-71b5-4bf9-9155-c017f8151419}</Project>
       <Name>SkyEditor.UI.WPF</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="WizardTests\AddingWizardResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WizardTests\AddingWizardTerm2View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WizardTests\AddingWizardTerm1View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
