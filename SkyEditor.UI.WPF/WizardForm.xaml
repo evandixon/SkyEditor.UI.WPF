@@ -17,10 +17,10 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Content="{Binding CurrentStepDisplayName}" />
-        <local:ObjectControlPlaceholder x:Name="ContentPlaceholder" Grid.Row="2" ObjectToEdit="{Binding CurrentStep}" EnableTabs="True" />
-        <Button x:Name="btnPrevious" Content="{x:Static res:Language.Wizard_Previous}" HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnNext" Content="{x:Static res:Language.Wizard_Next}" HorizontalAlignment="Left" Margin="90,3,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnFinish" Content="{x:Static res:Language.Wizard_Finish}" HorizontalAlignment="Right" Margin="0,3,10,0" Grid.Row="4" VerticalAlignment="Top" Width="75"/>
+        <local:ObjectControlPlaceholder x:Name="ContentPlaceholder" x:FieldModifier="public" Grid.Row="2" ObjectToEdit="{Binding CurrentStep}" EnableTabs="True" />
+        <Button x:Name="btnPrevious" x:FieldModifier="public" Content="{x:Static res:Language.Wizard_Previous}" HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnNext" x:FieldModifier="public" Content="{x:Static res:Language.Wizard_Next}" HorizontalAlignment="Left" Margin="90,3,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnFinish" x:FieldModifier="public" Content="{x:Static res:Language.Wizard_Finish}" HorizontalAlignment="Right" Margin="0,3,10,0" Grid.Row="4" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

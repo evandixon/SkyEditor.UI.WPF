@@ -12,7 +12,7 @@ Public Class AddingWizard
 
         Term1Step = New AddingWizardTerm1()
         Term2Step = New AddingWizardTerm2()
-        ResultStep = New AddingWizardResultView(Me)
+        ResultStep = New AddingWizardResult(Me)
         StepsInternal.Add(Term1Step)
         StepsInternal.Add(Term2Step)
         StepsInternal.Add(ResultStep)
@@ -22,7 +22,7 @@ Public Class AddingWizard
 
     Public Property Term2Step As AddingWizardTerm2
 
-    Public Property ResultStep As AddingWizardResultView
+    Public Property ResultStep As AddingWizardResult
 
     Public Overrides ReadOnly Property Name As String
         Get
@@ -75,7 +75,7 @@ Public Class AddingWizardTerm2
     End Function
 End Class
 
-Public Class AddingWizardResultView
+Public Class AddingWizardResult
     Implements IWizardStepViewModel
 
     Public Sub New(ByVal wizard As AddingWizard)
