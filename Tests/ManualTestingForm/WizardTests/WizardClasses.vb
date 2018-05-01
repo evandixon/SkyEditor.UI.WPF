@@ -1,4 +1,5 @@
-﻿Imports SkyEditor.Core
+﻿Imports System.ComponentModel
+Imports SkyEditor.Core
 Imports SkyEditor.Core.ConsoleCommands
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
@@ -33,6 +34,9 @@ End Class
 
 Public Class AddingWizardTerm1
     Implements IWizardStepViewModel
+    Implements INotifyPropertyChanged
+
+    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
     Public ReadOnly Property Name As String Implements INamed.Name
         Get
@@ -40,7 +44,17 @@ Public Class AddingWizardTerm1
         End Get
     End Property
 
-    Public Property Term1 As Integer? = 0
+    Public Property Term1 As Integer?
+        Get
+            Return _term1
+        End Get
+        Set(value As Integer?)
+            _term1 = value
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Term1)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsComplete)))
+        End Set
+    End Property
+    Private _term1 As Integer? = 0
 
     Public ReadOnly Property IsComplete As Boolean Implements IWizardStepViewModel.IsComplete
         Get
@@ -55,6 +69,9 @@ End Class
 
 Public Class AddingWizardTerm2
     Implements IWizardStepViewModel
+    Implements INotifyPropertyChanged
+
+    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
     Public ReadOnly Property Name As String Implements INamed.Name
         Get
@@ -63,6 +80,16 @@ Public Class AddingWizardTerm2
     End Property
 
     Public Property Term2 As Integer?
+        Get
+            Return _term2
+        End Get
+        Set(value As Integer?)
+            _term2 = value
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(Term2)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsComplete)))
+        End Set
+    End Property
+    Private _term2 As Integer?
 
     Public ReadOnly Property IsComplete As Boolean Implements IWizardStepViewModel.IsComplete
         Get
