@@ -1,0 +1,3 @@
+﻿Class AddingWizardResultView
+
+End Class
