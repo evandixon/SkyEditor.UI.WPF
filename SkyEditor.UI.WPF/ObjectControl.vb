@@ -4,7 +4,7 @@ Imports SkyEditor.Core
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
 
-<Obsolete("Will be deleted in the future.  Use DataBoundObjectControl instead.")> Public Class ObjectControl
+<Obsolete("Will be deleted in the future.  Use DataBoundObjectControl instead.")> Public MustInherit Class ObjectControl
     Inherits UserControl
     Implements IViewControl
 

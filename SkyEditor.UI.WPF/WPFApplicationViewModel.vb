@@ -10,9 +10,15 @@ Public Class WPFApplicationViewModel
         AvalonDockLayout = New AvalonDockLayoutViewModel(Me)
     End Sub
 
+    Public Event RestartRequested As EventHandler
+
     Public Property AvalonDockLayout As AvalonDockLayoutViewModel
 
     Protected Overrides Function CreateViewModel(model As Object) As FileViewModel
         Return New AvalonDockFileWrapper(model)
     End Function
+
+    Public Sub RequestRestart()
+        RaiseEvent RestartRequested(Me, New EventArgs())
+    End Sub
 End Class
