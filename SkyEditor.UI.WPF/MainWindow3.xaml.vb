@@ -136,6 +136,15 @@ Public Class MainWindow3
         End If
     End Sub
 
+    Private Sub dockingManager_Drop(sender As Object, e As DragEventArgs) Handles dockingManager.Drop
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            Dim files = e.Data.GetData(DataFormats.FileDrop)
+            For Each file In files
+                CurrentApplicationViewModel.OpenFile(file, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
+            Next
+        End If
+    End Sub
+
     Private Sub _currentApplicationViewModel_RestartRequested(sender As Object, e As EventArgs) Handles _currentApplicationViewModel.RestartRequested
         RestartOnExit = True
         Me.Close()

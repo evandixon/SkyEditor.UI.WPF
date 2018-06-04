@@ -34,7 +34,8 @@
                            AnchorablesSource="{Binding AnchorableViewModels}"
                            ActiveContent="{Binding ActiveViewModel, Mode=TwoWay}"
                            avalonHelpers:AvalonDockLayoutSerializer.LoadLayoutCommand="{Binding AvalonDockLayout.LoadLayoutCommand}"
-                           avalonHelpers:AvalonDockLayoutSerializer.SaveLayoutCommand="{Binding AvalonDockLayout.SaveLayoutCommand}">
+                           avalonHelpers:AvalonDockLayoutSerializer.SaveLayoutCommand="{Binding AvalonDockLayout.SaveLayoutCommand}"
+                           AllowDrop="True">
             <ad:DockingManager.LayoutItemTemplateSelector>
                 <avalonHelpers:PanesTemplateSelector>
                     <avalonHelpers:PanesTemplateSelector.DocumentTemplate>
