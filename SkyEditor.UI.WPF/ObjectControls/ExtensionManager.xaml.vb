@@ -7,18 +7,7 @@ Imports SkyEditor.Core.Utilities
 
 Namespace ObjectControls
     Public Class ExtensionManager
-        Inherits ObjectControl
-
-        Public Sub New(mainWindow As MainWindow3)
-
-            ' This call is required by the designer.
-            InitializeComponent()
-
-            ' Add any initialization after the InitializeComponent() call.
-            Me.MainWindow = mainWindow
-        End Sub
-
-        Private Property MainWindow As MainWindow3
+        Inherits DataBoundViewControl
 
         Private Function GetTVItem(Collection As IExtensionCollection) As TreeViewItem
             Dim item As New TreeViewItem
@@ -46,10 +35,6 @@ Namespace ObjectControls
                 lvExtensions.ItemsSource = Await DirectCast(tvCategories.SelectedItem.Tag, IExtensionCollection).GetExtensions(0, Integer.MaxValue, CurrentApplicationViewModel.CurrentPluginManager)
             End If
         End Sub
-
-        Public Overrides Function GetSupportedTypes() As IEnumerable(Of TypeInfo)
-            Return {GetType(ExtensionHelper)}
-        End Function
 
         Private Sub lvExtensions_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles lvExtensions.SelectionChanged
             If lvExtensions.SelectedItem IsNot Nothing Then
@@ -94,7 +79,7 @@ Namespace ObjectControls
                     Forms.MessageBox.Show(My.Resources.Language.ExtensionInstallSuccess)
                 Case ExtensionInstallResult.RestartRequired
                     If Forms.MessageBox.Show(My.Resources.Language.ExtensionInstallRestart, My.Resources.Language.MainTitle, MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                        MainWindow.RestartApplication()
+                        DirectCast(CurrentApplicationViewModel, WPFApplicationViewModel).RequestRestart()
                     End If
                 Case ExtensionInstallResult.InvalidFormat
                     Forms.MessageBox.Show(My.Resources.Language.ExtensionInstallInvalid, My.Resources.Language.MainTitle)
@@ -111,7 +96,7 @@ Namespace ObjectControls
                     Forms.MessageBox.Show(My.Resources.Language.ExtensionUninstallSuccess)
                 Case ExtensionUninstallResult.RestartRequired
                     If Forms.MessageBox.Show(My.Resources.Language.ExtensionUninstallRestart, My.Resources.Language.MainTitle, MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                        MainWindow.RestartApplication()
+                        DirectCast(CurrentApplicationViewModel, WPFApplicationViewModel).RequestRestart()
                     End If
                 Case Else
                     Forms.MessageBox.Show(My.Resources.Language.ExtensionUninstallUnknownFailure, My.Resources.Language.MainTitle)

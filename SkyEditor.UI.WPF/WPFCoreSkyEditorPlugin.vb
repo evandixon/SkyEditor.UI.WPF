@@ -54,6 +54,7 @@ Public Class WPFCoreSkyEditorPlugin
         manager.RegisterType(Of IViewControl, GenericIList)()
         manager.RegisterType(Of IViewControl, SolutionExplorer)()
         manager.RegisterType(Of IViewControl, SolutionBuildProgress)()
+        manager.RegisterType(Of IViewControl, ExtensionManager)()
 
         manager.RegisterType(Of ControlKeyAction, ControlS)()
 

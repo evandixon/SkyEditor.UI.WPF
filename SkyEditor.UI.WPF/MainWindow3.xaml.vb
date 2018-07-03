@@ -129,11 +129,6 @@ Public Class MainWindow3
         End With
     End Sub
 
-    Public Sub RestartApplication()
-        RestartOnExit = True
-        Me.Close()
-    End Sub
-
     Private Sub MainWindow3_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         If RestartOnExit Then
             Forms.Application.Restart()
@@ -148,6 +143,11 @@ Public Class MainWindow3
                 CurrentApplicationViewModel.OpenFile(file, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
             Next
         End If
+    End Sub
+
+    Private Sub _currentApplicationViewModel_RestartRequested(sender As Object, e As EventArgs) Handles _currentApplicationViewModel.RestartRequested
+        RestartOnExit = True
+        Me.Close()
     End Sub
 
 #End Region
