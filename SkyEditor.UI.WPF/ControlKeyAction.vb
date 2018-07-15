@@ -4,8 +4,6 @@
 ''' </summary>
 Public MustInherit Class ControlKeyAction
 
-    Public Property CurrentApplicationViewModel As WPFApplicationViewModel
-
     ''' <summary>
     ''' The combination of keys that must be pressed, in addition to Control, for the action to trigger
     ''' </summary>

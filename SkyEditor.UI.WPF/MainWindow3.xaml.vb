@@ -54,6 +54,9 @@ Public Class MainWindow3
     End Property
     Private WithEvents _currentApplicationViewModel As WPFApplicationViewModel
 
+    Public Property CurrentPluginManager As PluginManager
+
+
     ''' <summary>
     ''' If true, application will be restarted when the form is closed.
     ''' </summary>
@@ -71,8 +74,7 @@ Public Class MainWindow3
 
     Private Async Sub MainWindow3_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If My.Computer.Keyboard.CtrlKeyDown Then
-            For Each item In CurrentApplicationViewModel.CurrentPluginManager.GetRegisteredObjects(Of ControlKeyAction)
-                item.CurrentApplicationViewModel = CurrentApplicationViewModel
+            For Each item In CurrentPluginManager.GetRegisteredObjects(Of ControlKeyAction)
                 If item.Keys.All(Function(x) e.KeyboardDevice.IsKeyDown(x)) Then
                     Await item.DoAction
                 End If
@@ -81,7 +83,7 @@ Public Class MainWindow3
     End Sub
 
     Private Async Sub MainWindow3_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        With CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider
+        With CurrentPluginManager.CurrentSettingsProvider
             Dim height = .GetMainWindowHeight
             Dim width = .GetMainWindowWidth
             Dim isMax = .GetMainWindowIsMaximized
@@ -117,7 +119,7 @@ Public Class MainWindow3
         End If
 
         'Save the settings
-        With CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider
+        With CurrentPluginManager.CurrentSettingsProvider
             If Not Me.WindowState = WindowState.Maximized Then
                 'Setting width and height while maximized results in the window being the same size when restored
                 .SetMainWindowHeight(Me.Height)
@@ -125,7 +127,7 @@ Public Class MainWindow3
             End If
 
             .SetMainWindowIsMaximized(Me.WindowState = WindowState.Maximized)
-            .Save(CurrentApplicationViewModel.CurrentPluginManager.CurrentIOProvider)
+            .Save(CurrentPluginManager.CurrentIOProvider)
         End With
     End Sub
 

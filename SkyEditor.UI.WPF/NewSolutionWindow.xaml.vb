@@ -8,29 +8,18 @@ Imports SkyEditor.Core.Utilities
 
 Public Class NewSolutionWindow
     Implements IDisposable
-    Dim _appViewModel As ApplicationViewModel
-    Dim _folderBrowser As FolderBrowserDialog
-    Private Sub btnOk_Click(sender As Object, e As RoutedEventArgs) Handles btnOk.Click
-        _appViewModel.CurrentPluginManager.CurrentSettingsProvider.SetSetting("SkyEditor.Core.Solution.LastSolutionDirectory", txtLocation.Text)
-        _appViewModel.CurrentPluginManager.CurrentSettingsProvider.Save(_appViewModel.CurrentPluginManager.CurrentIOProvider)
-        DialogResult = True
-        Me.Close()
-    End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As RoutedEventArgs) Handles btnCancel.Click
-        DialogResult = False
-        Me.Close()
-    End Sub
-    Public Sub New(appViewModel As ApplicationViewModel)
+
+    Public Sub New(pluginManager As PluginManager)
         ' This call is required by the designer.
         InitializeComponent()
 
-        _appViewModel = appViewModel
         ' Add any initialization after the InitializeComponent() call.
         _folderBrowser = New FolderBrowserDialog
+        CurrentPluginManager = pluginManager
 
         Dim itemSource As New Dictionary(Of String, Object)
-        For Each item As Solution In _appViewModel.CurrentPluginManager.GetRegisteredObjects(GetType(Solution).GetTypeInfo)
+        For Each item As Solution In CurrentPluginManager.GetRegisteredObjects(GetType(Solution).GetTypeInfo)
             Dim t = item.GetType
             itemSource.Add(ReflectionHelpers.GetTypeFriendlyName(t), item)
         Next
@@ -38,17 +27,9 @@ Public Class NewSolutionWindow
         If ddType.Items.Count > 0 Then ddType.SelectedIndex = 0
     End Sub
 
-    Private Sub btnBrowse_Click(sender As Object, e As RoutedEventArgs) Handles btnBrowse.Click
-        If _folderBrowser.ShowDialog = Forms.DialogResult.OK Then
-            txtLocation.Text = _folderBrowser.SelectedPath
-        End If
-    End Sub
+    Dim _folderBrowser As FolderBrowserDialog
 
-    Private Sub NewProjectWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        If _appViewModel.CurrentPluginManager.CurrentSettingsProvider.GetSetting("SkyEditor.Core.Solution.LastSolutionDirectory") IsNot Nothing Then
-            txtLocation.Text = _appViewModel.CurrentPluginManager.CurrentSettingsProvider.GetSetting("SkyEditor.Core.Solution.LastSolutionDirectory")
-        End If
-    End Sub
+    Protected Property CurrentPluginManager As PluginManager
 
     Public Property SelectedName As String
         Get
@@ -76,6 +57,32 @@ Public Class NewSolutionWindow
             ddType.SelectedValue = value
         End Set
     End Property
+
+
+    Private Sub btnBrowse_Click(sender As Object, e As RoutedEventArgs) Handles btnBrowse.Click
+        If _folderBrowser.ShowDialog = Forms.DialogResult.OK Then
+            txtLocation.Text = _folderBrowser.SelectedPath
+        End If
+    End Sub
+
+    Private Sub NewProjectWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        If CurrentPluginManager.CurrentSettingsProvider.GetSetting("SkyEditor.Core.Solution.LastSolutionDirectory") IsNot Nothing Then
+            txtLocation.Text = CurrentPluginManager.CurrentSettingsProvider.GetSetting("SkyEditor.Core.Solution.LastSolutionDirectory")
+        End If
+    End Sub
+
+    Private Sub btnOk_Click(sender As Object, e As RoutedEventArgs) Handles btnOk.Click
+        CurrentPluginManager.CurrentSettingsProvider.SetSetting("SkyEditor.Core.Solution.LastSolutionDirectory", txtLocation.Text)
+        CurrentPluginManager.CurrentSettingsProvider.Save(CurrentPluginManager.CurrentIOProvider)
+        DialogResult = True
+        Me.Close()
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As RoutedEventArgs) Handles btnCancel.Click
+        DialogResult = False
+        Me.Close()
+    End Sub
+
 
 #Region "IDisposable Support"
     Private disposedValue As Boolean ' To detect redundant calls

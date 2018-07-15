@@ -7,7 +7,7 @@ Public Class WPFApplicationViewModel
 
     Public Sub New(manager As PluginManager)
         MyBase.New(manager)
-        AvalonDockLayout = New AvalonDockLayoutViewModel(Me)
+        AvalonDockLayout = New AvalonDockLayoutViewModel(Me, manager)
     End Sub
 
     Public Event RestartRequested As EventHandler

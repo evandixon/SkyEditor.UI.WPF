@@ -10,9 +10,9 @@ Namespace MenuActions.Context
     Public Class ProjectNodeOpenFile
         Inherits MenuAction
 
-        Public Shared Async Function OpenFile(target As ProjectHeiarchyItemViewModel, appViewModel As ApplicationViewModel) As Task
+        Public Shared Async Function OpenFile(target As ProjectHeiarchyItemViewModel, appViewModel As ApplicationViewModel, pluginManager As PluginManager) As Task
             If Not target.IsDirectory Then
-                Dim obj = Await target.GetFile(appViewModel.CurrentPluginManager, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
+                Dim obj = Await target.GetFile(pluginManager, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
                 If obj IsNot Nothing Then
                     appViewModel.OpenFile(obj, target.Project)
                 Else
@@ -24,11 +24,21 @@ Namespace MenuActions.Context
             End If
         End Function
 
+        Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
+            MyBase.New({My.Resources.Language.MenuFileOpen})
+            IsContextBased = True
 
+            CurrentApplicationViewModel = applicationViewModel
+            CurrentPluginManager = pluginManager
+        End Sub
+
+        Public Property CurrentApplicationViewModel As ApplicationViewModel
+
+        Public Property CurrentPluginManager As PluginManager
 
         Public Overrides Async Sub DoAction(targets As IEnumerable(Of Object))
             For Each item As ProjectHeiarchyItemViewModel In targets
-                Await OpenFile(item, CurrentApplicationViewModel)
+                Await OpenFile(item, CurrentApplicationViewModel, CurrentPluginManager)
             Next
         End Sub
 
@@ -40,10 +50,6 @@ Namespace MenuActions.Context
             Return Task.FromResult(TypeOf Obj Is ProjectHeiarchyItemViewModel AndAlso Not DirectCast(Obj, ProjectHeiarchyItemViewModel).IsDirectory)
         End Function
 
-        Public Sub New()
-            MyBase.New({My.Resources.Language.MenuFileOpen})
-            IsContextBased = True
-        End Sub
     End Class
 End Namespace
 

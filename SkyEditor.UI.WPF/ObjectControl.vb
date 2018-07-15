@@ -82,8 +82,6 @@ Imports SkyEditor.Core.Utilities
     End Property
     Dim _header As String
 
-    Public Property CurrentApplicationViewModel As ApplicationViewModel
-
     ''' <summary>
     ''' Returns the current EditingObject, after casting it to type T.
     ''' </summary>
@@ -113,10 +111,6 @@ Imports SkyEditor.Core.Utilities
         Else
             _editingObject = Value
         End If
-    End Sub
-
-    Public Sub SetApplicationViewModel(appViewModel As ApplicationViewModel) Implements IViewControl.SetApplicationViewModel
-        CurrentApplicationViewModel = appViewModel
     End Sub
 
     ''' <summary>

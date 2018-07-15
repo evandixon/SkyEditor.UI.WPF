@@ -1,9 +1,19 @@
 ﻿Imports System.Windows.Input
+Imports SkyEditor.Core
 Imports SkyEditor.Core.UI
 
 Namespace KeyShortcuts
     Public Class ControlS
         Inherits ControlKeyAction
+
+        Public Sub New(applicationViewModel As ApplicationViewModel, pluginManager As PluginManager)
+            CurrentApplicationViewModel = applicationViewModel
+            CurrentPluginManager = pluginManager
+        End Sub
+
+        Protected Property CurrentApplicationViewModel As ApplicationViewModel
+        Protected Property CurrentPluginManager As PluginManager
+
 
         Public Overrides ReadOnly Property Keys As Key()
             Get
@@ -12,14 +22,13 @@ Namespace KeyShortcuts
         End Property
 
         Private Async Function SaveFile(file As FileViewModel) As Task
-            Dim manager = CurrentApplicationViewModel.CurrentPluginManager
-            If file.CanSave(manager) Then
-                Await file.Save(manager)
-            ElseIf file.CanSaveAs(manager) Then
-                Dim s = CurrentApplicationViewModel.GetSaveFileDialog(file, False)
+            If file.CanSave(CurrentPluginManager) Then
+                Await file.Save(CurrentPluginManager)
+            ElseIf file.CanSaveAs(CurrentPluginManager) Then
+                Dim s = CurrentApplicationViewModel.GetSaveFileDialog(file, False, CurrentPluginManager)
 
                 If s.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                    Await file.Save(s.FileName, manager)
+                    Await file.Save(s.FileName, CurrentPluginManager)
                 End If
             End If
         End Function

@@ -1,21 +1,29 @@
 ﻿Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Settings
+Imports SkyEditor.Core
 
 Namespace MenuActions
     Public Class FileNewSolution
         Inherits MenuAction
 
-        Public Sub New()
+        Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileNew, My.Resources.Language.MenuFileNewSolution})
-            Me.AlwaysVisible = True
+            Me.AlwaysVisible = CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode
             SortOrder = 1.12
+
+            CurrentApplicationViewModel = applicationViewModel
+            CurrentPluginManager = pluginManager
         End Sub
 
+        Public Property CurrentApplicationViewModel As ApplicationViewModel
+
+        Public Property CurrentPluginManager As PluginManager
+
         Public Overrides Async Sub DoAction(Targets As IEnumerable(Of Object))
-            Dim newSol As New NewSolutionWindow(CurrentApplicationViewModel)
+            Dim newSol As New NewSolutionWindow(CurrentPluginManager)
             If newSol.ShowDialog Then
-                Dim solutionCreateTask = ProjectBase.CreateProject(Of Solution)(newSol.SelectedLocation, newSol.SelectedName, newSol.SelectedSolution.GetType, CurrentApplicationViewModel.CurrentPluginManager)
+                Dim solutionCreateTask = ProjectBase.CreateProject(Of Solution)(newSol.SelectedLocation, newSol.SelectedName, newSol.SelectedSolution.GetType, CurrentPluginManager)
                 CurrentApplicationViewModel.ShowLoading(solutionCreateTask)
 
                 Dim solution = Await solutionCreateTask
@@ -35,12 +43,6 @@ Namespace MenuActions
                     'To-do: do something if dialog result is not true
                 End If
             End If
-        End Sub
-
-        Private Sub FileNewSolution_CurrentPluginManagerChanged(sender As Object, e As EventArgs) Handles Me.CurrentApplicationViewModelChanged
-            Me.AlwaysVisible = CurrentApplicationViewModel IsNot Nothing AndAlso
-                (CurrentApplicationViewModel.CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse
-                CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode)
         End Sub
     End Class
 End Namespace

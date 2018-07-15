@@ -89,7 +89,7 @@ Public Class ObjectControlPlaceholder
                 If EnableTabs Then
                     'Tab control if applicable
                     If value IsNot Nothing Then
-                        Dim tabs = UIHelper.GetViewControlTabs(value, {GetType(UserControl)}, CurrentApplicationViewModel)
+                        Dim tabs = UIHelper.GetViewControlTabs(value, {GetType(UserControl)}, CurrentApplicationViewModel, CurrentApplicationViewModel.CurrentPluginManager)
                         Dim count = tabs.Count '- (From t In ucTabs Where t.GetSortOrder(value.GetType, True) < 0).Count
                         If count > 1 Then
                             Dim tabControl As New TabControl
@@ -114,7 +114,7 @@ Public Class ObjectControlPlaceholder
 
                 Else
                     'Always one control
-                    Dim objControl = UIHelper.GetViewControl(value, {GetType(UserControl)}, CurrentApplicationViewModel)
+                    Dim objControl = UIHelper.GetViewControl(value, {GetType(UserControl)}, CurrentApplicationViewModel, CurrentApplicationViewModel.CurrentPluginManager)
                     If objControl IsNot Nothing Then
                         Content = objControl
                     Else
@@ -133,16 +133,16 @@ Public Class ObjectControlPlaceholder
 
     Public Property CurrentApplicationViewModel As ApplicationViewModel
         Get
-            Return _currentPluginManager
+            Return _currentApplicationViewModel
         End Get
         Set(value As ApplicationViewModel)
-            _currentPluginManager = value
+            _currentApplicationViewModel = value
             If _pendingObject IsNot Nothing Then
                 ObjectToEdit = _pendingObject
             End If
         End Set
     End Property
-    Dim _currentPluginManager As ApplicationViewModel
+    Dim _currentApplicationViewModel As ApplicationViewModel
     Dim _pendingObject As Object
 
     Private Sub ObjectControlPlaceholder_DataContextChanged(sender As Object, e As DependencyPropertyChangedEventArgs) Handles Me.DataContextChanged

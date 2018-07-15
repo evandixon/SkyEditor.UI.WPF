@@ -1,5 +1,6 @@
 ﻿Imports System.Reflection
 Imports System.Windows.Forms
+Imports SkyEditor.Core
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.UI.WPF.ViewModels.Projects
@@ -7,6 +8,18 @@ Imports SkyEditor.UI.WPF.ViewModels.Projects
 Namespace MenuActions.Context
     Public Class SolutionAddExistingProject
         Inherits MenuAction
+
+        Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
+            MyBase.New({My.Resources.Language.MenuAddProject})
+            IsContextBased = True
+
+            CurrentApplicationViewModel = applicationViewModel
+            CurrentPluginManager = pluginManager
+        End Sub
+
+        Public Property CurrentApplicationViewModel As ApplicationViewModel
+
+        Public Property CurrentPluginManager As PluginManager
 
         Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
             For Each item In targets
@@ -24,7 +37,7 @@ Namespace MenuActions.Context
                 w.Filter = CurrentApplicationViewModel.GetIOFilter({Project.ProjectFileExt})
 
                 If w.ShowDialog = DialogResult.OK Then
-                    parentSolution.AddExistingProject(parentPath, w.FileName, CurrentApplicationViewModel.CurrentPluginManager)
+                    parentSolution.AddExistingProject(parentPath, w.FileName, CurrentPluginManager)
                 End If
             Next
         End Sub
@@ -42,10 +55,6 @@ Namespace MenuActions.Context
             End If
         End Function
 
-        Public Sub New()
-            MyBase.New({My.Resources.Language.MenuAddProject})
-            IsContextBased = True
-        End Sub
     End Class
 End Namespace
 

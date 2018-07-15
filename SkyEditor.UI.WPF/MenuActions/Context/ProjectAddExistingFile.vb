@@ -9,6 +9,17 @@ Namespace MenuActions.Context
     Public Class ProjectAddExistingFile
         Inherits MenuAction
 
+        Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
+            MyBase.New({My.Resources.Language.MenuAddFile})
+            IsContextBased = True
+
+            CurrentApplicationViewModel = applicationViewModel
+            CurrentPluginManager = pluginManager
+        End Sub
+
+        Public Property CurrentApplicationViewModel As ApplicationViewModel
+        Public Property CurrentPluginManager As PluginManager
+
         Public Overrides Sub DoAction(targets As IEnumerable(Of Object))
             For Each item In targets
                 Dim currentPath As String
@@ -27,7 +38,7 @@ Namespace MenuActions.Context
                 w.Filter = CurrentApplicationViewModel.GetIOFilter(parentProject.GetSupportedImportFileExtensions(currentPath))
 
                 If w.ShowDialog = DialogResult.OK Then
-                    Dim fileAddTask = Task.Run(Sub() parentProject.AddExistingFile(currentPath, w.FileName, CurrentApplicationViewModel.CurrentPluginManager.CurrentIOProvider))
+                    Dim fileAddTask = Task.Run(Sub() parentProject.AddExistingFile(currentPath, w.FileName, CurrentPluginManager.CurrentIOProvider))
                     CurrentApplicationViewModel.ShowLoading(fileAddTask, My.Resources.Language.LoadingCopyingFile)
                 End If
             Next
@@ -49,10 +60,6 @@ Namespace MenuActions.Context
             End If
         End Function
 
-        Public Sub New()
-            MyBase.New({My.Resources.Language.MenuAddFile})
-            IsContextBased = True
-        End Sub
     End Class
 End Namespace
 

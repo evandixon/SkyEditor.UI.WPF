@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports SkyEditor.Core
 Imports SkyEditor.Core.UI
 
 Namespace AvalonHelpers
@@ -6,11 +7,11 @@ Namespace AvalonHelpers
         Inherits FileViewModel
         Implements INotifyPropertyChanged
 
-        Public Sub New()
-            MyBase.New
+        Public Sub New(manager As PluginManager)
+            MyBase.New(manager)
         End Sub
-        Public Sub New(file As Object)
-            MyBase.New(file)
+        Public Sub New(file As Object, manager As PluginManager)
+            MyBase.New(file, manager)
         End Sub
 
         Public ReadOnly Property Tooltip As String

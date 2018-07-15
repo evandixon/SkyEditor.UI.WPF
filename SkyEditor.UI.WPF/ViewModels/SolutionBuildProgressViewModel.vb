@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Windows
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
@@ -10,7 +11,8 @@ Namespace ViewModels
     Public Class SolutionBuildProgressViewModel
         Inherits AnchorableViewModel
 
-        Public Sub New()
+        Public Sub New(viewModel As ApplicationViewModel)
+            MyBase.New(viewModel)
             Me.Header = My.Resources.Language.BuildProgress
             BuildingProjects = New ObservableCollection(Of ProjectBaseBuildViewModel)
         End Sub

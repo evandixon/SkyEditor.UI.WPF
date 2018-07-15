@@ -17,12 +17,9 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Prefix}"/>
                         <TextBlock Text="{Binding Name}" />
-                    </StackPanel>                    
+                    </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
-            <TreeView.ContextMenu>
-                <local:TargetedContextMenu x:Name="menuContext" />
-            </TreeView.ContextMenu>
         </TreeView>
     </Grid>
 </local:DataBoundViewControl>

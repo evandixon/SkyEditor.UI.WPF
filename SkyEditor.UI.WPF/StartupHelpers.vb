@@ -30,6 +30,7 @@ Public Class StartupHelpers
 
         Dim m As New MainWindow3
         m.CurrentApplicationViewModel = appViewModel
+        m.CurrentPluginManager = manager
 
         Return m
     End Function

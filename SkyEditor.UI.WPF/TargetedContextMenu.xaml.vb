@@ -16,6 +16,17 @@ Public Class TargetedContextMenu
         DirectCast(d, TargetedContextMenu).Target = e.NewValue
     End Sub
 
+    Public Sub New(applicationViewModel As ApplicationViewModel, pluginManager As PluginManager, settingsProvider As ISettingsProvider)
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        CurrentApplicationViewModel = applicationViewModel
+        CurrentPluginManager = pluginManager
+        CurrentSettingsProvider = settingsProvider
+    End Sub
+
     Public Property Target As Object
         Get
             Return _target
@@ -27,10 +38,12 @@ Public Class TargetedContextMenu
     End Property
     Dim _target As Object
 
-    Public Property CurrentApplicationViewModel As ApplicationViewModel
+    Protected Property CurrentApplicationViewModel As ApplicationViewModel
+    Protected Property CurrentPluginManager As PluginManager
+    Protected Property CurrentSettingsProvider As ISettingsProvider
 
     Private Async Sub UpdateDataContext()
-        Dim actions = UIHelper.GenerateLogicalMenuItems(Await UIHelper.GetContextMenuItemInfo(_target, CurrentApplicationViewModel, CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode), CurrentApplicationViewModel, {Target})
+        Dim actions = UIHelper.GenerateLogicalMenuItems(Await UIHelper.GetContextMenuItemInfo(_target, CurrentApplicationViewModel, CurrentPluginManager, CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode), CurrentApplicationViewModel, CurrentPluginManager, {Target})
         Me.DataContext = actions
     End Sub
 

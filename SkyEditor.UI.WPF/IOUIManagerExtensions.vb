@@ -36,11 +36,11 @@ Public Module IOUIManagerExtensions
     ''' <param name="file">File for which to get the SaveFileDialog.</param>
     ''' <param name="includeSolution">Whether or not to include Sky Editor Solutions in the IO filter</param>
     ''' <returns>A SaveFileDialog with a filter containing the <paramref name="file"/>'s supported extensions, with the currently selected one being the default extension.</returns>
-    <Extension> Public Function GetSaveFileDialog(appViewModel As ApplicationViewModel, file As FileViewModel, includeSolution As Boolean) As SaveFileDialog
+    <Extension> Public Function GetSaveFileDialog(appViewModel As ApplicationViewModel, file As FileViewModel, includeSolution As Boolean, manager As PluginManager) As SaveFileDialog
         Dim s As New SaveFileDialog
-        Dim extensions = file.GetSupportedExtensions(appViewModel.CurrentPluginManager)
+        Dim extensions = file.GetSupportedExtensions(manager)
         s.Filter = appViewModel.GetIOFilter(extensions, False, True, includeSolution)
-        s.FilterIndex = extensions.ToList.IndexOf(file.GetDefaultExtension(appViewModel.CurrentPluginManager)) + 1
+        s.FilterIndex = extensions.ToList.IndexOf(file.GetDefaultExtension(manager)) + 1
         Return s
     End Function
 End Module

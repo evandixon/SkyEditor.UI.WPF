@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Media
+Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
 Imports SkyEditor.Core.UI
 Imports SkyEditor.UI.WPF.Settings
@@ -9,6 +10,10 @@ Namespace ViewModels
         Inherits GenericViewModel(Of TextFile)
         Implements INotifyModified
         Implements INotifyPropertyChanged
+
+        Public Sub New(settings As ISettingsProvider)
+            CurrentSettingsProvider = settings
+        End Sub
 
         Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
@@ -26,16 +31,18 @@ Namespace ViewModels
             End Set
         End Property
 
+        Protected Property CurrentSettingsProvider As ISettingsProvider
+
         Public ReadOnly Property FontFamily As FontFamily
             Get
                 'Have to convert from Windows Forms font into WPF FontFamily
-                Return New FontFamily(CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider.GetFont.FontFamily.Name)
+                Return New FontFamily(CurrentSettingsProvider.GetFont.FontFamily.Name)
             End Get
         End Property
 
         Public ReadOnly Property FontSize As Single
             Get
-                Return CurrentApplicationViewModel.CurrentPluginManager.CurrentSettingsProvider.GetFont.Size
+                Return CurrentSettingsProvider.GetFont.Size
             End Get
         End Property
 

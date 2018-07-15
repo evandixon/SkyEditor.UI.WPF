@@ -95,11 +95,6 @@ Public Class DataBoundViewControl
     Public Property SortOrder As Integer
 
     ''' <summary>
-    ''' The instance of the current application ViewModel
-    ''' </summary>
-    Public Property CurrentApplicationViewModel As ApplicationViewModel
-
-    ''' <summary>
     ''' The type of the object to edit
     ''' </summary>
     Public Property TargetType As Type
@@ -143,10 +138,6 @@ Public Class DataBoundViewControl
     Public Overridable Function GetSortOrder(currentType As TypeInfo, isTab As Boolean) As Integer Implements IViewControl.GetSortOrder
         Return SortOrder
     End Function
-
-    Public Sub SetApplicationViewModel(appViewModel As ApplicationViewModel) Implements IViewControl.SetApplicationViewModel
-        CurrentApplicationViewModel = appViewModel
-    End Sub
 
 End Class
 

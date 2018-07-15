@@ -2,6 +2,7 @@
 Imports System.Windows
 Imports System.Windows.Controls
 Imports System.Windows.Forms
+Imports SkyEditor.Core
 Imports SkyEditor.Core.Extensions
 Imports SkyEditor.Core.Utilities
 
@@ -9,12 +10,21 @@ Namespace ObjectControls
     Public Class ExtensionManager
         Inherits DataBoundViewControl
 
+        Public Sub New(applicationViewModel As ApplicationViewModel, pluginManager As PluginManager)
+            CurrentApplicationViewModel = applicationViewModel
+            CurrentPluginManager = pluginManager
+        End Sub
+
+        Protected Property CurrentApplicationViewModel As ApplicationViewModel
+
+        Protected Property CurrentPluginManager As PluginManager
+
         Private Function GetTVItem(Collection As IExtensionCollection) As TreeViewItem
             Dim item As New TreeViewItem
             'Todo: await
             item.Header = Collection.GetName().Result
             item.Tag = Collection
-            For Each child In Collection.GetChildCollections(CurrentApplicationViewModel.CurrentPluginManager).Result
+            For Each child In Collection.GetChildCollections(CurrentPluginManager).Result
                 item.Items.Add(GetTVItem(child))
             Next
             Return item
@@ -32,7 +42,7 @@ Namespace ObjectControls
 
         Async Sub RefreshCurrentExtensionList()
             If tvCategories.SelectedItem IsNot Nothing Then
-                lvExtensions.ItemsSource = Await DirectCast(tvCategories.SelectedItem.Tag, IExtensionCollection).GetExtensions(0, Integer.MaxValue, CurrentApplicationViewModel.CurrentPluginManager)
+                lvExtensions.ItemsSource = Await DirectCast(tvCategories.SelectedItem.Tag, IExtensionCollection).GetExtensions(0, Integer.MaxValue, CurrentPluginManager)
             End If
         End Sub
 
@@ -54,7 +64,7 @@ Namespace ObjectControls
             Dim o As New OpenFileDialog
             o.Filter = $"{My.Resources.Language.ZipFiles} (*.zip)|*.zip|{My.Resources.Language.AllFiles} (*.*)|*.*"
             If o.ShowDialog = DialogResult.OK Then
-                Dim result = Await ExtensionHelper.InstallExtensionZip(o.FileName, CurrentApplicationViewModel.CurrentPluginManager)
+                Dim result = Await ExtensionHelper.InstallExtensionZip(o.FileName, CurrentPluginManager)
                 DisplayInstallResultMessage(result)
                 RefreshCurrentExtensionList()
             End If
@@ -65,10 +75,10 @@ Namespace ObjectControls
                 Dim repo = DirectCast(tvCategories.SelectedItem.Tag, IExtensionCollection)
                 Dim info = DirectCast(lvExtensions.SelectedItem, ExtensionInfo)
                 If info.IsInstalled Then
-                    DisplayUninstallResultMessage(Await repo.UninstallExtension(info.ID, CurrentApplicationViewModel.CurrentPluginManager))
+                    DisplayUninstallResultMessage(Await repo.UninstallExtension(info.ID, CurrentPluginManager))
                 Else
                     'Todo: add UI element to select version, instead of just using the default (info.Version)
-                    DisplayInstallResultMessage(Await repo.InstallExtension(info.ID, info.Version, CurrentApplicationViewModel.CurrentPluginManager))
+                    DisplayInstallResultMessage(Await repo.InstallExtension(info.ID, info.Version, CurrentPluginManager))
                 End If
             End If
         End Sub
