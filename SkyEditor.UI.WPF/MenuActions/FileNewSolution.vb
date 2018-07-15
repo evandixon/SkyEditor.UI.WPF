@@ -9,11 +9,11 @@ Namespace MenuActions
 
         Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileNew, My.Resources.Language.MenuFileNewSolution})
-            Me.AlwaysVisible = CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode
-            SortOrder = 1.12
 
             CurrentApplicationViewModel = applicationViewModel
             CurrentPluginManager = pluginManager
+            Me.AlwaysVisible = CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode
+            SortOrder = 1.12
         End Sub
 
         Public Property CurrentApplicationViewModel As ApplicationViewModel

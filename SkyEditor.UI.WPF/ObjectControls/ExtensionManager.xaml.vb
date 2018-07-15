@@ -11,6 +11,8 @@ Namespace ObjectControls
         Inherits DataBoundViewControl
 
         Public Sub New(applicationViewModel As ApplicationViewModel, pluginManager As PluginManager)
+            InitializeComponent()
+
             CurrentApplicationViewModel = applicationViewModel
             CurrentPluginManager = pluginManager
         End Sub

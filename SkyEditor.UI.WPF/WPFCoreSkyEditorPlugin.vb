@@ -45,6 +45,11 @@ Public Class WPFCoreSkyEditorPlugin
         End Get
     End Property
 
+    Public Overrides Function CreateApplicationViewModel(manager As PluginManager) As ApplicationViewModel
+        Return New WPFApplicationViewModel(manager)
+    End Function
+
+
     Public Overrides Sub Load(manager As PluginManager)
         MyBase.Load(manager)
 

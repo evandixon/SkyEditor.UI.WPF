@@ -11,13 +11,13 @@ Namespace MenuActions
 
         Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
             MyBase.New({My.Resources.Language.MenuFile, My.Resources.Language.MenuFileOpen, My.Resources.Language.MenuFileOpenAuto})
+
+            CurrentApplicationViewModel = applicationViewModel
+            CurrentPluginManager = pluginManager
             AlwaysVisible = (CurrentPluginManager.GetRegisteredObjects(Of IOpenableFile).Any() OrElse
                 CurrentPluginManager.GetRegisteredObjects(Of IFileOpener).Any(Function(x As IFileOpener) TypeOf x IsNot OpenableFileOpener) OrElse
                 CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode)
             SortOrder = 1.21
-
-            CurrentApplicationViewModel = applicationViewModel
-            CurrentPluginManager = pluginManager
         End Sub
 
         Public Property CurrentApplicationViewModel As ApplicationViewModel

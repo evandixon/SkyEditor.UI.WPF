@@ -26,7 +26,7 @@ Public Class StartupHelpers
         Dim manager As New PluginManager
         Await manager.LoadCore(coreMod)
 
-        Dim appViewModel As New WPFApplicationViewModel(manager)
+        Dim appViewModel = coreMod.GetApplicationViewModel(manager)
 
         Dim m As New MainWindow3
         m.CurrentApplicationViewModel = appViewModel

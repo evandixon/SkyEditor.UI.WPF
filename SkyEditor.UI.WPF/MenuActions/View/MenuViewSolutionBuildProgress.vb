@@ -10,11 +10,11 @@ Namespace MenuActions.View
 
         Public Sub New(pluginManager As PluginManager, applicationViewModel As ApplicationViewModel)
             MyBase.New({My.Resources.Language.MenuView, My.Resources.Language.MenuViewSolutionBuildProgress})
-            AlwaysVisible = CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode
-            SortOrder = 3.2
 
             CurrentApplicationViewModel = applicationViewModel
             CurrentPluginManager = pluginManager
+            AlwaysVisible = CurrentPluginManager.GetRegisteredObjects(Of Solution).Count() > 1 OrElse CurrentPluginManager.CurrentSettingsProvider.GetIsDevMode
+            SortOrder = 3.2
         End Sub
 
         Public Property CurrentApplicationViewModel As ApplicationViewModel
