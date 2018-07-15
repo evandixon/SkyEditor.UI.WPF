@@ -38,7 +38,7 @@ Namespace MenuActions
                         MessageBox.Show(My.Resources.Language.Menu_FileOpenAuto_SolutionOpenFailed)
                     End If
                 Else
-                    Await CurrentApplicationViewModel.OpenFile(o.FileName, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
+                    Await CurrentApplicationViewModel.OpenFile(o.FileName)
                 End If
             End If
         End Sub

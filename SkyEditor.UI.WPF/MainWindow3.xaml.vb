@@ -142,7 +142,7 @@ Public Class MainWindow3
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             Dim files = e.Data.GetData(DataFormats.FileDrop)
             For Each file In files
-                CurrentApplicationViewModel.OpenFile(file, AddressOf IOHelper.PickFirstDuplicateMatchSelector)
+                CurrentApplicationViewModel.OpenFile(file)
             Next
         End If
     End Sub
