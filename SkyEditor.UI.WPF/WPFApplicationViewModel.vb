@@ -15,7 +15,7 @@ Public Class WPFApplicationViewModel
     Public Property AvalonDockLayout As AvalonDockLayoutViewModel
 
     Protected Overrides Function CreateViewModel(model As Object) As FileViewModel
-        Return New AvalonDockFileWrapper(model)
+        Return New AvalonDockFileWrapper(CurrentPluginManager, model)
     End Function
 
     Public Sub RequestRestart()
