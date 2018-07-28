@@ -1,4 +1,5 @@
-﻿Imports SkyEditor.Core
+﻿Imports System.Windows.Threading
+Imports SkyEditor.Core
 Imports SkyEditor.Core.UI
 Imports SkyEditor.UI.WPF.AvalonHelpers
 
@@ -21,4 +22,13 @@ Public Class WPFApplicationViewModel
     Public Sub RequestRestart()
         RaiseEvent RestartRequested(Me, New EventArgs())
     End Sub
+
+    Public Overrides Sub ReportError([error] As ErrorInfo)
+        Dispatcher.CurrentDispatcher.Invoke(Sub() MyBase.ReportError([error]))
+    End Sub
+
+    Public Overrides Sub ReportError(exception As Exception)
+        Dispatcher.CurrentDispatcher.Invoke(Sub() MyBase.ReportError(exception))
+    End Sub
+
 End Class
