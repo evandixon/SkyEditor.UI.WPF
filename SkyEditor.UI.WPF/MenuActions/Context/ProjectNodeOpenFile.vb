@@ -3,6 +3,7 @@ Imports System.Reflection
 Imports System.Windows
 Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.IO.PluginInfrastructure
 Imports SkyEditor.Core.UI
 Imports SkyEditor.UI.WPF.ViewModels.Projects
 
@@ -47,7 +48,7 @@ Namespace MenuActions.Context
         End Function
 
         Public Overrides Function SupportsObject(obj As Object) As Task(Of Boolean)
-            Return Task.FromResult(TypeOf Obj Is ProjectHeiarchyItemViewModel AndAlso Not DirectCast(Obj, ProjectHeiarchyItemViewModel).IsDirectory)
+            Return Task.FromResult(TypeOf obj Is ProjectHeiarchyItemViewModel AndAlso Not DirectCast(obj, ProjectHeiarchyItemViewModel).IsDirectory)
         End Function
 
     End Class

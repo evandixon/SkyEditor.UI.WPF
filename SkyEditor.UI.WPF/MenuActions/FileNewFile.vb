@@ -1,5 +1,6 @@
 ﻿Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.IO.PluginInfrastructure
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
 Namespace MenuActions

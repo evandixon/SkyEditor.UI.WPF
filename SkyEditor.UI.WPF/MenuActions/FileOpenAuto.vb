@@ -4,6 +4,7 @@ Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Settings
 Imports System.Windows
 Imports SkyEditor.Core
+Imports SkyEditor.Core.IO.PluginInfrastructure
 
 Namespace MenuActions
     Public Class FileOpenAuto

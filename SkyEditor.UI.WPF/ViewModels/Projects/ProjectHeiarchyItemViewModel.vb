@@ -1,5 +1,6 @@
 ﻿Imports SkyEditor.Core
 Imports SkyEditor.Core.IO
+Imports SkyEditor.Core.IO.PluginInfrastructure
 Imports SkyEditor.Core.Projects
 
 Namespace ViewModels.Projects
