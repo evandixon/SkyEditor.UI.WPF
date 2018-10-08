@@ -104,10 +104,13 @@ End Class
 
 Public Class AddingWizardResult
     Implements IWizardStepViewModel
+    Implements INotifyPropertyChanged
 
     Public Sub New(ByVal wizard As AddingWizard)
-        wizard = wizard
+        Me.Wizard = wizard
     End Sub
+
+    Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
     Protected Property Wizard As AddingWizard
 
@@ -124,6 +127,16 @@ Public Class AddingWizardResult
     End Property
 
     Public Property ResultApproved As Boolean
+        Get
+            Return _resultApproved
+        End Get
+        Set(value As Boolean)
+            _resultApproved = value
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(ResultApproved)))
+            RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsComplete)))
+        End Set
+    End Property
+    Private _resultApproved As Boolean
 
     Public ReadOnly Property IsComplete As Boolean Implements IWizardStepViewModel.IsComplete
         Get

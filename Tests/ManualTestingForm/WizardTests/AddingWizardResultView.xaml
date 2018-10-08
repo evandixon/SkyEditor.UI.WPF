@@ -11,7 +11,7 @@
     <Grid>
         <Label Content="Result: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="67,14,0,0" TextWrapping="Wrap" Text="{Binding Result, Mode=OneWay}" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <CheckBox Content="Looks good to me!" HorizontalAlignment="Left" Margin="67,42,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Looks good to me!" IsChecked="{Binding ResultApproved}" HorizontalAlignment="Left" Margin="67,42,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </skyui:DataBoundViewControl>
