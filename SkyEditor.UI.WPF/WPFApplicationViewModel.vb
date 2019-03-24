@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Threading
+﻿Imports System.Windows
+Imports System.Windows.Threading
 Imports SkyEditor.Core
 Imports SkyEditor.Core.UI
 Imports SkyEditor.UI.WPF.AvalonHelpers
@@ -24,11 +25,11 @@ Public Class WPFApplicationViewModel
     End Sub
 
     Public Overrides Sub ReportError([error] As ErrorInfo)
-        Dispatcher.CurrentDispatcher.Invoke(Sub() MyBase.ReportError([error]))
+        Application.Current.Dispatcher.Invoke(Sub() MyBase.ReportError([error]))
     End Sub
 
     Public Overrides Sub ReportError(exception As Exception)
-        Dispatcher.CurrentDispatcher.Invoke(Sub() MyBase.ReportError(exception))
+        Application.Current.Dispatcher.Invoke(Sub() MyBase.ReportError(exception))
     End Sub
 
 End Class
