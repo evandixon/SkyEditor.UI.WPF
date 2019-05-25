@@ -3,6 +3,7 @@ Imports SkyEditor.Core
 Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
+Imports SkyEditor.Utilities.AsyncFor
 
 Namespace ViewModels.Projects
     Public Class ProjectBaseBuildViewModel

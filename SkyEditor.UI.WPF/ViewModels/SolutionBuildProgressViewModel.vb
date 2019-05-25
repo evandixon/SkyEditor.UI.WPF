@@ -6,6 +6,7 @@ Imports SkyEditor.Core.Projects
 Imports SkyEditor.Core.UI
 Imports SkyEditor.Core.Utilities
 Imports SkyEditor.UI.WPF.ViewModels.Projects
+Imports SkyEditor.Utilities.AsyncFor
 
 Namespace ViewModels
     Public Class SolutionBuildProgressViewModel

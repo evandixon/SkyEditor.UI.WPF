@@ -127,7 +127,7 @@ Public Class MainWindow3
             End If
 
             .SetMainWindowIsMaximized(Me.WindowState = WindowState.Maximized)
-            .Save(CurrentPluginManager.CurrentIOProvider)
+            .Save(CurrentPluginManager.CurrentFileSystem)
         End With
     End Sub
 

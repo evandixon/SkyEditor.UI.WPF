@@ -73,7 +73,7 @@ Public Class NewSolutionWindow
 
     Private Sub btnOk_Click(sender As Object, e As RoutedEventArgs) Handles btnOk.Click
         CurrentPluginManager.CurrentSettingsProvider.SetSetting("SkyEditor.Core.Solution.LastSolutionDirectory", txtLocation.Text)
-        CurrentPluginManager.CurrentSettingsProvider.Save(CurrentPluginManager.CurrentIOProvider)
+        CurrentPluginManager.CurrentSettingsProvider.Save(CurrentPluginManager.CurrentFileSystem)
         DialogResult = True
         Me.Close()
     End Sub

@@ -38,7 +38,7 @@ Namespace MenuActions.Context
                 w.Filter = CurrentApplicationViewModel.GetIOFilter(parentProject.GetSupportedImportFileExtensions(currentPath))
 
                 If w.ShowDialog = DialogResult.OK Then
-                    Dim fileAddTask = Task.Run(Sub() parentProject.AddExistingFile(currentPath, w.FileName, CurrentPluginManager.CurrentIOProvider))
+                    Dim fileAddTask = Task.Run(Sub() parentProject.AddExistingFile(currentPath, w.FileName, CurrentPluginManager.CurrentFileSystem))
                     CurrentApplicationViewModel.ShowLoading(fileAddTask, My.Resources.Language.LoadingCopyingFile)
                 End If
             Next

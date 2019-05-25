@@ -8,6 +8,7 @@ Imports SkyEditor.Core.Utilities
 Imports System.Windows.Forms
 Imports SkyEditor.UI.WPF.Settings
 Imports System.Windows.Input
+Imports SkyEditor.IO.FileSystem
 
 Namespace ViewModels.Settings
     Public Class GeneralSettingsViewModel
@@ -61,7 +62,7 @@ Namespace ViewModels.Settings
         Public Event Modified As EventHandler Implements INotifyModified.Modified
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
-        Public Async Function Save(provider As IIOProvider) As Task Implements ISavable.Save
+        Public Async Function Save(provider As IFileSystem) As Task Implements ISavable.Save
             Await Model.Save(provider)
             RaiseEvent FileSaved(Me, New EventArgs)
         End Function

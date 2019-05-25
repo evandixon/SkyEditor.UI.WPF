@@ -88,7 +88,7 @@ Public Class ObjectWindow
     '        End If
 
     '        If o.ShowDialog = Forms.DialogResult.OK Then
-    '            Await DirectCast(_objectToEdit, IOpenableFile).OpenFile(o.FileName, _manager.CurrentIOProvider)
+    '            Await DirectCast(_objectToEdit, IOpenableFile).OpenFile(o.FileName, _manager.CurrentFileSystem)
     '            RefreshDisplay()
     '        End If
     '    End If
@@ -100,10 +100,10 @@ Public Class ObjectWindow
     '            If String.IsNullOrEmpty(DirectCast(ObjectToEdit, IOnDisk).Filename) Then
     '                menuFileSaveAs_Click(sender, e)
     '            Else
-    '                DirectCast(ObjectToEdit, ISavable).Save(_manager.CurrentIOProvider)
+    '                DirectCast(ObjectToEdit, ISavable).Save(_manager.CurrentFileSystem)
     '            End If
     '        Else
-    '            DirectCast(ObjectToEdit, ISavable).Save(_manager.CurrentIOProvider)
+    '            DirectCast(ObjectToEdit, ISavable).Save(_manager.CurrentFileSystem)
     '        End If
     '    End If
     'End Sub
@@ -118,7 +118,7 @@ Public Class ObjectWindow
     '            s.Filter = "All Files (*.*)|*.*"
     '        End If
     '        If s.ShowDialog Then
-    '            DirectCast(ObjectToEdit, ISavableAs).Save(s.FileName, _manager.CurrentIOProvider)
+    '            DirectCast(ObjectToEdit, ISavableAs).Save(s.FileName, _manager.CurrentFileSystem)
     '            If TypeOf ObjectToEdit Is IOnDisk Then
     '                DirectCast(ObjectToEdit, IOnDisk).Filename = s.FileName
     '            End If

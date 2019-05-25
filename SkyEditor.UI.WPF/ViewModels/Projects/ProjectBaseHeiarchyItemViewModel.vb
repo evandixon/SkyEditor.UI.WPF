@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.ComponentModel
+Imports System.IO
 Imports System.Windows
 Imports SkyEditor.Core.Projects
 
@@ -123,7 +124,7 @@ Namespace ViewModels.Projects
 
 #Region "Event Handlers"
         Private Sub ProjectBaseHeiarchyItemViewModel_CurrentPathChanged() Handles Me.CurrentPathChanged
-            Name = IO.Path.GetFileName(CurrentPath.TrimEnd(""))
+            Name = Path.GetFileName(CurrentPath.TrimEnd(""))
             IsDirectory = Project.DirectoryExists(CurrentPath) 'Assumed to be file if it doesn't exist.
             ResetHandlers()
         End Sub
@@ -131,7 +132,7 @@ Namespace ViewModels.Projects
         Private Sub Project_DirectoryCreated(sender As Object, e As DirectoryCreatedEventArgs)
             Application.Current.Dispatcher.Invoke(Sub()
                                                       Dim newNode = CreateNode(Me.Project, e.Path)
-                                                      Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.Path).Replace("\", "/").TrimEnd("/"))
+                                                      Dim parentNode = FindNode(Path.GetDirectoryName(e.Path).Replace("\", "/").TrimEnd("/"))
                                                       parentNode.AddChild(newNode)
                                                   End Sub)
         End Sub
@@ -148,7 +149,7 @@ Namespace ViewModels.Projects
         Private Sub Project_ItemAdded(sender As Object, e As ItemAddedEventArgs)
             Application.Current.Dispatcher.Invoke(Sub()
                                                       Dim newNode = CreateNode(Me.Project, e.Path)
-                                                      Dim parentNode = FindNode(IO.Path.GetDirectoryName(e.Path).Replace("\", "/").TrimStart("/"))
+                                                      Dim parentNode = FindNode(Path.GetDirectoryName(e.Path).Replace("\", "/").TrimStart("/"))
                                                       parentNode.AddChild(newNode)
                                                   End Sub)
         End Sub
